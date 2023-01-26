@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jukebox-player"
+         data-controller="jukebox-player"
+         data-jukebox-player-target="self">
+        {% include 'jukebox/album_player_selector.html.twig' %}
+
+        {% block contents %} {% endblock %}
+    </div>
+{% endblock %}

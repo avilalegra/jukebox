@@ -1,0 +1,55 @@
+
+.audios-list {
+  padding: 20px;
+  border-radius: 5px;
+
+  > .player-controls {
+    margin-top: 40px;
+  }
+
+  min-height: 260px;
+
+  > .separator {
+    margin: 0;
+  }
+
+  > .emptyMsg {
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+
+
+  @media (min-width: 768px) {
+    padding: 55px;
+  }
+}
+
+.audio-list-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0 15px 0;
+  cursor: pointer;
+  width: 100%;
+
+  &.-active {
+    color: white;
+    background-color: cadetblue;
+    border-radius: 5px;
+  }
+
+  > .icon {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  > .marker {
+    height: 28px;
+    border: 2px solid transparent;
+  }
+
+  > &:hover {
+    .marker {
+      border-left: 2px solid gray;
+    }
+  }
+}

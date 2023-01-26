@@ -1,0 +1,22 @@
+@import "jukebox/jukebox";
+@import "player/player";
+@import "library/library";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+}
+
+._inv-button {
+  background-color: transparent;
+  border: none;
+}
+
+
+body {
+}
+

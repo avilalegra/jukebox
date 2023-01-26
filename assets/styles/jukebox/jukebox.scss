@@ -1,0 +1,63 @@
+@import "albums-player-selector";
+
+.jukebox-player {
+  display: flex;
+  flex-direction: column;
+  padding-top: 130px;
+  height: 100vh;
+
+  & > .main-section {
+    width: 100%;
+    padding: 10px;
+    height: 50%;
+  }
+
+  & .audios-list {
+    margin-bottom: 15px;
+    transition: display 1s;
+  }
+
+  & > .albums-player-selector {
+    transition: display 1s;
+    position: fixed;
+    top: 25px;
+    right: 35%;
+  }
+
+  @media (min-width: 768px) {
+    .main-section {
+      display: flex;
+    }
+
+    & > .albums-player-selector {
+      right: 20px;
+    }
+
+    & .audios-list {
+      margin-right: 15px;
+    }
+  }
+}
+
+
+@keyframes animateToPlayer {
+  from {
+    left: 0;
+    border-radius: 12px 0 0 12px;
+  }
+  to {
+    left: 50%;
+    border-radius: 0 12px 12px 0;
+  }
+}
+
+@keyframes animateToAlbums {
+  from {
+    left: 50%;
+    border-radius: 0 12px 12px 0;
+  }
+  to {
+    left: 0;
+    border-radius: 12px 0 0 12px;
+  }
+}

@@ -1,0 +1,22 @@
+{% extends 'player_base.html.twig' %}
+
+{% block contents %}
+    <ul id="albums-list" class="albums-list">
+        {% for album in albums %}
+            <li data-action="click->jukebox-player#showPlayer">
+                <form action="{{ path('player.playAlbum', {'id': album.id}) }}" method="post">
+                    <button class="_inv-button" type="submit">
+                        <div class="audio-album">
+                            <img class="image"
+                                 src="https://cdn.xxl.thumbs.canstockphoto.es/disco-de-vinilo-clipart-vectorial_csp17569054.jpg"
+                                 alt="">
+                            <p class="name">{{ album.name }}</p>
+                        </div>
+                    </button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {{ render(path('player.controls')) }}
+{% endblock %}

@@ -1,0 +1,23 @@
+<ul id="audios-list" class="audios-list">
+    {% for audio in audios %}
+
+        {% set activeAudio = audio.id in [nowPlaying.audio.id|default(null), lastPlayed.id|default(null)] %}
+
+        <li class="">
+            <form action="{{ path('player.play', {'id': audio.id}) }}" method="post">
+                <button id="{{ audio.id }}" type="submit"
+                        class="audio-list-item _inv-button {{ activeAudio ? '-active' : '' }}">
+                    <div class="marker"></div>
+                    <span class="material-symbols-outlined icon"> equalizer </span>
+                    {{ audio.name }}
+                </button>
+            </form>
+        </li>
+
+        {% if not loop.last %}
+            <hr class="separator">
+        {% endif %}
+    {% else %}
+        <span class="emptyMsg">No audios found</span>
+    {% endfor %}
+</ul>

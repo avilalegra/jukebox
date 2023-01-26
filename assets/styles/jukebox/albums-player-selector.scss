@@ -1,0 +1,59 @@
+.albums-player-selector {
+  position: relative;
+  display: flex;
+
+  * {
+    cursor: pointer;
+  }
+
+  &  .albums {
+    border-radius: 12px 0 0 12px;
+    padding: 9px 15px;
+    border: 1px solid gray;
+    transition: color 500ms;
+  }
+
+  &  .player {
+    padding: 9px 15px;
+    border: 1px solid gray;
+    border-radius: 0 12px 12px 0;
+    border-left-width: 0;
+    transition: color 500ms;
+  }
+
+  & > .switch {
+    position: absolute;
+    border-radius: 12px 0 0 12px;
+    background-color: cornflowerblue;
+    z-index: -100;
+    width: 50%;
+    height: 35px;
+  }
+
+  &.-albums {
+    .switch {
+      left: 0;
+      animation: animateToAlbums 500ms;
+      border-radius: 12px 0 0 12px;
+    }
+
+    .fa-compact-disc {
+      color: white;
+    }
+  }
+
+  &.-player {
+    .switch {
+      right: 0;
+      animation: animateToPlayer 500ms;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .fa-circle-play {
+      color: white;
+    }
+  }
+}
+
+
+
