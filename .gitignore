@@ -29,3 +29,8 @@ yarn-error.log
 public/player.pid
 public/player-status
 public/audios/
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
