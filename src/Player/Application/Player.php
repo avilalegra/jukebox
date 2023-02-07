@@ -15,12 +15,11 @@ class Player
     private ?PlayerStatus $currentStatus;
 
     public function __construct(
-        private AudioDeviceInterface            $audioDevice,
-        private EventDispatcherInterface        $eventDispatcher,
+        private AudioDeviceInterface $audioDevice,
+        private EventDispatcherInterface $eventDispatcher,
         private PlayerStatusRepositoryInterface $playerStatusRepository,
-        private TimeGeneratorInterface          $timeGenerator
-    )
-    {
+        private TimeGeneratorInterface $timeGenerator
+    ) {
         $this->currentStatus = null;
     }
 
@@ -56,7 +55,7 @@ class Player
 
     public function getStatus(): PlayerStatus
     {
-        if ($this->currentStatus === null) {
+        if (null === $this->currentStatus) {
             $this->currentStatus = $this->playerStatusRepository->getCurrentStatus();
         }
 

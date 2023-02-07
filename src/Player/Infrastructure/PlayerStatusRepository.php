@@ -13,11 +13,9 @@ class PlayerStatusRepository implements PlayerStatusRepositoryInterface
 {
     private const STATUS_FILE = 'player-status';
 
-
     public function __construct(
         private AudioLibraryInterface $audioLibrary
-    )
-    {
+    ) {
     }
 
     public function saveCurrentStatus(PlayerStatus $playerStatus): void

@@ -6,5 +6,5 @@ namespace App\Shared\Application;
 
 interface ApplicationEventInterface
 {
-    public static function name() : string;
+    public static function name(): string;
 }

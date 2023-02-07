@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Player\Infrastructure;
 
-
 use App\Kernel;
 use App\Player\Application\AsyncPlayerInterface;
 use App\Player\Application\Player;
@@ -18,10 +17,9 @@ class AsyncPlayer implements AsyncPlayerInterface
     private string $projectDir;
 
     public function __construct(
-        Kernel         $kernel,
+        Kernel $kernel,
         private Player $player
-    )
-    {
+    ) {
         $this->projectDir = $kernel->getProjectDir();
     }
 
@@ -47,7 +45,7 @@ class AsyncPlayer implements AsyncPlayerInterface
     public function stop(): void
     {
         $pid = $this->getActiveProcessPid();
-        if ($pid !== null) {
+        if (null !== $pid) {
             shell_exec("kill {$pid}");
         }
         $this->player->stop();
@@ -56,8 +54,9 @@ class AsyncPlayer implements AsyncPlayerInterface
     private function getActiveProcessPid(): ?int
     {
         if (file_exists(self::PID_FILE)) {
-            return (int)file_get_contents(self::PID_FILE);
+            return (int) file_get_contents(self::PID_FILE);
         }
+
         return null;
     }
 

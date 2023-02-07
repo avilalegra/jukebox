@@ -17,13 +17,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class PlayerCommand extends Command
 {
-
     public function __construct(
-        private Player                $player,
+        private Player $player,
         private AudioLibraryInterface $audioLibrary,
-        private LoggerInterface       $logger
-    )
-    {
+        private LoggerInterface $logger
+    ) {
         parent::__construct();
     }
 
@@ -45,6 +43,7 @@ class PlayerCommand extends Command
             };
         } catch (\Throwable $t) {
             $this->logger->error($t->getMessage());
+
             return Command::FAILURE;
         }
 

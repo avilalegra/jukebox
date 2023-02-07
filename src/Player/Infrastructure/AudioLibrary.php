@@ -13,8 +13,7 @@ class AudioLibrary implements AudioLibraryInterface
 {
     public function __construct(
         private EntityManagerInterface $em
-    )
-    {
+    ) {
     }
 
     public function findAudio(int $audioId): Audio
@@ -27,6 +26,7 @@ class AudioLibrary implements AudioLibraryInterface
     public function findAlbum(int $id): Album
     {
         $repository = $this->em->getRepository(Album::class);
+
         return $repository->find($id);
     }
 }

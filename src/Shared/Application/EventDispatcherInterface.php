@@ -6,5 +6,5 @@ namespace App\Shared\Application;
 
 interface EventDispatcherInterface
 {
-    public function fireEvent(ApplicationEventInterface $event) : void;
+    public function fireEvent(ApplicationEventInterface $event): void;
 }

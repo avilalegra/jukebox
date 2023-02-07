@@ -19,19 +19,17 @@ use Symfony\UX\Turbo\TurboBundle;
 #[Route('/player', name: 'player.')]
 class PlayerController extends AbstractController implements EventSubscriberInterface
 {
-
     public function __construct(
-        private HubInterface         $mercureHub,
+        private HubInterface $mercureHub,
         private AsyncPlayerInterface $player
-    )
-    {
+    ) {
     }
 
     public static function getSubscribedEvents()
     {
         return [
             AudioPlayingStarted::name() => 'onAudioPlayingStarted',
-            AudioPlayingStopped::name() => 'onAudioPlayingStopped'
+            AudioPlayingStopped::name() => 'onAudioPlayingStopped',
         ];
     }
 
@@ -69,6 +67,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+
             return new Response();
         }
 
@@ -82,6 +81,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+
             return new Response();
         }
 
@@ -92,9 +92,9 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     public function playAlbum(string $id): Response
     {
         $this->player->playAlbumAsync($id);
+
         return $this->redirectToRoute('player.index');
     }
-
 
     public function onAudioPlayingStarted(AudioPlayingStarted $event)
     {
@@ -119,7 +119,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
             $this->renderView('player/player_controls_update.html.twig',
                 [
                     'nowPlaying' => null,
-                    'lastPlayed' => $status->lastPlayedAudio
+                    'lastPlayed' => $status->lastPlayedAudio,
                 ]
             )
         ));

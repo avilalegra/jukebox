@@ -12,13 +12,13 @@ class AudioBrowser implements AudioBrowserInterface
 {
     public function __construct(
         private EntityManagerInterface $em
-    )
-    {
+    ) {
     }
 
     public function allAlbums(): array
     {
         $repository = $this->em->getRepository(Album::class);
+
         return $repository->findAll();
     }
 }

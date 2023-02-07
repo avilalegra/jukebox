@@ -11,5 +11,5 @@ interface AudioLibraryInterface
 {
     public function findAudio(int $audioId): Audio;
 
-    public function findAlbum(int $id) : Album;
+    public function findAlbum(int $id): Album;
 }

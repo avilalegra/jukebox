@@ -7,17 +7,15 @@ namespace App\Player\Application\Events;
 use App\Player\Application\PlayerStatus;
 use App\Shared\Application\ApplicationEventInterface;
 
-
 class AudioPlayingStopped implements ApplicationEventInterface
 {
     public function __construct(
         public readonly PlayerStatus $playerStatus
-    )
-    {
+    ) {
     }
 
     public static function name(): string
     {
-        return "audio-playing-stopped";
+        return 'audio-playing-stopped';
     }
 }

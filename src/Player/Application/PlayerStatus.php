@@ -6,16 +6,14 @@ namespace App\Player\Application;
 
 use App\Shared\Application\Album;
 use App\Shared\Application\Audio;
-use JsonSerializable;
 
-class PlayerStatus implements JsonSerializable
+class PlayerStatus implements \JsonSerializable
 {
     public function __construct(
         public readonly ?Album $playingAlbum,
         public readonly ?AudioPlayingStatus $playingAudio,
         public readonly ?Audio $lastPlayedAudio
-    )
-    {
+    ) {
     }
 
     public static function default(): PlayerStatus
@@ -33,16 +31,15 @@ class PlayerStatus implements JsonSerializable
         return new PlayerStatus($this->playingAlbum, null, $this->playingAudio?->audio);
     }
 
-
     public function jsonSerialize()
     {
         return [
             'playingAlbumId' => $this->playingAlbum?->id,
             'playingAudio' => $this->playingAudio ? [
                 'playingAudioId' => $this->playingAudio->audio->id,
-                'startedAt' => $this->playingAudio->startedAt
+                'startedAt' => $this->playingAudio->startedAt,
             ] : null,
-            'lastPlayedAudioId' => $this->lastPlayedAudio?->id
+            'lastPlayedAudioId' => $this->lastPlayedAudio?->id,
         ];
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Player\Infrastructure;
 
-
 use App\Player\Application\AudioDeviceException;
 use App\Player\Application\AudioDeviceInterface;
 use App\Shared\Application\Audio;
@@ -14,12 +13,11 @@ class AudioDevice implements AudioDeviceInterface
 {
     public function __construct(
         private string $audiosFolder,
-    )
-    {
+    ) {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function play(Audio $audio): void
     {

@@ -35,8 +35,7 @@ class Audio
         string $name,
         string $ext,
         int $secDuration
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->ext = $ext;

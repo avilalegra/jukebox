@@ -12,10 +12,8 @@ class SymfonyEventDispatcher implements EventDispatcherInterface
 {
     public function __construct(
         private SymfonyEventDispatcherInterface $dispatcher
-    )
-    {
+    ) {
     }
-
 
     public function fireEvent(ApplicationEventInterface $event): void
     {

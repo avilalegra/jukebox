@@ -6,5 +6,5 @@ namespace App\Player\Application;
 
 interface TimeGeneratorInterface
 {
-    public function epochTime() : int;
+    public function epochTime(): int;
 }

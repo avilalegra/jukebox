@@ -11,6 +11,5 @@ interface AudioBrowserInterface
     /**
      * @return array<Album>
      */
-    public function allAlbums() : array;
-
+    public function allAlbums(): array;
 }
