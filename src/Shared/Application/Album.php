@@ -18,10 +18,10 @@ class Album
 {
     #[Column()]
     #[Id()]
-    public readonly int $id;
+    public readonly int $id; /** @phpstan-ignore-line */
 
     #[Column]
-    public readonly string $name;
+    public readonly string $name; /** @phpstan-ignore-line */
 
     #[OneToMany(mappedBy: 'album', targetEntity: Audio::class)]
     public readonly Collection $audios;
