@@ -30,6 +30,8 @@ public/player.pid
 public/player-status
 public/audios/
 
+.idea/
+
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
