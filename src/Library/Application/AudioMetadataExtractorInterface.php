@@ -4,5 +4,5 @@ namespace App\Library\Application;
 
 interface AudioMetadataExtractorInterface
 {
-    public function extractMetadata(string $audioFilePath): ?AudioMetadata;
+    public function extractMetadata(string $audioFilePath): AudioMetadata;
 }

@@ -14,10 +14,11 @@ class AudioMetadataExtractor implements AudioMetadataExtractorInterface
     {
     }
 
-    public function extractMetadata(string $audioFilePath): ?AudioMetadata
+    public function extractMetadata(string $audioFilePath): AudioMetadata
     {
         $info = $this->mediaInfo->getInfo($audioFilePath);
         $general = $info->getGeneral();
+
 
         $metadata = new AudioMetadata(
             title: $general->get('title'),

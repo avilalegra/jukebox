@@ -12,10 +12,8 @@ beforeEach(function () {
     $this->extractor = new AudioMetadataExtractor(new MediaInfo());
 });
 
-test('extract audio metadata', function () {
-    $projectDir = $this->getParameter('kernel.project_dir');
-    $audioPath = "{$projectDir}/tests/taking-over.mp3";
-    $metadata = $this->extractor->extractMetadata($audioPath);
+test('extract audio metadata when metadata exists', function () {
+    $metadata = $this->extractor->extractMetadata(testAudioPath('taking-over.mp3'));
 
     expect($metadata)->toEqualCanonicalizing(new AudioMetadata(
         title: 'Like You',
@@ -28,3 +26,24 @@ test('extract audio metadata', function () {
         duration: 257
     ));
 });
+
+test('extract audio metadata when no metadata exists', function () {
+    $metadata = $this->extractor->extractMetadata(testAudioPath('english-course-intro.mp3'));
+
+    expect($metadata)->toEqualCanonicalizing(new AudioMetadata(
+        title: null,
+        artist: null,
+        album: null,
+        year: 2014,
+        track: 1,
+        genre: null,
+        lyrics: null,
+        duration: 16
+    ));
+});
+
+function testAudioPath(string $fileName) : string
+{
+    $projectDir = test()->getParameter('kernel.project_dir');
+    return "{$projectDir}/tests/{$fileName}";
+}
