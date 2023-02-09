@@ -16,7 +16,7 @@ class Audio
 {
     #[Column('id')]
     #[Id()]
-    public readonly int $id;
+    public readonly string $id;
 
     #[Column('name')]
     public readonly string $name;
@@ -31,7 +31,7 @@ class Audio
     public readonly Album $album;
 
     public function __construct(
-        int $id,
+        string $id,
         string $name,
         string $ext,
         int $secDuration

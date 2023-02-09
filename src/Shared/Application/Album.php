@@ -18,7 +18,7 @@ class Album
 {
     #[Column()]
     #[Id()]
-    public readonly int $id; /** @phpstan-ignore-line */
+    public readonly string $id; /** @phpstan-ignore-line */
 
     #[Column]
     public readonly string $name; /** @phpstan-ignore-line */

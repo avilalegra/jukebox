@@ -16,14 +16,14 @@ class AudioLibrary implements AudioLibraryInterface
     ) {
     }
 
-    public function findAudio(int $audioId): Audio
+    public function findAudio(string $audioId): Audio
     {
         $repository = $this->em->getRepository(Audio::class);
 
         return $repository->find($audioId);
     }
 
-    public function findAlbum(int $id): Album
+    public function findAlbum(string $id): Album
     {
         $repository = $this->em->getRepository(Album::class);
 

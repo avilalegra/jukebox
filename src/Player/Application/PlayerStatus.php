@@ -31,9 +31,8 @@ class PlayerStatus implements \JsonSerializable
         return new PlayerStatus($this->playingAlbum, null, $this->playingAudio?->audio);
     }
 
-    /**
-     * @return array
-     */
+
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

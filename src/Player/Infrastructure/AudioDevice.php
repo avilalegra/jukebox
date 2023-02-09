@@ -7,6 +7,7 @@ namespace App\Player\Infrastructure;
 use App\Player\Application\AudioDeviceException;
 use App\Player\Application\AudioDeviceInterface;
 use App\Shared\Application\Audio;
+use App\Shared\Application\AudioFile;
 use Symfony\Component\Process\Process;
 
 class AudioDevice implements AudioDeviceInterface
@@ -21,7 +22,8 @@ class AudioDevice implements AudioDeviceInterface
      */
     public function play(Audio $audio): void
     {
-        $audioFilePath = "{$this->audiosFolder}/{$audio->album->name}/{$audio->name}.{$audio->ext}";
+        $audioFile = new AudioFile($audio);
+        $audioFilePath = "{$this->audiosFolder}/{$audioFile->fileName()}";
 
         $process = new Process(['mplayer', $audioFilePath]);
         $process->setTimeout(null);
