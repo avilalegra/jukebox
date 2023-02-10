@@ -26,16 +26,6 @@ class Player
     /**
      * @throws AudioDeviceException
      */
-    public function playAlbum(Album $album): void
-    {
-        foreach ($album->audios as $audio) {
-            $this->playAudio($audio);
-        }
-    }
-
-    /**
-     * @throws AudioDeviceException
-     */
     public function playAudio(Audio $audio): void
     {
         $this->changeToPlayingStatus($audio);
@@ -49,7 +39,7 @@ class Player
 
     public function changeToPlayingStatus(Audio $audio): void
     {
-        $this->currentStatus = $this->playerStatusRepository->getCurrentStatus()->playTransition($audio, $this->timeGenerator->epochTime());
+        $this->currentStatus = $this->playerStatusRepository->getCurrentStatus()->playingTransition($audio, $this->timeGenerator->epochTime());
         $this->playerStatusRepository->saveCurrentStatus($this->currentStatus);
     }
 

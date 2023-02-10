@@ -1,8 +1,0 @@
-{% extends 'player_base.html.twig' %}
-
-{% block contents %}
-    <div id="player" {{ turbo_stream_listen('player-status') }}>
-        {% include 'player/audios_list.html.twig' %}
-        {% include 'player/player_controls.html.twig' %}
-    </div>
-{% endblock %}

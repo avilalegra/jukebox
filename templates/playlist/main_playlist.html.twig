@@ -1,0 +1,6 @@
+{% extends 'player_base.html.twig' %}
+
+{% block contents %}
+    {% include 'playlist/audios_list.html.twig' %}
+    {{ render(path('player.controls')) }}
+{% endblock %}

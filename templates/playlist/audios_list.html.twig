@@ -1,7 +1,7 @@
-<ul id="audios-list" class="audios-list">
-    {% for audio in audios %}
+<ul id="audios-list" class="audios-list" {{ turbo_stream_listen('player-status') }}>
+    {% for audio in playlist.audios %}
 
-        {% set activeAudio = audio.id in [nowPlaying.audio.id|default(null), lastPlayed.id|default(null)] %}
+        {% set activeAudio = audio.id in [nowPlaying.id|default(null), lastPlayed.id|default(null)] %}
 
         <li class="">
             <form action="{{ path('player.play', {'id': audio.id}) }}" method="post">
@@ -9,7 +9,7 @@
                         class="audio-list-item _inv-button {{ activeAudio ? '-active' : '' }}">
                     <div class="marker"></div>
                     <span class="material-symbols-outlined icon"> equalizer </span>
-                    {{ audio.name }}
+                    {{ audio.title }}
                 </button>
             </form>
         </li>

@@ -4,16 +4,12 @@
     <ul id="albums-list" class="albums-list">
         {% for name in albumNames %}
             <li data-action="click->jukebox-player#showPlayer">
-                <form action="{{ path('player.playAlbum', {'name': name}) }}" method="post">
-                    <button class="_inv-button" type="submit">
-                        <div class="audio-album">
-                            <img class="image"
-                                 src="https://cdn.xxl.thumbs.canstockphoto.es/disco-de-vinilo-clipart-vectorial_csp17569054.jpg"
-                                 alt="">
-                            <p class="name">{{ name }}</p>
-                        </div>
-                    </button>
-                </form>
+                <div class="audio-album">
+                    <img class="image"
+                         src="https://cdn.xxl.thumbs.canstockphoto.es/disco-de-vinilo-clipart-vectorial_csp17569054.jpg"
+                         alt="">
+                    <p class="name">{{ name }}</p>
+                </div>
             </li>
         {% endfor %}
     </ul>

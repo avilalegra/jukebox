@@ -20,9 +20,10 @@ use Symfony\UX\Turbo\TurboBundle;
 class PlayerController extends AbstractController implements EventSubscriberInterface
 {
     public function __construct(
-        private HubInterface $mercureHub,
+        private HubInterface         $mercureHub,
         private AsyncPlayerInterface $player
-    ) {
+    )
+    {
     }
 
     public static function getSubscribedEvents()
@@ -31,20 +32,6 @@ class PlayerController extends AbstractController implements EventSubscriberInte
             AudioPlayingStarted::name() => 'onAudioPlayingStarted',
             AudioPlayingStopped::name() => 'onAudioPlayingStopped',
         ];
-    }
-
-    #[Route('/', name: 'index')]
-    public function index(): Response
-    {
-        $status = $this->player->getStatus();
-
-        return $this->render('player/player.html.twig',
-            [
-                'audios' => [],
-                'nowPlaying' => $status->playingAudio,
-                'lastPlayed' => $status->lastPlayedAudio,
-            ]
-        );
     }
 
     #[Route('/controls', name: 'controls')]
@@ -88,22 +75,13 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->redirectToRoute('player.index');
     }
 
-    #[Route('/album/{name}', name: 'playAlbum')]
-    public function playAlbum(string $name): Response
-    {
-        $this->player->playAlbumAsync($name);
-
-        return $this->redirectToRoute('player.index');
-    }
-
     public function onAudioPlayingStarted(AudioPlayingStarted $event)
     {
         $status = $event->playerStatus;
 
         $this->mercureHub->publish(new Update('player-status',
-            $this->renderView('player/player_update.html.twig',
+            $this->renderView('player/player_controls_stream.html.twig',
                 [
-                    'audios' => [],
                     'nowPlaying' => $status->playingAudio,
                     'lastPlayed' => $status->lastPlayedAudio,
                 ]
@@ -116,7 +94,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         $status = $this->player->getStatus();
 
         $this->mercureHub->publish(new Update('player-status',
-            $this->renderView('player/player_controls_update.html.twig',
+            $this->renderView('player/player_controls_stream.html.twig',
                 [
                     'nowPlaying' => null,
                     'lastPlayed' => $status->lastPlayedAudio,

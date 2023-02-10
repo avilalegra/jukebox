@@ -28,8 +28,8 @@ class PlayerCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('action', InputArgument::REQUIRED, 'play-audio|play-album')
-            ->addArgument('id', InputArgument::REQUIRED, 'audio id | album id');
+            ->addArgument('action', InputArgument::REQUIRED, 'play-audio')
+            ->addArgument('id', InputArgument::REQUIRED, 'audio id');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -39,7 +39,6 @@ class PlayerCommand extends Command
         try {
             match ($input->getArgument('action')) {
                 'play-audio' => $this->playAudio($id),
-                'play-album' => $this->playAlbum($id),
             };
         } catch (\Throwable $t) {
             $this->logger->error($t->getMessage());
@@ -54,11 +53,5 @@ class PlayerCommand extends Command
     {
         $audio = $this->audioLibrary->findAudio($audioId);
         $this->player->playAudio($audio);
-    }
-
-    private function playAlbum(string $albumId): void
-    {
-        $album = $this->audioLibrary->findAlbum($albumId);
-        $this->player->playAlbum($album);
     }
 }

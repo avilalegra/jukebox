@@ -20,7 +20,7 @@ class PlayerStatus implements \JsonSerializable
         return new PlayerStatus( null, null);
     }
 
-    public function playTransition(Audio $audio, int $startedAt): self
+    public function playingTransition(Audio $audio, int $startedAt): self
     {
         return new PlayerStatus(new AudioPlayingStatus($audio, $startedAt), $this->playingAudio?->audio);
     }
