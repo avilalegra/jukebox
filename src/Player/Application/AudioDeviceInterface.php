@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Player\Application;
 
-use App\Shared\Application\Audio;
+use App\Shared\Application\AudioReadModel;
 
 interface AudioDeviceInterface
 {
     /** @throws AudioDeviceException */
-    public function play(Audio $audio): void;
+    public function play(AudioReadModel $audio): void;
 }

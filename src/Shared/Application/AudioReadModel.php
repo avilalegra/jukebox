@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity()]
-class Audio
+#[Table('audio')]
+class AudioReadModel
 {
     #[Column()]
     #[Id()]

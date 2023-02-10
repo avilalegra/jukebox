@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Library\Infrastructure;
 
 use App\Library\Application\AudioBrowserInterface;
-use App\Shared\Application\Audio;
+use App\Shared\Application\AudioReadModel;
 use Doctrine\ORM\EntityManagerInterface;
 
 class AudioBrowser implements AudioBrowserInterface
@@ -20,7 +20,7 @@ class AudioBrowser implements AudioBrowserInterface
     {
         $qb = $this->em
             ->createQueryBuilder()
-            ->from(Audio::class, 'a')
+            ->from(AudioReadModel::class, 'a')
             ->select('a.album')
             ->distinct();
 

@@ -5,7 +5,7 @@ namespace App\Shared\Application;
 class AudioFile
 {
     public function __construct(
-        private Audio $audio
+        private AudioReadModel $audio
     )
     {
     }

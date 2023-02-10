@@ -6,7 +6,7 @@ namespace App\Player\Infrastructure;
 
 use App\Player\Application\AudioDeviceException;
 use App\Player\Application\AudioDeviceInterface;
-use App\Shared\Application\Audio;
+use App\Shared\Application\AudioReadModel;
 use App\Shared\Application\AudioFile;
 use Symfony\Component\Process\Process;
 
@@ -20,7 +20,7 @@ class AudioDevice implements AudioDeviceInterface
     /**
      * {@inheritDoc}
      */
-    public function play(Audio $audio): void
+    public function play(AudioReadModel $audio): void
     {
         $audioFile = new AudioFile($audio);
         $audioFilePath = "{$this->audiosFolder}/{$audioFile->fileName()}";

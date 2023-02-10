@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Player\Application;
 
-use App\Shared\Application\Audio;
+use App\Shared\Application\AudioReadModel;
 
 class PlayerStatus implements \JsonSerializable
 {
     public function __construct(
         public readonly ?AudioPlayingStatus $playingAudio,
-        public readonly ?Audio $lastPlayedAudio
+        public readonly ?AudioReadModel $lastPlayedAudio
     )
     {
     }
@@ -20,7 +20,7 @@ class PlayerStatus implements \JsonSerializable
         return new PlayerStatus( null, null);
     }
 
-    public function playingTransition(Audio $audio, int $startedAt): self
+    public function playingTransition(AudioReadModel $audio, int $startedAt): self
     {
         return new PlayerStatus(new AudioPlayingStatus($audio, $startedAt), $this->playingAudio?->audio);
     }
