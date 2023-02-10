@@ -40,7 +40,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 
         return $this->render('player/player.html.twig',
             [
-                'audios' => $status->playingAlbum?->audios ?? [],
+                'audios' => [],
                 'nowPlaying' => $status->playingAudio,
                 'lastPlayed' => $status->lastPlayedAudio,
             ]
@@ -88,10 +88,10 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->redirectToRoute('player.index');
     }
 
-    #[Route('/album/{id}', name: 'playAlbum')]
-    public function playAlbum(string $id): Response
+    #[Route('/album/{name}', name: 'playAlbum')]
+    public function playAlbum(string $name): Response
     {
-        $this->player->playAlbumAsync($id);
+        $this->player->playAlbumAsync($name);
 
         return $this->redirectToRoute('player.index');
     }
@@ -103,7 +103,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         $this->mercureHub->publish(new Update('player-status',
             $this->renderView('player/player_update.html.twig',
                 [
-                    'audios' => $status->playingAlbum->audios,
+                    'audios' => [],
                     'nowPlaying' => $status->playingAudio,
                     'lastPlayed' => $status->lastPlayedAudio,
                 ]

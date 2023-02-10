@@ -7,38 +7,39 @@ namespace App\Shared\Application;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
 #[Table('audios')]
 class Audio
 {
-    #[Column('id')]
+    #[Column()]
     #[Id()]
     public readonly string $id;
 
-    #[Column('name')]
-    public readonly string $name;
+    #[Column()]
+    public readonly string $title;
 
-    #[Column('extension')]
-    public readonly string $ext;
+    #[Column()]
+    public readonly string $extension;
 
-    #[Column('duration')]
-    public readonly int $secDuration;
+    #[Column()]
+    public readonly int $duration;
 
-    #[ManyToOne(targetEntity: Album::class, inversedBy: 'audios')]
-    public readonly Album $album;
+    #[Column()]
+    public readonly string $album;
 
     public function __construct(
         string $id,
-        string $name,
-        string $ext,
-        int $secDuration
+        string $title,
+        string $extension,
+        int $duration,
+        string $album,
     ) {
         $this->id = $id;
-        $this->name = $name;
-        $this->ext = $ext;
-        $this->secDuration = $secDuration;
+        $this->title = $title;
+        $this->extension = $extension;
+        $this->duration = $duration;
+        $this->album = $album;
     }
 }

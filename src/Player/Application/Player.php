@@ -49,7 +49,7 @@ class Player
 
     public function changeToPlayingStatus(Audio $audio): void
     {
-        $this->currentStatus = $this->playerStatusRepository->getCurrentStatus()->goPlaying($audio, $this->timeGenerator->epochTime());
+        $this->currentStatus = $this->playerStatusRepository->getCurrentStatus()->playTransition($audio, $this->timeGenerator->epochTime());
         $this->playerStatusRepository->saveCurrentStatus($this->currentStatus);
     }
 
@@ -64,13 +64,13 @@ class Player
 
     public function changeToStoppedStatus(): void
     {
-        $this->currentStatus = $this->getStatus()->goStopped();
+        $this->currentStatus = $this->getStatus()->stopTransition();
         $this->playerStatusRepository->saveCurrentStatus($this->currentStatus);
     }
 
     public function stop(): void
     {
-        $currentStatus = $this->playerStatusRepository->getCurrentStatus()->goStopped();
+        $currentStatus = $this->playerStatusRepository->getCurrentStatus()->stopTransition();
         $this->playerStatusRepository->saveCurrentStatus($currentStatus);
         $this->eventDispatcher->fireEvent(new AudioPlayingStopped($currentStatus));
     }

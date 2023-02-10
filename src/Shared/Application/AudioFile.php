@@ -13,14 +13,14 @@ class AudioFile
     public function fileName(): string
     {
         return sprintf('%s-%ss.%s',
-            preg_replace('/\s+/', '-', strtolower($this->audio->name)),
-            $this->audio->secDuration,
-            $this->audio->ext
+            preg_replace('/\s+/', '-', strtolower($this->audio->title)),
+            $this->audio->duration,
+            $this->audio->extension
         );
     }
 
     public function extension(): string
     {
-        return $this->audio->ext;
+        return $this->audio->extension;
     }
 }

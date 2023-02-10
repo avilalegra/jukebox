@@ -9,7 +9,7 @@ use App\Shared\Application\Album;
 interface AudioBrowserInterface
 {
     /**
-     * @return array<Album>
+     * @return array<string>
      */
-    public function allAlbums(): array;
+    public function albumNamesIndex(): array;
 }

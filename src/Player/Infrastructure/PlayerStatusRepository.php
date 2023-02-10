@@ -31,11 +31,6 @@ class PlayerStatusRepository implements PlayerStatusRepositoryInterface
 
         $rawStatus = json_decode(file_get_contents(self::STATUS_FILE), true);
 
-        $playingAlbum = match ($albumId = $rawStatus['playingAlbumId']) {
-            null => null,
-            default => $this->audioLibrary->findAlbum($albumId)
-        };
-
         $playingAudio = match ($audioPlayingStatus = $rawStatus['playingAudio']) {
             null => null,
             default => new AudioPlayingStatus(
@@ -49,6 +44,6 @@ class PlayerStatusRepository implements PlayerStatusRepositoryInterface
             default => $this->audioLibrary->findAudio($audioId)
         };
 
-        return new PlayerStatus($playingAlbum, $playingAudio, $lastPlayedAudio);
+        return new PlayerStatus($playingAudio, $lastPlayedAudio);
     }
 }

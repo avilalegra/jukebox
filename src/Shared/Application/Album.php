@@ -12,22 +12,12 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 
-#[Entity]
-#[Table('albums')]
-class Album
+readonly class Album
 {
-    #[Column()]
-    #[Id()]
-    public readonly string $id; /** @phpstan-ignore-line */
-
-    #[Column]
-    public readonly string $name; /** @phpstan-ignore-line */
-
-    #[OneToMany(mappedBy: 'album', targetEntity: Audio::class)]
-    public readonly Collection $audios;
-
-    public function __construct()
+    public function __construct(
+        public string $name,
+        public array $audios
+    )
     {
-        $this->audios = new ArrayCollection();
     }
 }

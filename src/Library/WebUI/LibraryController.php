@@ -20,8 +20,8 @@ class LibraryController extends AbstractController
     #[Route('/', name: 'index')]
     public function albums(): Response
     {
-        $albums = $this->audioBrowser->allAlbums();
+        $albumNames = $this->audioBrowser->albumNamesIndex();
 
-        return $this->render('library/albums.html.twig', compact('albums'));
+        return $this->render('library/albums.html.twig', compact('albumNames'));
     }
 }
