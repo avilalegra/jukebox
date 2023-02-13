@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Player\Application\Events;
+namespace App\Player\Application\Player;
 
-use App\Player\Application\PlayerStatus;
+use App\Player\Application\Player\Status\PlayerStatus;
 use App\Shared\Application\ApplicationEventInterface;
 
 class AudioPlayingStopped implements ApplicationEventInterface

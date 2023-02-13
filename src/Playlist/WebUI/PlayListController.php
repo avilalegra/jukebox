@@ -2,8 +2,8 @@
 
 namespace App\Playlist\WebUI;
 
-use App\Player\Application\Events\AudioPlayingStarted;
-use App\Player\Application\Player;
+use App\Player\Application\Player\AudioPlayingStarted;
+use App\Player\Application\Player\Player;
 use App\Playlist\Application\PlayListBrowserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

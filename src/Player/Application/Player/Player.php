@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Player\Application;
+namespace App\Player\Application\Player;
 
-use App\Player\Application\Events\AudioPlayingStarted;
-use App\Player\Application\Events\AudioPlayingStopped;
+use App\Player\Application\Device\AudioDeviceException;
+use App\Player\Application\Device\AudioDeviceInterface;
+use App\Player\Application\Player\Status\PlayerStatus;
+use App\Player\Application\Player\Status\PlayerStatusRepositoryInterface;
 use App\Shared\Application\EventDispatcherInterface;
 use App\Shared\Domain\AudioReadModel;
 

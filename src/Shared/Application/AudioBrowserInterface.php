@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
-namespace App\Player\Application;
+namespace App\Shared\Application;
 
 use App\Shared\Domain\AudioReadModel;
 
-interface AudioLibraryInterface
+interface AudioBrowserInterface
 {
     public function findAudio(string $audioId): AudioReadModel;
-
 }

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Player\Application;
+namespace App\Player\Application\Player;
+
+use App\Player\Application\Player\Status\PlayerStatus;
 
 interface AsyncPlayerInterface
 {

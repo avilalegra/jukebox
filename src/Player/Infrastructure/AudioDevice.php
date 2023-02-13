@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Player\Infrastructure;
 
-use App\Player\Application\AudioDeviceException;
-use App\Player\Application\AudioDeviceInterface;
+use App\Player\Application\Device\AudioDeviceException;
+use App\Player\Application\Device\AudioDeviceInterface;
 use App\Shared\Application\AudioFile;
 use App\Shared\Domain\AudioReadModel;
 use Symfony\Component\Process\Process;

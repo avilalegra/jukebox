@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Player\WebUI;
 
-use App\Player\Application\AsyncPlayerInterface;
-use App\Player\Application\Events\AudioPlayingStarted;
-use App\Player\Application\Events\AudioPlayingStopped;
+use App\Player\Application\Player\AsyncPlayerInterface;
+use App\Player\Application\Player\AudioPlayingStarted;
+use App\Player\Application\Player\AudioPlayingStopped;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;

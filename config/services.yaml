@@ -22,8 +22,8 @@ services:
       - '../src/DependencyInjection/'
       - '../src/Entity/'
       - '../src/Kernel.php'
-      - '../src/Player/Application/Events/AudioPlayingStarted.php'
-      - '../src/Player/Application/Events/AudioPlayingStopped.php'
+      - '../src/Player/Application/Player/AudioPlayingStarted.php'
+      - '../src/Player/Application/Player/AudioPlayingStopped.php'
 
 
   # add more service definitions when explicit configuration is needed

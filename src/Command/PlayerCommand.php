@@ -2,8 +2,8 @@
 
 namespace App\Command;
 
-use App\Player\Application\AudioLibraryInterface;
-use App\Player\Application\Player;
+use App\Player\Application\Player\Player;
+use App\Shared\Application\AudioBrowserInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,9 +18,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PlayerCommand extends Command
 {
     public function __construct(
-        private Player $player,
-        private AudioLibraryInterface $audioLibrary,
-        private LoggerInterface $logger
+        private Player                $player,
+        private AudioBrowserInterface $audioBrowser,
+        private LoggerInterface       $logger
     ) {
         parent::__construct();
     }
@@ -51,7 +51,7 @@ class PlayerCommand extends Command
 
     private function playAudio(string $audioId): void
     {
-        $audio = $this->audioLibrary->findAudio($audioId);
+        $audio = $this->audioBrowser->findAudio($audioId);
         $this->player->playAudio($audio);
     }
 }

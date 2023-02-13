@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace App\Player\Infrastructure;
 
 use App\Player\Application\AudioLibraryInterface;
-use App\Player\Application\AudioPlayingStatus;
-use App\Player\Application\PlayerStatus;
-use App\Player\Application\PlayerStatusRepositoryInterface;
+use App\Player\Application\Player\Status\AudioPlayingStatus;
+use App\Player\Application\Player\Status\PlayerStatus;
+use App\Player\Application\Player\Status\PlayerStatusRepositoryInterface;
+use App\Shared\Application\AudioBrowserInterface;
 
 class PlayerStatusRepository implements PlayerStatusRepositoryInterface
 {
     private const STATUS_FILE = 'player-status';
 
     public function __construct(
-        private AudioLibraryInterface $audioLibrary
+        private AudioBrowserInterface $audioBrowser
     ) {
     }
 
@@ -34,14 +35,14 @@ class PlayerStatusRepository implements PlayerStatusRepositoryInterface
         $playingAudio = match ($audioPlayingStatus = $rawStatus['playingAudio']) {
             null => null,
             default => new AudioPlayingStatus(
-                audio: $this->audioLibrary->findAudio($audioPlayingStatus['playingAudioId']),
+                audio: $this->audioBrowser->findAudio($audioPlayingStatus['playingAudioId']),
                 startedAt: $audioPlayingStatus['startedAt']
             )
         };
 
         $lastPlayedAudio = match ($audioId = $rawStatus['lastPlayedAudioId']) {
             null => null,
-            default => $this->audioLibrary->findAudio($audioId)
+            default => $this->audioBrowser->findAudio($audioId)
         };
 
         return new PlayerStatus($playingAudio, $lastPlayedAudio);

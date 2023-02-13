@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Player\Infrastructure;
 
 use App\Kernel;
-use App\Player\Application\AsyncPlayerInterface;
-use App\Player\Application\Player;
-use App\Player\Application\PlayerStatus;
+use App\Player\Application\Player\AsyncPlayerInterface;
+use App\Player\Application\Player\Player;
+use App\Player\Application\Player\Status\PlayerStatus;
 use Symfony\Component\Process\Process;
 
 class AsyncPlayer implements AsyncPlayerInterface
