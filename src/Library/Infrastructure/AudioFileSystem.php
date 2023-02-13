@@ -20,7 +20,7 @@ class AudioFileSystem implements AudioFileSystemInterface
     /**
      * @inheritDoc
      */
-    public function writeFile(AudioFile $audioFile, $fileContents): void
+    public function writeAudioFile(AudioFile $audioFile, $fileContents): void
     {
         $this->localFileSystem->writeFile($audioFile->fileName(), $fileContents);
     }

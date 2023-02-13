@@ -30,7 +30,7 @@ test('write audio file', function () {
         'mp3'
     ));
 
-    $this->audioFileSystem->writeFile($audioFile, sampleAudioFile('some mp3 audio contents'));
+    $this->audioFileSystem->writeAudioFile($audioFile, sampleAudioFile('some mp3 audio contents'));
 
     $expectedFilePath = "{$this->audiosFolder}/like-you-257s.mp3";
 

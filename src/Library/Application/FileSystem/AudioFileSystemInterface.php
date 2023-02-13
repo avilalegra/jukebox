@@ -11,5 +11,7 @@ interface AudioFileSystemInterface
      * @param resource $fileContents
      * @throws LocalFileSystemException
      */
-    public function writeFile(AudioFile $audioFile, $fileContents) : void;
+    public function writeAudioFile(AudioFile $audioFile, $fileContents) : void;
+
+    public function getAudioFilePath(AudioFile $audioFile) : string;
 }
