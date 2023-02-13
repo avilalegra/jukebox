@@ -10,8 +10,6 @@ interface AsyncPlayerInterface
 {
     public function playAudioAsync(string $audioId): void;
 
-    public function playAlbumAsync(string $albumId): void;
-
     public function stop(): void;
 
     public function getStatus(): PlayerStatus;

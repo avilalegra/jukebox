@@ -61,11 +61,6 @@ class AsyncPlayer implements AsyncPlayerInterface
         file_put_contents(self::PID_FILE, $pid);
     }
 
-    public function playAlbumAsync(string $albumId): void
-    {
-        $this->executePlayCommandAsync(['play-album', $albumId]);
-    }
-
     public function getStatus(): PlayerStatus
     {
         return $this->player->getStatus();
