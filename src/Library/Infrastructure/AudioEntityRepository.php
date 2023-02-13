@@ -2,7 +2,7 @@
 
 namespace App\Library\Infrastructure;
 
-use App\Library\Application\AudioEntity;
+use App\Library\Domain\AudioEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 

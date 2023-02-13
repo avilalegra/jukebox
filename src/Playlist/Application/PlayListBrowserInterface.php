@@ -2,7 +2,9 @@
 
 namespace App\Playlist\Application;
 
+use App\Playlist\Domain\PlaylistReadModel;
+
 interface PlayListBrowserInterface
 {
-    public function mainPlaylist() : Playlist;
+    public function mainPlaylist() : PlaylistReadModel;
 }

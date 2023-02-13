@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Player\Infrastructure;
 
+use App\Library\Domain\AudioEntity;
 use App\Player\Application\AudioLibraryInterface;
-use App\Shared\Application\Album;
-use App\Shared\Application\AudioReadModel;
+use App\Shared\Domain\AudioReadModel;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
 class AudioLibrary implements AudioLibraryInterface
 {
     /**
-     * @var EntityRepository<AudioReadModel>
+     * @var EntityRepository<AudioEntity>
      */
     private EntityRepository $repository;
 
@@ -21,18 +21,11 @@ class AudioLibrary implements AudioLibraryInterface
         private EntityManagerInterface $em
     )
     {
-        $this->repository = $this->em->getRepository(AudioReadModel::class);
+        $this->repository = $this->em->getRepository(AudioEntity::class);
     }
 
     public function findAudio(string $audioId): AudioReadModel
     {
-        return $this->repository->find($audioId);
-    }
-
-    public function findAlbum(string $album): Album
-    {
-        $audios = $this->repository->findBy(['album' => $album]);
-
-        return new Album(name: $album, audios: $audios);
+        return $this->repository->find($audioId)->readModel();
     }
 }

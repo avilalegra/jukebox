@@ -2,6 +2,8 @@
 
 namespace App\Shared\Application;
 
+use App\Shared\Domain\AudioReadModel;
+
 class AudioFile
 {
     public function __construct(

@@ -6,9 +6,8 @@ namespace App\Player\Application;
 
 use App\Player\Application\Events\AudioPlayingStarted;
 use App\Player\Application\Events\AudioPlayingStopped;
-use App\Shared\Application\Album;
-use App\Shared\Application\AudioReadModel;
 use App\Shared\Application\EventDispatcherInterface;
+use App\Shared\Domain\AudioReadModel;
 
 class Player
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Player\Application;
 
-use App\Shared\Application\AudioReadModel;
+use App\Shared\Domain\AudioReadModel;
 
 class AudioPlayingStatus
 {

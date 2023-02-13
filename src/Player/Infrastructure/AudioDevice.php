@@ -6,8 +6,8 @@ namespace App\Player\Infrastructure;
 
 use App\Player\Application\AudioDeviceException;
 use App\Player\Application\AudioDeviceInterface;
-use App\Shared\Application\AudioReadModel;
 use App\Shared\Application\AudioFile;
+use App\Shared\Domain\AudioReadModel;
 use Symfony\Component\Process\Process;
 
 class AudioDevice implements AudioDeviceInterface

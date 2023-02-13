@@ -1,6 +1,6 @@
 <?php
 
-use App\Library\Application\AudioEntity;
+use App\Library\Domain\AudioEntity;
 use App\Library\Infrastructure\AudioEntityRepository;
 use App\Tests\DbTools;
 use App\Tests\IntegrationTestBase;
