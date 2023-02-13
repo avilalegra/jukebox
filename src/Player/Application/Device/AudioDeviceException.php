@@ -6,14 +6,14 @@ namespace App\Player\Application\Device;
 
 class AudioDeviceException extends \Exception
 {
-    public function __construct($message = '', \Throwable $previous = null)
+    private function __construct($message = '', \Throwable $previous = null)
     {
         parent::__construct($message, 0, $previous);
     }
 
-    public static function playingException(): self
+    public static function playAudioException(?\Throwable $previous): self
     {
-        return new self('audio device playing exception');
+        return new self("couldn't play audio", $previous);
     }
 
     public static function stopDeviceException(): self

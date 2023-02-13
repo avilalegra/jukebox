@@ -8,6 +8,7 @@ use App\Kernel;
 use App\Player\Application\Player\AsyncPlayerInterface;
 use App\Player\Application\Player\Player;
 use App\Player\Application\Player\Status\PlayerStatus;
+use App\Player\Infrastructure\OSProccess\OSProcessRunner;
 use Symfony\Component\Process\Process;
 
 class AsyncPlayer implements AsyncPlayerInterface
@@ -17,9 +18,11 @@ class AsyncPlayer implements AsyncPlayerInterface
     private string $projectDir;
 
     public function __construct(
-        Kernel $kernel,
-        private Player $player
-    ) {
+        Kernel                  $kernel,
+        private Player          $player,
+        private OSProcessRunner $processRunner
+    )
+    {
         $this->projectDir = $kernel->getProjectDir();
     }
 
@@ -31,22 +34,15 @@ class AsyncPlayer implements AsyncPlayerInterface
     private function executePlayCommandAsync(array $args): void
     {
         $this->stop();
-
-        $process = new Process(['php', "{$this->projectDir}/bin/console", 'app:player', ...$args]);
-        $process->setOptions(['create_new_console' => true]);
-        $process->setTimeout(null);
-        $process->setIdleTimeout(null);
-
-        $process->start();
-
-        $this->saveProcessPid($process->getPid());
+        $pid = $this->processRunner->runAsync(['php', "{$this->projectDir}/bin/console", 'app:player', ...$args]);
+        $this->saveProcessPid($pid);
     }
 
     public function stop(): void
     {
         $pid = $this->getActiveProcessPid();
         if (null !== $pid) {
-            shell_exec("kill {$pid}");
+            OSProcessRunner::kill($pid);
         }
         $this->player->stop();
     }
@@ -54,7 +50,7 @@ class AsyncPlayer implements AsyncPlayerInterface
     private function getActiveProcessPid(): ?int
     {
         if (file_exists(self::PID_FILE)) {
-            return (int) file_get_contents(self::PID_FILE);
+            return (int)file_get_contents(self::PID_FILE);
         }
 
         return null;

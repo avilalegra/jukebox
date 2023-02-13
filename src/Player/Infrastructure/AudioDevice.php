@@ -6,15 +6,19 @@ namespace App\Player\Infrastructure;
 
 use App\Player\Application\Device\AudioDeviceException;
 use App\Player\Application\Device\AudioDeviceInterface;
+use App\Player\Infrastructure\OSProccess\OsProcessException;
+use App\Player\Infrastructure\OSProccess\OSProcessRunner;
 use App\Shared\Application\AudioFile;
 use App\Shared\Domain\AudioReadModel;
-use Symfony\Component\Process\Process;
+
 
 class AudioDevice implements AudioDeviceInterface
 {
     public function __construct(
-        private string $audiosFolder,
-    ) {
+        private string          $audiosFolder,
+        private OSProcessRunner $processRunner
+    )
+    {
     }
 
     /**
@@ -25,13 +29,10 @@ class AudioDevice implements AudioDeviceInterface
         $audioFile = new AudioFile($audio);
         $audioFilePath = "{$this->audiosFolder}/{$audioFile->fileName()}";
 
-        $process = new Process(['mplayer', $audioFilePath]);
-        $process->setTimeout(null);
-        $process->setIdleTimeout(null);
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            throw AudioDeviceException::playingException();
+        try {
+            $this->processRunner->run(['mplayer', $audioFilePath]);
+        } catch (OsProcessException $e) {
+            throw AudioDeviceException::playAudioException($e);
         }
     }
 }
