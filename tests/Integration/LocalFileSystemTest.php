@@ -31,7 +31,6 @@ test('write file', function () {
     unlink($filePath);
 });
 
-
 it('throws write exception', function () {
     $fs = new LocalFileSystem('not found folder');
     $fs->writeFile('sample.mp3', resourceFromContents('sample contents'));
