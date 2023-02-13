@@ -18,9 +18,4 @@ class AudioFile
             $this->audio->extension
         );
     }
-
-    public function extension(): string
-    {
-        return $this->audio->extension;
-    }
 }
