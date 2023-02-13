@@ -102,6 +102,7 @@
         "dama/doctrine-test-bundle": "^7.2",
         "friendsofphp/php-cs-fixer": "^3.14",
         "pestphp/pest": "^1.22",
+        "pestphp/pest-plugin-mock": "^1.0",
         "phpstan/phpstan": "^1.9",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.2.*",

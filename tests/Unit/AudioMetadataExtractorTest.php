@@ -1,8 +1,10 @@
 <?php
 
-use App\Library\Application\AudioMetadata;
+use App\Library\Application\Metadata\AudioMetadata;
+use App\Library\Application\Metadata\AudioMetadataExtractionException;
 use App\Library\Infrastructure\AudioMetadataExtractor;
 use App\Tests\JukeboxTestBase;
+use Mhor\MediaInfo\Exception\UnknownTrackTypeException;
 use Mhor\MediaInfo\MediaInfo;
 
 uses(JukeboxTestBase::class);
@@ -42,7 +44,16 @@ test('extract audio metadata when no metadata exists', function () {
     ));
 });
 
-function testAudioPath(string $fileName) : string
+it('throws exception', function () {
+    $mediaInfoMock = mock(MediaInfo::class)
+        ->expect(getInfo: fn($_) => throw new UnknownTrackTypeException('track type value'));
+
+    $extractor = new AudioMetadataExtractor($mediaInfoMock);
+    $extractor->extractMetadata(testAudioPath('english-course-intro.mp3'));
+
+})->throws(AudioMetadataExtractionException::class);
+
+function testAudioPath(string $fileName): string
 {
     $projectDir = test()->getParameter('kernel.project_dir');
     return "{$projectDir}/tests/{$fileName}";

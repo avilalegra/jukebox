@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Library\Application;
+namespace App\Library\Application\Metadata;
 
 readonly class AudioMetadata
 {
