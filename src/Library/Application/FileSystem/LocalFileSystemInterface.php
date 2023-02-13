@@ -10,5 +10,8 @@ interface LocalFileSystemInterface
      */
     public function writeFile(string $fileName,  $contents): void;
 
-    public function getFilePath(string $fileName) : string;
+    /**
+     * @throws LocalFileSystemException
+     */
+    public function getExistingFilePath(string $fileName) : string;
 }
