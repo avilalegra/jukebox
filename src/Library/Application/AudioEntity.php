@@ -32,6 +32,9 @@ class AudioEntity
     #[Column()]
     private ?int $duration;
 
+    #[Column()]
+    private string $extension;
+
     public function __construct(
         string $id,
         ?string $title,
@@ -41,8 +44,19 @@ class AudioEntity
         ?int $track,
         ?string $genre,
         ?string $lyrics,
-        ?int $duration
+        ?int $duration,
+        string $extension
     )
     {
+        $this->id = $id;
+        $this->title = $title;
+        $this->artist = $artist;
+        $this->album = $album;
+        $this->year = $year;
+        $this->track = $track;
+        $this->genre = $genre;
+        $this->lyrics = $lyrics;
+        $this->duration = $duration;
+        $this->extension = $extension;
     }
 }
