@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Library\Application\FileSystem;
+namespace App\Library\Application\Storage;
 
-class LocalFileSystemException extends \Exception
+class AudioStorageException extends \Exception
 {
     public function __construct(string $message = "", ?\Throwable $previous = null)
     {

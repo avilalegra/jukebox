@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Player\Infrastructure;
 
-use App\Library\Application\FileSystem\AudioFileSystemInterface;
+use App\Library\Application\Storage\AudioStorageInterface;
 use App\Player\Application\Device\AudioDeviceException;
 use App\Player\Application\Device\AudioDeviceInterface;
 use App\Player\Infrastructure\OSProccess\OsProcessException;
@@ -16,8 +16,8 @@ use App\Shared\Domain\AudioReadModel;
 class AudioDevice implements AudioDeviceInterface
 {
     public function __construct(
-        private AudioFileSystemInterface $audioFileSystem,
-        private OSProcessRunner $processRunner
+        private AudioStorageInterface $audioFileSystem,
+        private OSProcessRunner       $processRunner
     )
     {
     }

@@ -1,8 +1,7 @@
 <?php
 
-use App\Library\Application\FileSystem\LocalFileSystemException;
-use App\Library\Infrastructure\AudioFileSystem;
-use App\Library\Infrastructure\LocalFileSystem;
+use App\Library\Application\Storage\AudioStorageException;
+use App\Library\Infrastructure\AudioStorage;
 use App\Shared\Application\AudioFile;
 use App\Shared\Domain\AudioReadModel;
 use App\Tests\IntegrationTestBase;
@@ -11,7 +10,7 @@ uses(IntegrationTestBase::class);
 
 beforeEach(function () {
     $this->audiosFolder = $this->getParameter('audios_folder');
-    $this->audioFileSystem = new AudioFileSystem(new LocalFileSystem($this->audiosFolder));
+    $this->audioFileSystem = new AudioStorage($this->audiosFolder);
 });
 
 
@@ -34,7 +33,7 @@ test('write audio file', function () {
 
 it('throws get audio file not found exception', function () {
     $this->audioFileSystem->getAudioFilePath(sampleAudioFile());
-})->throws(LocalFileSystemException::class);
+})->throws(AudioStorageException::class);
 
 
 function sampleAudioFile(): AudioFile

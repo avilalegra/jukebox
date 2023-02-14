@@ -1,6 +1,6 @@
 <?php
 
-use App\Library\Application\FileSystem\AudioFileSystemInterface;
+use App\Library\Application\Storage\AudioStorageInterface;
 use App\Player\Application\Device\AudioDeviceException;
 use App\Player\Infrastructure\AudioDevice;
 use App\Player\Infrastructure\OSProccess\OsProcessException;
@@ -48,8 +48,8 @@ function sampleAudio(): AudioReadModel
     );
 }
 
-function audioFileSystemMock(): AudioFileSystemInterface
+function audioFileSystemMock(): AudioStorageInterface
 {
-    return mock(AudioFileSystemInterface::class)
+    return mock(AudioStorageInterface::class)
         ->expect(getAudioFilePath: fn() => 'audio/file/path');
 }

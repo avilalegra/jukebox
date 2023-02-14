@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Library\Application\FileSystem;
+namespace App\Library\Application\Storage;
 
 use App\Shared\Application\AudioFile;
 
-interface AudioFileSystemInterface
+interface AudioStorageInterface
 {
 
     /**
      * @param resource $fileContents
-     * @throws LocalFileSystemException
+     * @throws AudioStorageException
      */
     public function writeAudioFile(AudioFile $audioFile, $fileContents) : void;
 
