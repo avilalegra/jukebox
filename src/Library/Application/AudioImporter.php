@@ -32,7 +32,7 @@ class AudioImporter
             genre: $metadata->genre,
             lyrics: $metadata->lyrics,
             duration: $metadata->duration,
-            extension: 'mp3'
+            extension: $metadata->extension
         );
 
         $this->audioStorage->importAudioFileAs(AudioFileName::fromAudio($audio->readModel()), $audioFilePath);
