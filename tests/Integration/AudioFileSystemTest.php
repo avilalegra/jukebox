@@ -15,22 +15,12 @@ beforeEach(function () {
 });
 
 
-
 test('write audio file', function () {
-    $audioFile = new AudioFile(new AudioReadModel(
-        '3b798c60-6703-44e4-a617-d8c97fde5043',
-        'Like you',
-        'Evanescence',
-        'The Open Door',
-        2009,
-        8,
-        'Alternative Rock',
-        'some lyrics',
-        '257',
-        'mp3'
-    ));
 
-    $this->audioFileSystem->writeAudioFile($audioFile, sampleAudioFile('some mp3 audio contents'));
+    $this->audioFileSystem->writeAudioFile(
+        sampleAudioFile(),
+        resourceFromContents('some mp3 audio contents')
+    );
 
     $expectedFilePath = "{$this->audiosFolder}/like-you-257s.mp3";
 
@@ -40,8 +30,16 @@ test('write audio file', function () {
     unlink($expectedFilePath);
 });
 
-it('throws get audio file not found exception', function() {
-    $audioFile = new AudioFile(new AudioReadModel(
+
+
+it('throws get audio file not found exception', function () {
+    $this->audioFileSystem->getAudioFilePath(sampleAudioFile());
+})->throws(LocalFileSystemException::class);
+
+
+function sampleAudioFile(): AudioFile
+{
+    return new AudioFile(new AudioReadModel(
         '3b798c60-6703-44e4-a617-d8c97fde5043',
         'Like you',
         'Evanescence',
@@ -53,19 +51,4 @@ it('throws get audio file not found exception', function() {
         '257',
         'mp3'
     ));
-
-    $this->audioFileSystem->getAudioFilePath($audioFile);
-
-})->throws(LocalFileSystemException::class);
-
-
-/**
- * @return false|resource
- */
-function sampleAudioFile(string $contents)
-{
-    $audioStream = fopen('php://memory', 'r+');
-    fwrite($audioStream, $contents);
-    rewind($audioStream);
-    return $audioStream;
 }

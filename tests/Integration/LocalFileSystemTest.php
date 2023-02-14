@@ -12,6 +12,8 @@ test('get stored file path', function () {
     expect($fs->getExistingFilePath('taking-over.mp3'))->toEqual($storageFolder.'/taking-over.mp3');
 });
 
+
+
 it('throws get not existent file path exception', function() {
     $storageFolder = $this->getParameter('storage_folder');
     $fs = new LocalFileSystem($storageFolder);
@@ -19,6 +21,8 @@ it('throws get not existent file path exception', function() {
     $fs->getExistingFilePath('not_found_file');
 
 })->throws(LocalFileSystemException::class);
+
+
 
 test('write file', function () {
     $storageFolder = $this->getParameter('storage_folder');
@@ -31,16 +35,11 @@ test('write file', function () {
     unlink($filePath);
 });
 
+
+
 it('throws write exception', function () {
     $fs = new LocalFileSystem('not found folder');
     $fs->writeFile('sample.mp3', resourceFromContents('sample contents'));
 })->throws(LocalFileSystemException::class);
 
 
-function resourceFromContents(string $contents)
-{
-    $audioStream = fopen('php://temp/maxmemory:4M', 'r+');
-    fwrite($audioStream, $contents);
-    rewind($audioStream);
-    return $audioStream;
-}
