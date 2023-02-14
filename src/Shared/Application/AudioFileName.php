@@ -4,7 +4,7 @@ namespace App\Shared\Application;
 
 use App\Shared\Domain\AudioReadModel;
 
-class AudioFileName
+readonly class AudioFileName
 {
     public static function fromAudio(AudioReadModel $audio) : self
     {
@@ -16,7 +16,7 @@ class AudioFileName
     }
 
     public function __construct(
-        public readonly string $fileName
+        public string $fileName
     )
     {
     }
