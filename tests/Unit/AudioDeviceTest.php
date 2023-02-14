@@ -51,5 +51,5 @@ function sampleAudio(): AudioReadModel
 function audioStorageMock(): AudioStorageInterface
 {
     return mock(AudioStorageInterface::class)
-        ->expect(getAudioFilePath: fn() => 'audio/file/path');
+        ->expect(getFullPath: fn() => 'audio/file/path');
 }

@@ -29,7 +29,7 @@ class AudioDevice implements AudioDeviceInterface
     {
         try {
             $audioFile = new AudioFileName($audio);
-            $audioFilePath = $this->audioStorage->getAudioFilePath($audioFile);
+            $audioFilePath = $this->audioStorage->getFullPath($audioFile);
             $this->processRunner->run(['mplayer', $audioFilePath]);
 
         } catch (OsProcessException $e) {

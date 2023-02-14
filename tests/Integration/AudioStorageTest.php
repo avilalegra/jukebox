@@ -14,25 +14,25 @@ beforeEach(function () {
 });
 
 
-test('write audio file', function () {
+test('import audio file', function () {
 
-    $this->audioStorage->writeAudioFile(
+    $this->audioStorage->importAudioFileAs(
         sampleAudioFile(),
-        resourceFromContents('some mp3 audio contents')
+        sampleAudioFilePath('english-course-intro.mp3')
     );
 
     $expectedFilePath = "{$this->audiosFolder}/like-you-257s.mp3";
 
     expect(file_exists($expectedFilePath))->toBeTrue();
-    expect(file_get_contents($expectedFilePath))->toEqual('some mp3 audio contents');
+    expect(md5(file_get_contents($expectedFilePath)))->toEqual('cd31a1b9bdc03753c8d0f25fe9909a64');
 
     unlink($expectedFilePath);
 });
 
 
 
-it('throws get audio file not found exception', function () {
-    $this->audioStorage->getAudioFilePath(sampleAudioFile());
+it('throws exception when recovering full path of not existing audio', function () {
+    $this->audioStorage->getFullPath(sampleAudioFile());
 })->throws(AudioStorageException::class);
 
 
@@ -50,4 +50,10 @@ function sampleAudioFile(): AudioFileName
         '257',
         'mp3'
     ));
+}
+
+function sampleAudioFilePath(string $fileName): string
+{
+    $projectDir = test()->getParameter('kernel.project_dir');
+    return "{$projectDir}/tests/{$fileName}";
 }

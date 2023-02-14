@@ -15,20 +15,21 @@ class AudioStorage implements AudioStorageInterface
     /**
      * @inheritDoc
      */
-    public function writeAudioFile(AudioFileName $name, $fileContents): void
+    public function importAudioFileAs(AudioFileName $name, string $sourceFilePath): void
     {
         $filePath = $this->filePath($name->fileName());
         try {
-            file_put_contents($filePath, $fileContents);
+            $h = fopen($sourceFilePath, 'r');
+            file_put_contents($filePath, $h);
         } catch (\Throwable $t) {
             throw AudioStorageException::writeException($filePath, $t);
         }
     }
 
     /**
-     * @throws AudioStorageException
+     * @inheritDoc
      */
-    public function getAudioFilePath(AudioFileName $name): string
+    public function getFullPath(AudioFileName $name): string
     {
         $filePath = $this->filePath($name->fileName());
 
