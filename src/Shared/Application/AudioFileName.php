@@ -4,7 +4,7 @@ namespace App\Shared\Application;
 
 use App\Shared\Domain\AudioReadModel;
 
-class AudioFile
+class AudioFileName
 {
     public function __construct(
         private AudioReadModel $audio

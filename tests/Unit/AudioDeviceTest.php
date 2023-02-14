@@ -11,7 +11,7 @@ use App\Shared\Domain\AudioReadModel;
 test('play audio', function () {
 
     $processRunner = Mockery::spy(OSProcessRunner::class);
-    $audioDevice = new AudioDevice(audioFileSystemMock(), $processRunner);
+    $audioDevice = new AudioDevice(audioStorageMock(), $processRunner);
 
     $audioDevice->play(sampleAudio());
 
@@ -25,7 +25,7 @@ it('throws exception', function () {
     $processRunner = mock(OSProcessRunner::class)
         ->expect(run: fn() => throw new OsProcessException('command error output'));
 
-    $audioDevice = new AudioDevice(audioFileSystemMock(), $processRunner);
+    $audioDevice = new AudioDevice(audioStorageMock(), $processRunner);
 
     $audioDevice->play(sampleAudio());
 
@@ -48,7 +48,7 @@ function sampleAudio(): AudioReadModel
     );
 }
 
-function audioFileSystemMock(): AudioStorageInterface
+function audioStorageMock(): AudioStorageInterface
 {
     return mock(AudioStorageInterface::class)
         ->expect(getAudioFilePath: fn() => 'audio/file/path');

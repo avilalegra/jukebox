@@ -4,7 +4,7 @@ namespace App\Library\Infrastructure;
 
 use App\Library\Application\Storage\AudioStorageInterface;
 use App\Library\Application\Storage\AudioStorageException;
-use App\Shared\Application\AudioFile;
+use App\Shared\Application\AudioFileName;
 
 class AudioStorage implements AudioStorageInterface
 {
@@ -15,9 +15,9 @@ class AudioStorage implements AudioStorageInterface
     /**
      * @inheritDoc
      */
-    public function writeAudioFile(AudioFile $audioFile, $fileContents): void
+    public function writeAudioFile(AudioFileName $name, $fileContents): void
     {
-        $filePath = $this->filePath($audioFile->fileName());
+        $filePath = $this->filePath($name->fileName());
         try {
             file_put_contents($filePath, $fileContents);
         } catch (\Throwable $t) {
@@ -28,15 +28,15 @@ class AudioStorage implements AudioStorageInterface
     /**
      * @throws AudioStorageException
      */
-    public function getAudioFilePath(AudioFile $audioFile): string
+    public function getAudioFilePath(AudioFileName $name): string
     {
-        $filePath = $this->filePath($audioFile->fileName());
+        $filePath = $this->filePath($name->fileName());
 
         if (!file_exists($filePath)) {
             throw  AudioStorageException::fileNotFoundException($filePath);
         }
 
-        return $audioFile->fileName();
+        return $name->fileName();
     }
 
     private function filePath(string $fileName): string

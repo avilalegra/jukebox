@@ -2,7 +2,7 @@
 
 namespace App\Library\Application\Storage;
 
-use App\Shared\Application\AudioFile;
+use App\Shared\Application\AudioFileName;
 
 interface AudioStorageInterface
 {
@@ -11,7 +11,7 @@ interface AudioStorageInterface
      * @param resource $fileContents
      * @throws AudioStorageException
      */
-    public function writeAudioFile(AudioFile $audioFile, $fileContents) : void;
+    public function writeAudioFile(AudioFileName $name,  $fileContents) : void;
 
-    public function getAudioFilePath(AudioFile $audioFile) : string;
+    public function getAudioFilePath(AudioFileName $name) : string;
 }

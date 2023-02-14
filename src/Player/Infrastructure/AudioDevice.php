@@ -9,14 +9,14 @@ use App\Player\Application\Device\AudioDeviceException;
 use App\Player\Application\Device\AudioDeviceInterface;
 use App\Player\Infrastructure\OSProccess\OsProcessException;
 use App\Player\Infrastructure\OSProccess\OSProcessRunner;
-use App\Shared\Application\AudioFile;
+use App\Shared\Application\AudioFileName;
 use App\Shared\Domain\AudioReadModel;
 
 
 class AudioDevice implements AudioDeviceInterface
 {
     public function __construct(
-        private AudioStorageInterface $audioFileSystem,
+        private AudioStorageInterface $audioStorage,
         private OSProcessRunner       $processRunner
     )
     {
@@ -28,8 +28,8 @@ class AudioDevice implements AudioDeviceInterface
     public function play(AudioReadModel $audio): void
     {
         try {
-            $audioFile = new AudioFile($audio);
-            $audioFilePath = $this->audioFileSystem->getAudioFilePath($audioFile);
+            $audioFile = new AudioFileName($audio);
+            $audioFilePath = $this->audioStorage->getAudioFilePath($audioFile);
             $this->processRunner->run(['mplayer', $audioFilePath]);
 
         } catch (OsProcessException $e) {

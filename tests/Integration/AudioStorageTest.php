@@ -2,7 +2,7 @@
 
 use App\Library\Application\Storage\AudioStorageException;
 use App\Library\Infrastructure\AudioStorage;
-use App\Shared\Application\AudioFile;
+use App\Shared\Application\AudioFileName;
 use App\Shared\Domain\AudioReadModel;
 use App\Tests\IntegrationTestBase;
 
@@ -10,13 +10,13 @@ uses(IntegrationTestBase::class);
 
 beforeEach(function () {
     $this->audiosFolder = $this->getParameter('audios_folder');
-    $this->audioFileSystem = new AudioStorage($this->audiosFolder);
+    $this->audioStorage = new AudioStorage($this->audiosFolder);
 });
 
 
 test('write audio file', function () {
 
-    $this->audioFileSystem->writeAudioFile(
+    $this->audioStorage->writeAudioFile(
         sampleAudioFile(),
         resourceFromContents('some mp3 audio contents')
     );
@@ -32,13 +32,13 @@ test('write audio file', function () {
 
 
 it('throws get audio file not found exception', function () {
-    $this->audioFileSystem->getAudioFilePath(sampleAudioFile());
+    $this->audioStorage->getAudioFilePath(sampleAudioFile());
 })->throws(AudioStorageException::class);
 
 
-function sampleAudioFile(): AudioFile
+function sampleAudioFile(): AudioFileName
 {
-    return new AudioFile(new AudioReadModel(
+    return new AudioFileName(new AudioReadModel(
         '3b798c60-6703-44e4-a617-d8c97fde5043',
         'Like you',
         'Evanescence',
