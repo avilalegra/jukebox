@@ -6,18 +6,18 @@ use App\Shared\Domain\AudioReadModel;
 
 class AudioFileName
 {
-    public function __construct(
-        private AudioReadModel $audio
-    )
+    public static function fromAudio(AudioReadModel $audio) : self
     {
+        return new self(sprintf('%s-%ss.%s',
+            preg_replace('/\s+/', '-', strtolower($audio->title)),
+            $audio->duration,
+            $audio->extension
+        ));
     }
 
-    public function fileName(): string
+    public function __construct(
+        public readonly string $fileName
+    )
     {
-        return sprintf('%s-%ss.%s',
-            preg_replace('/\s+/', '-', strtolower($this->audio->title)),
-            $this->audio->duration,
-            $this->audio->extension
-        );
     }
 }

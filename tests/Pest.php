@@ -1,10 +1,8 @@
 <?php
 
 
-function resourceFromContents(string $contents)
+function testAudioPath(string $fileName): string
 {
-    $audioStream = fopen('php://temp/maxmemory:4M', 'r+');
-    fwrite($audioStream, $contents);
-    rewind($audioStream);
-    return $audioStream;
+    $projectDir = test()->getParameter('kernel.project_dir');
+    return "{$projectDir}/tests/{$fileName}";
 }

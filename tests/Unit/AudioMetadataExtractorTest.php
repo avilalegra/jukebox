@@ -15,7 +15,7 @@ beforeEach(function () {
 });
 
 test('extract audio metadata when metadata exists', function () {
-    $metadata = $this->extractor->extractMetadata(sampleAudioFilePath('taking-over.mp3'));
+    $metadata = $this->extractor->extractMetadata(testAudioPath('taking-over.mp3'));
 
     expect($metadata)
         ->toEqualCanonicalizing(
@@ -34,7 +34,7 @@ test('extract audio metadata when metadata exists', function () {
 
 
 test('extract audio metadata when no metadata exists', function () {
-    $metadata = $this->extractor->extractMetadata(sampleAudioFilePath('english-course-intro.mp3'));
+    $metadata = $this->extractor->extractMetadata(testAudioPath('english-course-intro.mp3'));
 
     expect($metadata)
         ->toEqualCanonicalizing(
@@ -57,14 +57,6 @@ it('throws exception', function () {
         ->expect(getInfo: fn($_) => throw new UnknownTrackTypeException('track type value'));
 
     $extractor = new AudioMetadataExtractor($mediaInfoMock);
-    $extractor->extractMetadata(sampleAudioFilePath('english-course-intro.mp3'));
+    $extractor->extractMetadata(testAudioPath('english-course-intro.mp3'));
 
 })->throws(AudioMetadataExtractionException::class);
-
-
-
-function audioPath(string $fileName): string
-{
-    $projectDir = test()->getParameter('kernel.project_dir');
-    return "{$projectDir}/tests/{$fileName}";
-}

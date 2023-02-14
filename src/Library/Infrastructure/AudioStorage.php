@@ -17,7 +17,7 @@ class AudioStorage implements AudioStorageInterface
      */
     public function importAudioFileAs(AudioFileName $name, string $sourceFilePath): void
     {
-        $filePath = $this->filePath($name->fileName());
+        $filePath = $this->filePath($name->fileName);
         try {
             $h = fopen($sourceFilePath, 'r');
             file_put_contents($filePath, $h);
@@ -31,13 +31,13 @@ class AudioStorage implements AudioStorageInterface
      */
     public function getFullPath(AudioFileName $name): string
     {
-        $filePath = $this->filePath($name->fileName());
+        $filePath = $this->filePath($name->fileName);
 
         if (!file_exists($filePath)) {
             throw  AudioStorageException::fileNotFoundException($filePath);
         }
 
-        return $name->fileName();
+        return $name->fileName;
     }
 
     private function filePath(string $fileName): string

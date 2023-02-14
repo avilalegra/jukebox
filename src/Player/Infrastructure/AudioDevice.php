@@ -28,7 +28,7 @@ class AudioDevice implements AudioDeviceInterface
     public function play(AudioReadModel $audio): void
     {
         try {
-            $audioFile = new AudioFileName($audio);
+            $audioFile = AudioFileName::fromAudio($audio);
             $audioFilePath = $this->audioStorage->getFullPath($audioFile);
             $this->processRunner->run(['mplayer', $audioFilePath]);
 
