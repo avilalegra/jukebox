@@ -25,6 +25,7 @@ test('import audio', function () {
             'Alternative Rock',
             'some lyrics',
             '257',
+            'mp3'
         ));
 
     $importer = new AudioImporter($guidGenerator, $audioStorage, $metadataExtractor, $audioRepository);

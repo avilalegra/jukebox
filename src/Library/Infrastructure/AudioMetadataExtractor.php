@@ -34,7 +34,8 @@ class AudioMetadataExtractor implements AudioMetadataExtractorInterface
                 track: $general->get('track_name_position'),
                 genre: $general->get('genre'),
                 lyrics: $general->get('lyrics'),
-                duration: (int)floor($general->get('duration')->getMilliseconds() / 1000)
+                duration: (int)floor($general->get('duration')->getMilliseconds() / 1000),
+                extension: $general->get('file_extension')
             );
 
         } catch (\Throwable $t) {
