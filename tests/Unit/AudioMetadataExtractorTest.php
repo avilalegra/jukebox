@@ -11,7 +11,7 @@ uses(IntegrationTestBase::class);
 
 
 beforeEach(function () {
-    $this->extractor = new AudioMetadataExtractor(new MediaInfo());
+    $this->extractor = new AudioMetadataExtractor();
 });
 
 test('extract audio metadata when metadata exists', function () {

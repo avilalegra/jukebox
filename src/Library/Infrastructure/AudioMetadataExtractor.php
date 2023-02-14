@@ -9,11 +9,6 @@ use Mhor\MediaInfo\MediaInfo;
 
 class AudioMetadataExtractor implements AudioMetadataExtractorInterface
 {
-    public function __construct(
-        private MediaInfo $mediaInfo
-    )
-    {
-    }
 
     /**
      * @inheritDoc
@@ -22,7 +17,7 @@ class AudioMetadataExtractor implements AudioMetadataExtractorInterface
     {
         try {
 
-            $info = $this->mediaInfo->getInfo($audioFilePath);
+            $info = (new MediaInfo())->getInfo($audioFilePath);
             $general = $info->getGeneral();
 
 
