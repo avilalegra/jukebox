@@ -9,7 +9,7 @@ test('iterate mp3 audios', function () {
     $paths = iterator_to_array($iterator->iterateAudios(projectDir()));
 
     expect($paths)->toEqualCanonicalizing([
-        testAudioPath('english-course-intro.mp3'),
-        testAudioPath('taking-over.mp3')
+        getTestAudioPath('english-course-intro.mp3'),
+        getTestAudioPath('taking-over.mp3')
     ]);
 });

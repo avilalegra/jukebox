@@ -22,9 +22,11 @@ class AudioImporter
     {
         $metadata = $this->metadataExtractor->extractMetadata($audioFilePath);
 
+        $defaultName = explode('.', basename($audioFilePath))[0];
+
         $audio = new AudioEntity(
             id: $this->guidGenerator->generateGuid(),
-            title: $metadata->title,
+            title: $metadata->title ?? $defaultName,
             artist: $metadata->artist,
             album: $metadata->album,
             year: $metadata->year,

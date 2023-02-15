@@ -17,7 +17,7 @@ test('import audio file', function () {
 
     $this->audioStorage->importAudioFileAs(
         new AudioFileName('like-you-16s.mp3'),
-        testAudioPath('english-course-intro.mp3')
+        getTestAudioPath('english-course-intro.mp3')
     );
 
     $expectedFilePath = "{$this->audiosFolder}/like-you-16s.mp3";

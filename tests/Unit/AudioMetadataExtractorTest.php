@@ -15,7 +15,7 @@ beforeEach(function () {
 });
 
 test('extract audio metadata when metadata exists', function () {
-    $metadata = $this->extractor->extractMetadata(testAudioPath('taking-over.mp3'));
+    $metadata = $this->extractor->extractMetadata(getTestAudioPath('taking-over.mp3'));
 
     expect($metadata)
         ->toEqualCanonicalizing(
@@ -35,7 +35,7 @@ test('extract audio metadata when metadata exists', function () {
 
 
 test('extract audio metadata when no metadata exists', function () {
-    $metadata = $this->extractor->extractMetadata(testAudioPath('english-course-intro.mp3'));
+    $metadata = $this->extractor->extractMetadata(getTestAudioPath('english-course-intro.mp3'));
 
     expect($metadata)
         ->toEqualCanonicalizing(
@@ -59,6 +59,6 @@ it('throws exception', function () {
         ->expect(getInfo: fn($_) => throw new UnknownTrackTypeException('track type value'));
 
     $extractor = new AudioMetadataExtractor($mediaInfoMock);
-    $extractor->extractMetadata(testAudioPath('english-course-intro.mp3'));
+    $extractor->extractMetadata(getTestAudioPath('english-course-intro.mp3'));
 
 })->throws(AudioMetadataExtractionException::class);
