@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Integration;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[\AllowDynamicProperties]
-abstract class IntegrationTestBase extends KernelTestCase
+abstract class IntegrationTestCase extends KernelTestCase
 {
     public function container() : ContainerInterface
     {
