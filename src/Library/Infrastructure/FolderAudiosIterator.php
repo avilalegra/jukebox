@@ -9,7 +9,8 @@ class FolderAudiosIterator implements FolderAudiosIteratorInterface
 
     public function iterateAudios(string $folder): iterable
     {
-        $iterator = new \DirectoryIterator($folder);
+        $dirIterator = new \RecursiveDirectoryIterator($folder);
+        $iterator = new \RecursiveIteratorIterator($dirIterator);
 
         /** @var \SplFileInfo $fileInfo */
         foreach ($iterator as $fileInfo) {
