@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <form action="{{ path('library.source') }}" method="post">
+        <button type="submit">Import</button>
+    </form>
+
     <div class="jukebox-player"
          data-controller="jukebox-player"
          data-jukebox-player-target="self">
