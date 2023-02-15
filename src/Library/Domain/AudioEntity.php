@@ -23,7 +23,7 @@ class AudioEntity
     #[Column()]
     private ?string $album;
     #[Column()]
-    private ?int $year;
+    private ?string $year;
     #[Column()]
     private ?int $track;
     #[Column()]
@@ -41,7 +41,7 @@ class AudioEntity
         ?string $title,
         ?string $artist,
         ?string $album,
-        ?int    $year,
+        ?string    $year,
         ?int    $track,
         ?string $genre,
         ?string $lyrics,

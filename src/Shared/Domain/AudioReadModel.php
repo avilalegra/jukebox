@@ -11,7 +11,7 @@ readonly class AudioReadModel
         public ?string $title,
         public ?string $artist,
         public ?string $album,
-        public ?int $year,
+        public ?string $year,
         public ?int $track,
         public ?string $genre,
         public ?string $lyrics,
