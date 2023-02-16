@@ -2,8 +2,12 @@
 
 namespace App\Library\Application\Metadata;
 
+use Spatie\Cloneable\Cloneable;
+
 readonly class AudioMetadata
 {
+    use Cloneable;
+
     public function __construct(
         public ?string $title,
         public ?string $artist,

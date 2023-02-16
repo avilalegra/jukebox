@@ -6,10 +6,10 @@ use App\Shared\Application\AudioFileName;
 
 interface AudioStorageInterface
 {
-    public function importAudioFileAs(AudioFileName $name, string $sourceFilePath) : void;
+    public function importAudioFileAs(AudioFileName $fileName, string $sourceFilePath) : void;
 
     /**
      * @throws AudioStorageException
      */
-    public function getFullPath(AudioFileName $name) : string;
+    public function getFullPath(AudioFileName $fileName) : string;
 }

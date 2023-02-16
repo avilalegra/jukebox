@@ -9,13 +9,10 @@ use Doctrine\ORM\EntityRepository;
 
 class AudioEntityRepository implements \App\Library\Application\AudioEntityRepositoryInterface
 {
-    private EntityRepository $repository;
-
     public function __construct(
         private EntityManagerInterface $em
     )
     {
-        $this->repository = $em->getRepository(AudioEntity::class);
     }
 
     public function add(AudioEntity $audio): void

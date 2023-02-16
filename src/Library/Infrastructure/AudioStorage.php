@@ -8,40 +8,43 @@ use App\Shared\Application\AudioFileName;
 
 class AudioStorage implements AudioStorageInterface
 {
-    public function __construct(public string $storageFolder)
+    public function __construct(
+        private string                   $storageFolder,
+        private LocalFileSystemInterface $localFileSystem
+    )
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function importAudioFileAs(AudioFileName $name, string $sourceFilePath): void
+    public function importAudioFileAs(AudioFileName $fileName, string $sourceFilePath): void
     {
-        $filePath = $this->filePath($name->fileName);
+        $targetPath = $this->targetPath($fileName);
+
         try {
-            $h = fopen($sourceFilePath, 'r');
-            file_put_contents($filePath, $h);
+            $this->localFileSystem->moveFile($sourceFilePath, $targetPath);
         } catch (\Throwable $t) {
-            throw AudioStorageException::writeException($filePath, $t);
+            throw AudioStorageException::writeException($targetPath, $t);
         }
     }
 
     /**
      * @inheritDoc
      */
-    public function getFullPath(AudioFileName $name): string
+    public function getFullPath(AudioFileName $fileName): string
     {
-        $filePath = $this->filePath($name->fileName);
+        $targetPath = $this->targetPath($fileName);
 
-        if (!file_exists($filePath)) {
-            throw  AudioStorageException::fileNotFoundException($filePath);
+        if (!$this->localFileSystem->exists($targetPath)) {
+            throw  AudioStorageException::fileNotFoundException($targetPath);
         }
 
-        return $name->fileName;
+        return $fileName->fileName;
     }
 
-    private function filePath(string $fileName): string
+    private function targetPath(AudioFileName $fileName): string
     {
-        return $this->storageFolder . '/' . $fileName;
+        return $this->storageFolder . '/' . $fileName->fileName;
     }
 }

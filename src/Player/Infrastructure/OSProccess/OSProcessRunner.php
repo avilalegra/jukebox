@@ -4,7 +4,7 @@ namespace App\Player\Infrastructure\OSProccess;
 
 use Symfony\Component\Process\Process;
 
-class OSProcessRunner
+class OSProcessRunner implements OSProcessRunnerInterface
 {
     public static function kill(int $pid): void
     {
@@ -12,7 +12,7 @@ class OSProcessRunner
     }
 
     /**
-     * @throws OsProcessException
+     * @inheritDoc
      */
     public function run(array $command): void
     {

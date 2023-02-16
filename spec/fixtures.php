@@ -1,20 +1,33 @@
 <?php
 
-
-function getTestAudioPath(string $fileName): string
-{
-    return __DIR__ . "/{$fileName}";
-}
-
-function projectDir(): string
-{
-    return __DIR__;
-}
+use App\Library\Application\Metadata\AudioMetadata;
+use App\Library\Domain\AudioEntity;
+use App\Shared\Domain\AudioReadModel;
 
 
 const SAMPLE_GUID = 'c1bc7bd8-be49-477e-9d72-38cc385c8bbf';
 
-const SAMPLE_AUDIO_METADATA = [
+function sampleAudioEntity(array $overwrites = []): AudioEntity
+{
+    return new AudioEntity(
+        SAMPLE_GUID,
+        ...array_merge(METADATA, $overwrites));
+}
+
+function sampleAudioReadModel(array $overwrites = []): AudioReadModel
+{
+    return new AudioReadModel(
+        SAMPLE_GUID,
+        ...array_merge(METADATA, $overwrites));
+}
+
+function sampleMetadata(array $overwrites = []): AudioMetadata
+{
+    return new AudioMetadata(
+        ...array_merge(METADATA, $overwrites));
+}
+
+const METADATA = [
     'title' => 'Like You',
     'artist' => 'Evanescence',
     'album' => 'The Open Door',
@@ -25,5 +38,3 @@ const SAMPLE_AUDIO_METADATA = [
     'duration' => 257,
     'extension' => 'mp3'
 ];
-
-

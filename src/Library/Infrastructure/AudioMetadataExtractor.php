@@ -26,7 +26,7 @@ class AudioMetadataExtractor implements AudioMetadataExtractorInterface
             $general = $info->getGeneral();
 
 
-            return new AudioMetadata(
+            $metadata = new AudioMetadata(
                 title: $general->get('title'),
                 artist: $general->get('performer'),
                 album: $general->get('album'),
@@ -38,6 +38,7 @@ class AudioMetadataExtractor implements AudioMetadataExtractorInterface
                 extension: $general->get('file_extension')
             );
 
+            return $metadata;
         } catch (\Throwable $t) {
             throw AudioMetadataExtractionException::forAudioFilePath($audioFilePath, $t);
         }

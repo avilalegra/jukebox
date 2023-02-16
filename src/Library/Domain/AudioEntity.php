@@ -41,7 +41,7 @@ class AudioEntity
         ?string $title,
         ?string $artist,
         ?string $album,
-        ?string    $year,
+        ?string $year,
         ?int    $track,
         ?string $genre,
         ?string $lyrics,
@@ -75,5 +75,10 @@ class AudioEntity
             duration: $this->duration,
             extension: $this->extension
         );
+    }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
     }
 }

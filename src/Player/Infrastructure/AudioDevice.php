@@ -9,6 +9,7 @@ use App\Player\Application\Device\AudioDeviceException;
 use App\Player\Application\Device\AudioDeviceInterface;
 use App\Player\Infrastructure\OSProccess\OsProcessException;
 use App\Player\Infrastructure\OSProccess\OSProcessRunner;
+use App\Player\Infrastructure\OSProccess\OSProcessRunnerInterface;
 use App\Shared\Application\AudioFileName;
 use App\Shared\Domain\AudioReadModel;
 
@@ -17,7 +18,7 @@ class AudioDevice implements AudioDeviceInterface
 {
     public function __construct(
         private AudioStorageInterface $audioStorage,
-        private OSProcessRunner       $processRunner
+        private OSProcessRunnerInterface       $processRunner
     )
     {
     }
