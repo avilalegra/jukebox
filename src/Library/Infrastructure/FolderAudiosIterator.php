@@ -2,11 +2,14 @@
 
 namespace App\Library\Infrastructure;
 
-use App\Library\Application\FolderAudiosIteratorInterface;
+use App\Library\Application\Import\FolderAudiosIteratorInterface;
 
 class FolderAudiosIterator implements FolderAudiosIteratorInterface
 {
 
+    /**
+     * @inheritDoc
+     */
     public function iterateAudios(string $folder): iterable
     {
         $dirIterator = new \RecursiveDirectoryIterator($folder);

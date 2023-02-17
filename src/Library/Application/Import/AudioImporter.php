@@ -9,7 +9,7 @@ use App\Library\Application\Storage\AudioStorageInterface;
 use App\Library\Domain\AudioEntity;
 use App\Shared\Application\AudioFileName;
 
-class AudioImporter
+class AudioImporter implements AudioImporterInterface
 {
     public function __construct(
         private GuidGeneratorInterface          $guidGenerator,
@@ -21,7 +21,7 @@ class AudioImporter
     }
 
     /**
-     * @throws AudioImportException
+     * @inheritDoc
      */
     public function importAudio(string $audioFilePath): void
     {
