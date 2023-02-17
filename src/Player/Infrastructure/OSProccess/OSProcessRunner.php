@@ -20,7 +20,7 @@ class OSProcessRunner implements OSProcessRunnerInterface
         $process->run();
 
         if (!$process->isSuccessful()) {
-            throw new OsProcessException($process->getErrorOutput());
+            throw OsProcessException::runException($command, $process->getErrorOutput());
         }
     }
 

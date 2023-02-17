@@ -4,18 +4,22 @@ namespace App\Library\Application\Storage;
 
 class AudioStorageException extends \Exception
 {
-    public function __construct(string $message = "", ?\Throwable $previous = null)
+    private function __construct(
+        public readonly string $fileName,
+        string                 $message,
+        ?\Throwable            $previous = null
+    )
     {
         parent::__construct($message, 0, $previous);
     }
 
-    public static function writeException(string $fileName, ?\Throwable $previous): self
+    public static function importAudioFileException(string $fileName, ?\Throwable $previous = null): self
     {
-        return new self("couldn't write file: {$fileName}", $previous);
+        return new self("couldn't import file", $fileName, $previous);
     }
 
     public static function fileNotFoundException(string $fileName): self
     {
-        return new self("couldn't find file: " . $fileName);
+        return new self("couldn't find file", $fileName);
     }
 }

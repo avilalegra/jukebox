@@ -96,7 +96,7 @@ class AudioImporterSpec extends ObjectBehavior
     {
         $audioStorage
             ->importAudioFileAs(new AudioFileName('like-you-evanescence-257s.mp3'), self::AUDIO_FILE_PATH)
-            ->willThrow(AudioStorageException::writeException(self::AUDIO_FILE_PATH, null));
+            ->willThrow(AudioStorageException::importAudioFileException(self::AUDIO_FILE_PATH, null));
 
         $this->beConstructedWith($guidGenerator, $audioStorage, $metadataExtractor, $audioRepository);
 

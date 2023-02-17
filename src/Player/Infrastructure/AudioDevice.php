@@ -17,8 +17,8 @@ use App\Shared\Domain\AudioReadModel;
 class AudioDevice implements AudioDeviceInterface
 {
     public function __construct(
-        private AudioStorageInterface $audioStorage,
-        private OSProcessRunnerInterface       $processRunner
+        private AudioStorageInterface    $audioStorage,
+        private OSProcessRunnerInterface $processRunner
     )
     {
     }
@@ -34,7 +34,7 @@ class AudioDevice implements AudioDeviceInterface
             $this->processRunner->run(['mplayer', $audioFilePath]);
 
         } catch (OsProcessException $e) {
-            throw AudioDeviceException::playAudioException($e);
+            throw AudioDeviceException::playAudioException($audio, $e);
         }
     }
 }

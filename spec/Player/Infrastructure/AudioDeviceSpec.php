@@ -35,7 +35,7 @@ class AudioDeviceSpec extends ObjectBehavior
     {
         $osProcessRunner
             ->run(['mplayer', self::AUDIO_FILE_PATH])
-            ->willThrow(new OsProcessException('command error output'));
+            ->willThrow(OsProcessException::runException(['mplayer', self::AUDIO_FILE_PATH], 'command error output'));
 
         $this->beConstructedWith($audioStorage, $osProcessRunner);
 

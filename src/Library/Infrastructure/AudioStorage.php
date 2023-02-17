@@ -25,7 +25,7 @@ class AudioStorage implements AudioStorageInterface
         try {
             $this->localFileSystem->moveFile($sourceFilePath, $targetPath);
         } catch (\Throwable $t) {
-            throw AudioStorageException::writeException($targetPath, $t);
+            throw AudioStorageException::importAudioFileException($targetPath, $t);
         }
     }
 

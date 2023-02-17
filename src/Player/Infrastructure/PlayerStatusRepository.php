@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Player\Infrastructure;
 
-use App\Player\Application\AudioLibraryInterface;
 use App\Player\Application\Player\Status\AudioPlayingStatus;
 use App\Player\Application\Player\Status\PlayerStatus;
 use App\Player\Application\Player\Status\PlayerStatusRepositoryInterface;
