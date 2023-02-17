@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Library\Application;
+namespace App\Library\Application\Import;
 
-use App\Library\Infrastructure\FolderAudiosIterator;
+use App\Library\Application\FolderAudiosIteratorInterface;
 
 class AudiosFolderImporter
 {

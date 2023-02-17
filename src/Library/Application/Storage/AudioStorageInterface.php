@@ -6,6 +6,9 @@ use App\Shared\Application\AudioFileName;
 
 interface AudioStorageInterface
 {
+    /**
+     * @throws AudioStorageException
+     */
     public function importAudioFileAs(AudioFileName $fileName, string $sourceFilePath) : void;
 
     /**

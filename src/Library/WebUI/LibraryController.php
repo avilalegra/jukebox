@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Library\WebUI;
 
 use App\Library\Application\AudioLibraryInterface;
-use App\Library\Application\AudiosFolderImporter;
+use App\Library\Application\Import\AudiosFolderImporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
