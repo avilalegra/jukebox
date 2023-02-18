@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
   audios_folder: '%env(resolve:AUDIOS_FOLDER)%'
+  covers_folder: '%env(resolve:COVERS_FOLDER)%'
   storage_folder: '%env(resolve:STORAGE_FOLDER)%'
   import_source_folder: '%env(resolve:IMPORT_SOURCE_FOLDER)%'
 
@@ -15,6 +16,7 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     bind:
       $audiosFolder: '%audios_folder%'
+      $coversFolder: '%covers_folder%'
       $storageFolder: '%storage_folder%'
       $importSourceFolder: '%import_source_folder%'
 
