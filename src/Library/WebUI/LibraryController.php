@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Library\WebUI;
 
-use App\Library\Application\AudioLibraryInterface;
+use App\Album\Application\AlbumBrowserInterface;
 use App\Library\Application\Import\AudiosFolderImporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LibraryController extends AbstractController
 {
     public function __construct(
-        private AudioLibraryInterface $audioBrowser,
+        private AlbumBrowserInterface $audioBrowser,
         private string                $importSourceFolder,
         private AudiosFolderImporter  $audiosImporter
     )
@@ -24,9 +24,9 @@ class LibraryController extends AbstractController
     #[Route('/albums', name: 'albums')]
     public function albums(): Response
     {
-        $albumNames = $this->audioBrowser->albumNamesIndex();
+        $albums = $this->audioBrowser->albumsIndex();
 
-        return $this->render('library/albums.html.twig', compact('albumNames'));
+        return $this->render('library/albums.html.twig', compact('albums'));
     }
 
 

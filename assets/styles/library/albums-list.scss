@@ -1,20 +1,29 @@
 
 .albums-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 
-  > .audio-album {
-    margin-right: 10px;
+  .audio-album {
+    margin-bottom: 25px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 55px;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .audio-album {
+      margin-right: 25px;
+      width: 250px;
+      height: 250px;
+    }
   }
 }
 
 .audio-album {
+  position: relative;
   cursor: pointer;
-  padding: 10px;
-  border-radius: 5px;
-  margin-right: 10px;
-  box-shadow: 4px 4px 5px grey;
-  max-height: 115px;
+  border: 1px solid gray;
 
   &.-selected {
     background-color: cadetblue;
@@ -22,11 +31,17 @@
 
   > .image {
     object-fit: fill;
-    max-width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
   }
 
   > .name {
     margin: 0;
+  }
+
+  > .album-name {
+    position: absolute;
+    bottom: 8px;
+    left: 27%;
   }
 }

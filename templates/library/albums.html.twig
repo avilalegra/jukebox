@@ -2,15 +2,19 @@
 
 {% block contents %}
     <ul id="albums-list" class="albums-list">
-        {% for name in albumNames %}
+        {% for album in albums %}
             <li data-action="click->jukebox-player#showPlayer">
+            {% if album.coverFileName %}
                 <div class="audio-album">
-                    <img class="image"
-                         src="https://cdn.xxl.thumbs.canstockphoto.es/disco-de-vinilo-clipart-vectorial_csp17569054.jpg"
-                         alt="">
-                    <p class="name">{{ name }}</p>
+                    <img class="image" src="{{ asset('covers/' ~ album.coverFileName ) }}" alt="">
                 </div>
-            </li>
+            {% else %}
+                <div class="audio-album">
+                    <img class="image" src="{{ asset('covers/unknown_album  ') }}" alt="">
+                    <p class="album-name">{{ album.name }}</p>
+                </div>
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 
