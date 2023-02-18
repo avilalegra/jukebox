@@ -29,12 +29,27 @@ class AudioStorageSpec extends ObjectBehavior
             ->shouldHaveBeenCalled();
     }
 
+    function it_should_get_full_path_audio(
+        LocalFileSystemInterface $localFileSystem
+    )
+    {
+        $localFileSystem
+            ->exists(self::STORAGE_PATH . '/like-you-16s.mp3')
+            ->willReturn(true);
+
+        $this->beConstructedWith(self::STORAGE_PATH, $localFileSystem);
+
+        $this->getFullPath(new AudioFileName('like-you-16s.mp3'))
+            ->shouldReturn(self::STORAGE_PATH . '/like-you-16s.mp3');
+
+    }
+
     function it_should_throw_exception_when_getting_path_of_non_existing_audio(
         LocalFileSystemInterface $localFileSystem
     )
     {
         $localFileSystem
-            ->exists(self::STORAGE_PATH.'/like-you-16s.mp3')
+            ->exists(self::STORAGE_PATH . '/like-you-16s.mp3')
             ->willReturn(false);
 
         $this->beConstructedWith(self::STORAGE_PATH, $localFileSystem);

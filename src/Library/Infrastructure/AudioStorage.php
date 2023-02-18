@@ -40,7 +40,7 @@ class AudioStorage implements AudioStorageInterface
             throw  AudioStorageException::fileNotFoundException($targetPath);
         }
 
-        return $fileName->fileName;
+        return $targetPath;
     }
 
     private function targetPath(AudioFileName $fileName): string
