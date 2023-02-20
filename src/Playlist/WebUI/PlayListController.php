@@ -34,7 +34,7 @@ class PlayListController extends AbstractController  implements EventSubscriberI
     #[Route('/main', name: 'main')]
     public function mainPlaylist() : Response
     {
-        $playlist = $this->playListBrowser->mainPlaylist();
+        $playlist = $this->playListBrowser->playingPlaylist();
         $status = $this->player->getStatus();
 
         return $this->render('playlist/main_playlist.html.twig',
@@ -47,7 +47,7 @@ class PlayListController extends AbstractController  implements EventSubscriberI
 
     public function onAudioPlayingStarted(AudioPlayingStarted $event)
     {
-        $playlist = $this->playListBrowser->mainPlaylist();
+        $playlist = $this->playListBrowser->playingPlaylist();
 
         $status = $event->playerStatus;
 

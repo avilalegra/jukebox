@@ -12,6 +12,22 @@ use Doctrine\ORM\Mapping\Table;
 #[Table('audio')]
 class AudioEntity
 {
+    public static function fromReadModel(AudioReadModel $audio): self
+    {
+        return new self(
+            id: $audio->id,
+            title: $audio->title,
+            artist: $audio->artist,
+            album: $audio->album,
+            year: $audio->year,
+            track: $audio->track,
+            genre: $audio->genre,
+            lyrics: $audio->lyrics,
+            duration: $audio->duration,
+            extension: $audio->extension
+        );
+    }
+
     #[Column()]
     #[Id()]
     public readonly string $id;

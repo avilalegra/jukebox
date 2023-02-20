@@ -3,6 +3,7 @@
 namespace App\Playlist\Domain;
 
 use App\Library\Domain\AudioEntity;
+use App\Shared\Domain\AudioReadModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -40,6 +41,18 @@ class PlaylistEntity
         $this->name = $name;
         $this->audios = new ArrayCollection();
     }
+
+    /**
+     * @param array<AudioEntity> $audios
+     */
+    public function replaceAudios(array $audios): void
+    {
+        $this->audios->clear();
+        foreach ($audios as $audio) {
+            $this->audios->add($audio);
+        }
+    }
+
 
     public function readModel(): PlaylistReadModel
     {

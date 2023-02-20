@@ -4,17 +4,22 @@
     <ul id="albums-list" class="albums-list">
         {% for album in albums %}
             <li data-action="click->jukebox-player#showPlayer">
-            {% if album.coverFileName %}
-                <div class="audio-album">
-                    <img class="image" src="{{ asset('covers/' ~ album.coverFileName ) }}" alt="">
-                </div>
-            {% else %}
-                <div class="audio-album">
-                    <img class="image" src="{{ asset('covers/unknown_album  ') }}" alt="">
-                    <p class="album-name">{{ album.name }}</p>
-                </div>
-                </li>
-            {% endif %}
+                <form action="{{ path('albums.play', {'name': album.name}) }}" method="POST">
+                    <button class="_inv-button" type="submit">
+                        {% if album.coverFileName %}
+                            <div class="audio-album">
+                                <img class="image" src="{{ asset('covers/' ~ album.coverFileName ) }}" alt="">
+                            </div>
+                        {% else %}
+                            <div class="audio-album">
+                                <img class="image" src="{{ asset('covers/unknown_album  ') }}" alt="">
+                                <p class="album-name">{{ album.name }}</p>
+                            </div>
+                        {% endif %}
+
+                    </button>
+                </form>
+            </li>
         {% endfor %}
     </ul>
 

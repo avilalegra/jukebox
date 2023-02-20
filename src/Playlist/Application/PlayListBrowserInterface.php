@@ -6,5 +6,5 @@ use App\Playlist\Domain\PlaylistReadModel;
 
 interface PlayListBrowserInterface
 {
-    public function mainPlaylist() : PlaylistReadModel;
+    public function playingPlaylist() : PlaylistReadModel;
 }

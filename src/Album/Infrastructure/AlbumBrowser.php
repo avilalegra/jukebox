@@ -35,4 +35,16 @@ class AlbumBrowser implements AlbumBrowserInterface
             $results
         );
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function findAlbumAudios(string $albumName): array
+    {
+
+        return array_map(
+            fn(AudioEntity $audio) => $audio->readModel(),
+            $results
+        );
+    }
 }
