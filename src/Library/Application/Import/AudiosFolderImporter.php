@@ -22,7 +22,7 @@ class AudiosFolderImporter
         foreach ($this->audiosIterator->iterateAudios($folder) as $audioPath) {
             try {
                 $this->audioImporter->importAudio($audioPath);
-            } catch (AudioImportException $_) {
+            } catch (AudioImportException $t) {
                 $this->logger->error("failed to import audio: " . $audioPath);
             }
         }

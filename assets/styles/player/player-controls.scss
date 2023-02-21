@@ -1,12 +1,18 @@
 .player-controls {
-  background-color: darkseagreen;
+  background-color: var(--sub-color-dark);
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  bottom: 8px;
+  left: 1%;
+  width: 98%;
   display: flex;
   align-items: center;
   padding: 20px 20px 7px;
+  border-radius: 7px;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1.0;
+  }
 
   > .playing-progress {
     width: 85%;
@@ -35,12 +41,12 @@
     align-items: center;
     top: 9px;
     height: 5px;
-    background-color: seagreen;
+    background-color: var(--accent-color-light);
     z-index: 1000;
   }
 
   .position {
-    background-color: seagreen;
+    background-color: var(--accent-color-dark);
     height: 12px;
     width: 11px;
     border-radius: 100%;
@@ -50,7 +56,7 @@
     position: absolute;
     height: 3px;
     width: 100%;
-    background-color: gray;
+    background-color: var(--sub-color-light);
   }
 }
 

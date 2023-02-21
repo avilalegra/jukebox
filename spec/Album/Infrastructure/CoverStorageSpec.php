@@ -18,7 +18,7 @@ class CoverStorageSpec extends ObjectBehavior
         $localFileSystem->exists(self::COVERS_FOLDER . '/' . self::SAMPLE_ALBUM_NAME)->willReturn(true);
         $this->beConstructedWith(self::COVERS_FOLDER, $localFileSystem);
 
-        $this->searchCoverFileName(self::SAMPLE_ALBUM_NAME)->shouldReturn(self::SAMPLE_ALBUM_NAME);
+        $this->getCoverFileName(self::SAMPLE_ALBUM_NAME)->shouldReturn(self::SAMPLE_ALBUM_NAME);
     }
 
     function it_should_return_null_if_cover_doesnt_exists(
@@ -28,6 +28,6 @@ class CoverStorageSpec extends ObjectBehavior
         $localFileSystem->exists(self::COVERS_FOLDER . '/' . self::SAMPLE_ALBUM_NAME)->willReturn(false);
         $this->beConstructedWith(self::COVERS_FOLDER, $localFileSystem);
 
-        $this->searchCoverFileName(self::SAMPLE_ALBUM_NAME)->shouldReturn(null);
+        $this->getCoverFileName(self::SAMPLE_ALBUM_NAME)->shouldReturn(null);
     }
 }

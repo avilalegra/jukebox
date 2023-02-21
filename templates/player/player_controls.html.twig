@@ -9,7 +9,7 @@
                 </button>
             </form>
         {% elseif  lastPlayed != null %}
-            <form action="{{ path('player.play', {'id': lastPlayed.id }) }}" method="post">
+            <form action="{{ path('player.play.audio', {'id': lastPlayed.id }) }}" method="post">
                 <button type="submit" class="play-action _inv-button">
                     <i class="fa-regular fa-circle-play fa-2xl"></i>
                 </button>

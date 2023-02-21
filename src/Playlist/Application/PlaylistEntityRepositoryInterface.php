@@ -8,5 +8,5 @@ interface PlaylistEntityRepositoryInterface
 {
     public function update(PlaylistEntity $playlist) : void;
 
-    public function findPlayingPlaylist() : PlaylistEntity;
+    public function findPlaylist(string $playlistId) : PlaylistEntity;
 }

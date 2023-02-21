@@ -31,7 +31,7 @@ class PlayerCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('action', InputArgument::REQUIRED, 'play-audio|play-queue')
+            ->addArgument('action', InputArgument::REQUIRED, 'play-audio|play-main-playlist')
             ->addArgument('id', InputArgument::OPTIONAL, 'audio id');
     }
 
@@ -42,7 +42,7 @@ class PlayerCommand extends Command
         try {
             match ($input->getArgument('action')) {
                 'play-audio' => $this->playAudio($id),
-                'play-queue' => $this->playQueue()
+                'play-main-playlist' => $this->playMainPlaylist()
             };
         } catch (\Throwable $t) {
             $this->logger->error($t->getMessage());
@@ -59,9 +59,9 @@ class PlayerCommand extends Command
         $this->player->playAudio($audio);
     }
 
-    private function playQueue(): void
+    private function playMainPlaylist(): void
     {
-        $playingList = $this->playListBrowser->playingPlaylist();
-        $this->player->playAll(...$playingList->audios);
+        $mainPlaylist = $this->playListBrowser->mainPlaylist();
+        $this->player->playAll(...$mainPlaylist->audios);
     }
 }

@@ -34,7 +34,7 @@ class PlayListController extends AbstractController  implements EventSubscriberI
     #[Route('/main', name: 'main')]
     public function mainPlaylist() : Response
     {
-        $playlist = $this->playListBrowser->playingPlaylist();
+        $playlist = $this->playListBrowser->mainPlaylist();
         $status = $this->player->getStatus();
 
         return $this->render('playlist/main_playlist.html.twig',
@@ -47,12 +47,12 @@ class PlayListController extends AbstractController  implements EventSubscriberI
 
     public function onAudioPlayingStarted(AudioPlayingStarted $event)
     {
-        $playlist = $this->playListBrowser->playingPlaylist();
+        $playlist = $this->playListBrowser->mainPlaylist();
 
         $status = $event->playerStatus;
 
         $this->mercureHub->publish(new Update('player-status',
-            $this->renderView('playlist/audios_list_stream.html.twig',
+            $this->renderView('playlist/main_playlist_audios_stream.html.twig',
                 [
                     'playlist' => $playlist,
                     'nowPlaying' => $status->playingAudio?->audio,

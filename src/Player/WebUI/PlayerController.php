@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Player\WebUI;
 
+use App\Player\Application\Player\AsyncPlayerInterface;
 use App\Player\Application\Player\AudioPlayingStarted;
 use App\Player\Application\Player\AudioPlayingStopped;
-use App\Playlist\Application\Playing\AsyncPlayerInterface;
+use App\Player\Application\Player\PlayerManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 {
     public function __construct(
         private HubInterface         $mercureHub,
-        private AsyncPlayerInterface $player
+        private PlayerManager $player
     )
     {
     }
@@ -61,10 +62,10 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->redirectToRoute('player.index');
     }
 
-    #[Route('/audios/{id}', name: 'play', methods: ['post'])]
+    #[Route('/audios/{id}', name: 'play.audio', methods: ['post'])]
     public function playAudio(string $id, Request $request): Response
     {
-        $this->player->playAudioAsync($id);
+        $this->player->playAudio($id);
 
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
@@ -73,6 +74,13 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         }
 
         return $this->redirectToRoute('player.index');
+    }
+
+    #[Route('/album/{name}', name: 'play.album', methods: ['POST'])]
+    public function playAlbum(string $name): Response
+    {
+        $this->player->playAlbum($name);
+        return $this->redirectToRoute('playlists.main');
     }
 
     public function onAudioPlayingStarted(AudioPlayingStarted $event)

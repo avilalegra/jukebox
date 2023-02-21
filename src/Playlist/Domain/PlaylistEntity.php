@@ -53,7 +53,6 @@ class PlaylistEntity
         }
     }
 
-
     public function readModel(): PlaylistReadModel
     {
         return new PlaylistReadModel(

@@ -24,8 +24,8 @@ class PlaylistEntityRepository implements PlaylistEntityRepositoryInterface
         $this->em->flush();
     }
 
-    public function findPlayingPlaylist(): PlaylistEntity
+    public function findPlaylist(string $playlistId): PlaylistEntity
     {
-        return $this->repository->findOneBy(['name' => 'main']);
+        return $this->repository->findOneBy(['name' => $playlistId]);
     }
 }

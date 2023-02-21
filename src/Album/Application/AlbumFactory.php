@@ -12,8 +12,6 @@ class AlbumFactory
 
     public function createAlbum(string $albumName): AlbumInfo
     {
-        $coverFileName = $this->coverStorage->searchCoverFileName($albumName);
 
-        return new AlbumInfo($albumName, $coverFileName);
     }
 }

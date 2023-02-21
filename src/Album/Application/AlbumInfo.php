@@ -6,7 +6,7 @@ readonly class AlbumInfo
 {
     public function __construct(
         public string $name,
-        public ?string $coverFileName
+        public bool $hasCover
     )
     {
     }

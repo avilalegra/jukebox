@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Player\Infrastructure;
 
 use App\Kernel;
+use App\Player\Application\Player\AsyncPlayerInterface;
 use App\Player\Application\Player\Player;
 use App\Player\Application\Player\Status\PlayerStatus;
 use App\Player\Infrastructure\OSProccess\OSProcessRunner;
-use App\Playlist\Application\Playing\AsyncPlayerInterface;
 
 class AsyncPlayer implements AsyncPlayerInterface
 {
@@ -25,9 +25,9 @@ class AsyncPlayer implements AsyncPlayerInterface
         $this->projectDir = $kernel->getProjectDir();
     }
 
-    public function playQueueAsync(): void
+    public function playMainPlaylistAsync(): void
     {
-        $this->executePlayCommandAsync(['play-queue']);
+        $this->executePlayCommandAsync(['play-main-playlist']);
     }
 
 

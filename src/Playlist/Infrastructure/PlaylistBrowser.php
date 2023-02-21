@@ -22,8 +22,10 @@ class PlaylistBrowser implements PlayListBrowserInterface
         $this->repository = $this->em->getRepository(PlaylistEntity::class);
     }
 
-    public function playingPlaylist(): PlaylistReadModel
+    public function mainPlaylist(): PlaylistReadModel
     {
-        return $this->repository->findOneBy(['name' => 'main'])->readModel();
+        return $this->repository
+            ->findOneBy(['name' => 'main'])
+            ->readModel();
     }
 }

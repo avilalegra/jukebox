@@ -25,6 +25,6 @@ class LibraryController extends AbstractController
     {
         $this->audiosImporter->importAudios($this->importSourceFolder);
 
-        return $this->redirectToRoute('library.albums');
+        return $this->redirectToRoute('albums.index');
     }
 }

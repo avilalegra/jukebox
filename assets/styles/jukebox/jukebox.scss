@@ -1,10 +1,10 @@
 @import "albums-player-selector";
 
+
 .jukebox-player {
   display: flex;
   flex-direction: column;
-  padding-top: 130px;
-  height: 100vh;
+  height: 97vh;
 
   & > .main-section {
     width: 100%;
@@ -15,6 +15,7 @@
   & .audios-list {
     margin-bottom: 15px;
     transition: display 1s;
+    max-height: 90%;
   }
 
   & > .albums-player-selector {
