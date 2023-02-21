@@ -19,24 +19,29 @@
                 <i class="play-action fa-solid fa-music fa-xl"></i>
             {% endif %}
 
-            {% set isRunning = nowPlaying is null ? 0 : 1 %}
 
-            <div class="playing-progress"
-                 data-controller="player-progress"
-                 data-player-progress-is-running-value="{{ isRunning }}"
-                 data-player-progress-elapsed-time-value="{{ date().format('U') - (nowPlaying.startedAt | default(0)) }}"
-                 data-player-progress-total-time-value="{{ nowPlaying.audio.duration | default(0) }}">
-                <div class="progress-bar" data-player-progress-target="progressBar">
-                    <div class="played" data-player-progress-target="played">
-                        <div class="position"></div>
+            <div class="center-block">
+                <p class="audio-title">{{ nowPlaying.audio.title | default('') }}</p>
+
+                {% set isRunning = nowPlaying is null ? 0 : 1 %}
+                <div class="playing-progress"
+                     data-controller="player-progress"
+                     data-player-progress-is-running-value="{{ isRunning }}"
+                     data-player-progress-elapsed-time-value="{{ date().format('U') - (nowPlaying.startedAt | default(0)) }}"
+                     data-player-progress-total-time-value="{{ nowPlaying.audio.duration | default(0) }}">
+                    <div class="progress-bar" data-player-progress-target="progressBar">
+                        <div class="played" data-player-progress-target="played">
+                            <div class="position"></div>
+                        </div>
+                        <div class="remain"></div>
                     </div>
-                    <div class="remain"></div>
+
+                    <div class="progress-time">
+                        <span data-player-progress-target="elapsed">{{ 0 | date('i:s') }}</span>
+                        <span data-player-progress-target="remain">{{ nowPlaying.duration | default(0) | date('i:s') }}</span>
+                    </div>
                 </div>
 
-                <div class="progress-time">
-                    <span data-player-progress-target="elapsed">{{ 0 | date('i:s') }}</span>
-                    <span data-player-progress-target="remain">{{ nowPlaying.duration | default(0) | date('i:s') }}</span>
-                </div>
             </div>
         </div>
 
