@@ -1,12 +1,15 @@
-<div id="main-playlist-audios" class="main-playlist-audios" {{ turbo_stream_listen('player-status') }}>
+<div id="main-playlist-audios"
+     class="main-playlist-audios"
+        {{ turbo_stream_listen('player-status') }}>
+
     {% if nowPlaying is not null %}
-        <img id="albumImage" class="album-image" src="{{ asset('covers/' ~ albumCover(nowPlaying.album)) }}">
+        <img class="album-image" src="{{ asset('covers/' ~ albumCover(nowPlaying.album)) }}">
     {% endif %}
 
     <ul class="audios-list">
         {% for audio in playlist.audios %}
             {% set activeAudio = audio.id in [nowPlaying.id|default(null), lastPlayed.id|default(null)] %}
-            <li class="">
+            <li>
                 <form action="{{ path('player.play.audio', {'id': audio.id}) }}" method="post">
                     <button id="{{ audio.id }}" type="submit"
                             class="audio-list-item _inv-button {{ activeAudio ? '-active' : '' }}">

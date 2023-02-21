@@ -1,19 +1,23 @@
 .albums-player-selector {
   position: relative;
   display: flex;
+  background-color: var(--main-color);
+  transition: background-color 2s;
+  border-radius: 12px;
+  z-index: 10000;
 
   * {
     cursor: pointer;
   }
 
-  &  .albums {
+  &  .albums-tab {
     border-radius: 12px 0 0 12px;
     padding: 9px 15px;
     border: 1px solid gray;
     transition: color 500ms;
   }
 
-  &  .player {
+  &  .player-tab {
     padding: 9px 15px;
     border: 1px solid gray;
     border-radius: 0 12px 12px 0;
@@ -24,7 +28,7 @@
   & > .switch {
     position: absolute;
     border-radius: 12px 0 0 12px;
-    background-color: cornflowerblue;
+    background-color: var(--sub-color-dark);
     z-index: -100;
     width: 50%;
     height: 35px;
@@ -38,7 +42,7 @@
     }
 
     .fa-compact-disc {
-      color: white;
+      color: var(--accent-color-light)
     }
   }
 
@@ -50,7 +54,7 @@
     }
 
     .fa-circle-play {
-      color: white;
+      color: var(--accent-color-light)
     }
   }
 }

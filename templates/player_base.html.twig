@@ -3,16 +3,13 @@
 {% block body %}
     <canvas id="canvas"> </canvas>
 
-
 {#    <form action="{{ path('library.source') }}" method="post">#}
 {#        <button type="submit">Import</button>#}
 {#    </form>#}
 
-    <div class="jukebox-player"
-         data-controller="jukebox-player"
-         data-jukebox-player-target="self">
+    <div class="jukebox-player">
         {% include 'jukebox/album_player_selector.html.twig' %}
-
         {% block contents %} {% endblock %}
     </div>
+
 {% endblock %}

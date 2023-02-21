@@ -281,7 +281,22 @@ const quantization = (rgbValues, depth) => {
     ];
 };
 
-const getColorsPalette = () => {
+function RGBToHex(color) {
+    let r = (+color.r).toString(16),
+        g = (+color.g).toString(16),
+        b = (+color.b).toString(16);
+
+    if (r.length === 1)
+        r = "0" + r;
+    if (g.length === 1)
+        g = "0" + g;
+    if (b.length === 1)
+        b = "0" + b;
+
+    return "#" + r + g + b;
+}
+
+export default (image) => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext("2d");
 
@@ -290,12 +305,15 @@ const getColorsPalette = () => {
     const rgbArray = buildRgb(imageData.data);
     const quantColors = quantization(rgbArray, 0);
 
-    console.log(quantColors);
+    console.log(quantColors)
+    console.log(hslToHex(convertRGBtoHSL(quantColors)[0]));
+
+    let colors = orderByLuminance(quantColors);
 
     return {
-        mainColor: '#e9d8a6',
-        subColorLight: '#94d2bd',
-        subColorDark: '#94d2bd',
+        mainColor: rgbToHex(colors[0]),
+        subColorLight: hslToHex(convertRGBtoHSL(colors)[3]),
+        subColorDark: hslToHex(convertRGBtoHSL(colors)[12]),
         accentColorLight: '#ca6702',
         accentColorDark: '#ae2012',
     }
