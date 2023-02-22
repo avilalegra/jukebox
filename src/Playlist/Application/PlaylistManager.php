@@ -2,7 +2,7 @@
 
 namespace App\Playlist\Application;
 
-use App\Library\Application\AudioEntityRepositoryInterface;
+use App\Audio\Application\AudioEntityRepositoryInterface;
 use App\Shared\Domain\AudioReadModel;
 
 class PlaylistManager

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Album\Infrastructure;
 
 use App\Album\Application\AlbumBrowserInterface;
-use App\Album\Application\AlbumFactory;
 use App\Album\Application\AlbumInfo;
 use App\Album\Application\CoverStorageInterface;
-use App\Library\Domain\AudioEntity;
+use App\Audio\Domain\AudioEntity;
 use Doctrine\ORM\EntityManagerInterface;
 
 

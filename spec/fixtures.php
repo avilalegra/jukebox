@@ -1,7 +1,7 @@
 <?php
 
-use App\Library\Application\Metadata\AudioMetadata;
-use App\Library\Domain\AudioEntity;
+use App\Audio\Application\Metadata\AudioMetadata;
+use App\Audio\Domain\AudioEntity;
 use App\Shared\Domain\AudioReadModel;
 
 

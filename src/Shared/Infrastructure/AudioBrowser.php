@@ -2,7 +2,7 @@
 
 namespace App\Shared\Infrastructure;
 
-use App\Library\Domain\AudioEntity;
+use App\Audio\Domain\AudioEntity;
 use App\Shared\Application\AudioBrowserInterface;
 use App\Shared\Domain\AudioReadModel;
 use Doctrine\ORM\EntityManagerInterface;

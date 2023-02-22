@@ -2,8 +2,7 @@
 
 namespace App\Playlist\Domain;
 
-use App\Library\Domain\AudioEntity;
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
