@@ -1,6 +1,6 @@
 <div id="main-playlist-audios"
      class="main-playlist-audios"
-        {{ turbo_stream_listen('player-status') }}>
+        {{ turbo_stream_listen('player-board') }}>
 
     {% if nowPlaying is not null %}
         <img class="album-image" src="{{ asset('covers/' ~ albumCover(nowPlaying.album)) }}">

@@ -1,0 +1,6 @@
+{% extends 'player_base.html.twig' %}
+
+{% block contents %}
+    {% include 'player/player_board.html.twig' %}
+    {{ render(path('player.bar')) }}
+{% endblock %}

@@ -1,4 +1,4 @@
-{% set isPlayer = app.request.attributes.get('_route') == 'playlists.main' %}
+{% set isPlayer = app.request.attributes.get('_route') == 'player.index' %}
 
 <div class="albums-player-selector {{ isPlayer ? '-player' : '-admin' }}">
     <div class="switch"></div>
@@ -9,7 +9,7 @@
         </button>
     </form>
 
-    <form action="{{ path('playlists.main') }}">
+    <form action="{{ path('player.index') }}">
         <button class="player-tab _inv-button">
             <i class="fa-solid fa-circle-play fa-lg"> </i>
         </button>

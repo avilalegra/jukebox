@@ -23,5 +23,7 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
-    "dependencies": {}
+    "dependencies": {
+        "node-vibrant": "3.1.6"
+    }
 }

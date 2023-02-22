@@ -14,6 +14,13 @@
     right: 35%;
   }
 
+  .player-bar {
+    position: fixed;
+    bottom: 8px;
+    left: 1%;
+    width: 98%;
+  }
+
   @media (min-width: 768px) {
     & > .albums-player-selector {
       right: 20px;
@@ -22,28 +29,5 @@
     & .audios-list {
       margin-right: 15px;
     }
-  }
-}
-
-
-@keyframes animateToPlayer {
-  from {
-    left: 0;
-    border-radius: 12px 0 0 12px;
-  }
-  to {
-    left: 50%;
-    border-radius: 0 12px 12px 0;
-  }
-}
-
-@keyframes animateToAlbums {
-  from {
-    left: 50%;
-    border-radius: 0 12px 12px 0;
-  }
-  to {
-    left: 0;
-    border-radius: 12px 0 0 12px;
   }
 }

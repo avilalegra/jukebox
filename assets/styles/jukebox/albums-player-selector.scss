@@ -1,7 +1,7 @@
 .albums-player-selector {
   position: relative;
   display: flex;
-  background-color: var(--main-color);
+  background-color: var(--sub-color-dark);
   transition: background-color 2s;
   border-radius: 12px;
   z-index: 10000;
@@ -28,7 +28,7 @@
   & > .switch {
     position: absolute;
     border-radius: 12px 0 0 12px;
-    background-color: var(--sub-color-dark);
+    background-color: var(--sub-color-light);
     z-index: -100;
     width: 50%;
     height: 35px;
@@ -44,6 +44,10 @@
     .fa-compact-disc {
       color: var(--accent-color-light)
     }
+
+    .fa-circle-play {
+      color: var(--accent-color-dark)
+    }
   }
 
   &.-player {
@@ -56,8 +60,32 @@
     .fa-circle-play {
       color: var(--accent-color-light)
     }
+
+    .fa-compact-disc {
+      color: var(--accent-color-dark)
+    }
   }
 }
 
 
+@keyframes animateToPlayer {
+  from {
+    left: 0;
+    border-radius: 12px 0 0 12px;
+  }
+  to {
+    left: 50%;
+    border-radius: 0 12px 12px 0;
+  }
+}
 
+@keyframes animateToAlbums {
+  from {
+    left: 50%;
+    border-radius: 0 12px 12px 0;
+  }
+  to {
+    left: 0;
+    border-radius: 12px 0 0 12px;
+  }
+}

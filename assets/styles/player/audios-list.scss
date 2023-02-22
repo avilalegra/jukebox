@@ -37,12 +37,12 @@
 
   > .marker {
     height: 28px;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
   }
 
   > &:hover {
     .marker {
-      border-left: 2px solid gray;
+      background-color: var(--accent-color-light);
     }
   }
 }
