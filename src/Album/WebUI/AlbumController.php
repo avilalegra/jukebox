@@ -22,6 +22,6 @@ class AlbumController extends AbstractController
     {
         $albums = $this->albumBrowser->albumsIndex();
 
-        return $this->render('library/albums.html.twig', compact('albums'));
+        return $this->render('album/albums.html.twig', compact('albums'));
     }
 }

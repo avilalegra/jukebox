@@ -12,7 +12,7 @@
             <li>
                 <form action="{{ path('player.play.audio', {'id': audio.id}) }}" method="post">
                     <button id="{{ audio.id }}" type="submit"
-                            class="audio-list-item _inv-button {{ activeAudio ? '-active' : '' }}">
+                            class="audio _inv-button {{ activeAudio ? '-active' : '' }}">
                         <div class="marker"></div>
                         <span class="material-symbols-outlined icon"> equalizer </span>
                         {{ audio.title }}

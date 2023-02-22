@@ -12,7 +12,7 @@
   .play-action {
     position: relative;
     top: 8px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
     color: var(--accent-color-dark);
 
     &:not(.fa-music) {
@@ -22,60 +22,9 @@
 
   .center-block {
     flex: 1;
-    width: 98%;
-    display: flex;
     margin-left: 15px;
     margin-right: 15px;
-    flex-direction: column;
-
-    > .audio-title {
-      height: 20px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 80%;
-    }
-
-    .progress-bar {
-      box-sizing: border-box;
-      position: relative;
-      align-items: center;
-      width: 100%;
-      height: 25px;
-
-      > .played {
-        position: absolute;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        top: 9px;
-        height: 5px;
-        background-color: var(--accent-color-light);
-        z-index: 1000;
-      }
-
-      .position {
-        background-color: var(--accent-color-dark);
-        height: 12px;
-        width: 11px;
-        border-radius: 100%;
-      }
-
-      > .remain {
-        position: absolute;
-        top: 10px;
-        height: 3px;
-        width: 100%;
-        background-color: var(--sub-color-light);
-      }
-    }
-
-    .progress-time {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 10px 0 10px;
-      font-size: 0.9rem;
-    }
+    width: 98%;
   }
 
   > .album-image {
@@ -84,13 +33,7 @@
     height: 70px;
     margin-left: 10px;
     object-fit: cover;
-
-
-    @media (min-width: 768px) {
-     display: block;
-    }
   }
-
 
   @media (min-width: 768px) {
     opacity: 0.7;
@@ -98,5 +41,63 @@
     &:hover {
       opacity: 1.0;
     }
+
+    > .album-image {
+      display: block;;
+    }
+  }
+}
+
+.player-bar .center-block {
+  display: flex;
+  flex-direction: column;
+
+  > .audio-title {
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
+  }
+
+  .progress-bar {
+    box-sizing: border-box;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    height: 25px;
+
+    > .played {
+      position: absolute;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      top: 9px;
+      height: 5px;
+      background-color: var(--accent-color-light);
+      z-index: 1000;
+    }
+
+    .position {
+      background-color: var(--accent-color-dark);
+      height: 12px;
+      width: 11px;
+      border-radius: 100%;
+    }
+
+    > .remain {
+      position: absolute;
+      top: 10px;
+      height: 3px;
+      width: 100%;
+      background-color: var(--sub-color-light);
+    }
+  }
+
+  .progress-time {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+    font-size: 0.9rem;
   }
 }

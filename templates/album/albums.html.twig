@@ -5,7 +5,7 @@
         {% for album in albums %}
             <li data-action="click->jukebox-player#showPlayer">
                 <form action="{{ path('player.play.album', {'name': album.name}) }}" method="POST">
-                    <div class="audio-album">
+                    <div class="album">
                         <button class="_inv-button" type="submit">
                             <img class="image" src="{{ asset('covers/' ~ albumCover(album.name)) }}" alt="">
                             {% if album.name == '__unknown__' %}

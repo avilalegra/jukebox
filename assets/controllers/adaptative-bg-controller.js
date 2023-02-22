@@ -13,13 +13,15 @@ export default class extends Controller {
     async adjustColorPalette() {
 
         if (this.hasImageTarget) {
-            let palette = await this.getPalette(this.imageTarget)
+            let image = document.createElement('img');
+            image.src = this.imageTarget.src
+            let palette = await this.getPalette(image)
             let r = document.querySelector(':root');
-            r.style.setProperty('--main-color', palette.Vibrant.getHex());
-            r.style.setProperty('--sub-color-light', palette.LightVibrant.getHex());
-            r.style.setProperty('--sub-color-dark', palette.DarkVibrant.getHex());
-            r.style.setProperty('--accent-color-light', palette.LightVibrant.getTitleTextColor());
-            r.style.setProperty('--accent-color-dark', palette.DarkVibrant.getTitleTextColor());
+            r.style.setProperty('--main-color', palette.Muted.getHex());
+            r.style.setProperty('--sub-color-light', palette.LightMuted.getHex());
+            r.style.setProperty('--sub-color-dark', palette.DarkMuted.getHex());
+            r.style.setProperty('--accent-color-light', palette.LightMuted.getTitleTextColor());
+            r.style.setProperty('--accent-color-dark', palette.DarkMuted.getTitleTextColor());
         }
     }
 
@@ -28,6 +30,7 @@ export default class extends Controller {
     }
 }
 
+// debug tool
 function showPalette(palette) {
     let body = document.getElementById('palette');
     body.innerHTML = ""

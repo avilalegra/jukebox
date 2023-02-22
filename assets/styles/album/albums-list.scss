@@ -3,7 +3,7 @@
   flex-direction: column;
   padding: 20px;
 
-  .audio-album {
+  .album {
     margin-bottom: 25px;
 
     .image {
@@ -17,7 +17,7 @@
     justify-content: center;
     flex-wrap: wrap;
 
-    .audio-album {
+    .album {
       margin-right: 25px;
       width: 250px;
       height: 250px;
@@ -29,13 +29,9 @@
   }
 }
 
-.audio-album {
+.albums-list .album {
   position: relative;
   cursor: pointer;
-
-  &.-selected {
-    background-color: cadetblue;
-  }
 
   .image {
     object-fit: cover;
@@ -44,10 +40,6 @@
 
   ._inv-button {
     width: 100%;
-  }
-
-  .name {
-    margin: 0;
   }
 
   .album-name {
