@@ -17,11 +17,17 @@ export default class extends Controller {
             image.src = this.imageTarget.src
             let palette = await this.getPalette(image)
             let r = document.querySelector(':root');
-            r.style.setProperty('--main-color', palette.Muted.getHex());
-            r.style.setProperty('--sub-color-light', palette.LightMuted.getHex());
-            r.style.setProperty('--sub-color-dark', palette.DarkMuted.getHex());
-            r.style.setProperty('--accent-color-light', palette.LightMuted.getTitleTextColor());
-            r.style.setProperty('--accent-color-dark', palette.DarkMuted.getTitleTextColor());
+            r.style.setProperty('--main-muted', palette.Muted.getHex());
+            r.style.setProperty('--sub-muted-light', palette.LightMuted.getHex());
+            r.style.setProperty('--sub-muted-dark', palette.DarkMuted.getHex());
+            r.style.setProperty('--accent-muted-light', palette.LightMuted.getTitleTextColor());
+            r.style.setProperty('--accent-muted-dark', palette.DarkMuted.getTitleTextColor());
+
+            r.style.setProperty('--main-vibrant', palette.Vibrant.getHex());
+            r.style.setProperty('--sub-vibrant-light', palette.LightVibrant.getHex());
+            r.style.setProperty('--sub-vibrant-dark', palette.DarkVibrant.getHex());
+            r.style.setProperty('--accent-vibrant-light', palette.LightVibrant.getTitleTextColor());
+            r.style.setProperty('--accent-vibrant-dark', palette.DarkVibrant.getTitleTextColor());
         }
     }
 

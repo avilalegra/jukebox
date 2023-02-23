@@ -2,16 +2,13 @@
 
 
 .jukebox-player {
-  display: flex;
-  flex-direction: column;
   height: 97vh;
-  margin-top: 80px;
 
   & > .albums-player-selector {
     transition: display 1s;
     position: fixed;
-    top: 25px;
-    right: 35%;
+    top: 5px;
+    left: 30px;
   }
 
   .player-bar {
@@ -21,9 +18,50 @@
     width: 98%;
   }
 
+  .contents-section {
+    overflow: auto;
+    height: 100vh;
+  }
+
+  @media (max-width: 768px) {
+
+    .navbar {
+      transition: height 1s;
+      height: 45px;
+    }
+
+    &.-navbar-opened .navbar {
+      height: 120px;
+    }
+  }
+
+
   @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    transition: margin-left 1s;
+    margin-left: -120px;
+    margin-top: 4%;
+
+    &.-navbar-opened {
+      margin-left: 0;
+    }
+
+    .navbar {
+      height: 80vh;
+      position: relative;
+    }
+
     & > .albums-player-selector {
       right: 20px;
+      top: 25px;
+      left: unset;
+    }
+
+    .contents-section {
+      height: 94vh;
     }
   }
 }
+
+

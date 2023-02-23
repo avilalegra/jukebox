@@ -5,9 +5,12 @@
 {#        <button type="submit">Import</button>#}
 {#    </form>#}
 
-    <div class="jukebox-player">
+    <div class="jukebox-player" data-controller="navbar" data-navbar-target="jukebox">
+        {% include 'navbar.html.twig' %}
         {% include 'jukebox/album_player_selector.html.twig' %}
-        {% block contents %} {% endblock %}
+        <section class="contents-section">
+            {% block contents %} {% endblock %}
+        </section>
     </div>
 
 {% endblock %}

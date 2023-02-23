@@ -46,6 +46,7 @@
 
   @media (min-width: 768px) {
     padding: 55px;
+    padding-left: 10px;
   }
 }
 
@@ -54,11 +55,11 @@
   align-items: center;
   padding: 15px 0 15px 0;
   cursor: pointer;
-  color: var(--accent-color-light);
+  color: var(--accent-muted-light);
 
   &.-active {
-    color: var(--accent-color-dark);
-    background-color: var(--sub-color-light);
+    color: var(--accent-muted-dark);
+    background-color: var(--sub-muted-light);
     border-radius: 5px;
     font-weight: 600;
   }
@@ -75,7 +76,7 @@
 
   > &:hover {
     .marker {
-      background-color: var(--accent-color-light);
+      background-color: var(--accent-muted-light);
     }
   }
 }

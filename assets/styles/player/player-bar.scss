@@ -4,8 +4,8 @@
   padding: 7px 20px 7px;
   border-radius: 7px;
   align-content: center;
-  background-color: var(--sub-color-dark);
-  color: var(--accent-color-dark);
+  background-color: var(--sub-muted-dark);
+  color: var(--accent-muted-dark);
   min-height: 84px;
 
 
@@ -13,7 +13,7 @@
     position: relative;
     top: 8px;
     margin-bottom: 20px;
-    color: var(--accent-color-dark);
+    color: var(--accent-muted-dark);
 
     &:not(.fa-music) {
       cursor: pointer;
@@ -74,12 +74,12 @@
       align-items: center;
       top: 9px;
       height: 5px;
-      background-color: var(--accent-color-light);
+      background-color: var(--accent-muted-light);
       z-index: 1000;
     }
 
     .position {
-      background-color: var(--accent-color-dark);
+      background-color: var(--accent-muted-dark);
       height: 12px;
       width: 11px;
       border-radius: 100%;
@@ -90,7 +90,7 @@
       top: 10px;
       height: 3px;
       width: 100%;
-      background-color: var(--sub-color-light);
+      background-color: var(--sub-muted-light);
     }
   }
 

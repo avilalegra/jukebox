@@ -1,13 +1,20 @@
 @import "jukebox/jukebox";
 @import "player/player";
 @import "album/album";
+@import "navbar";
 
 :root {
-  --main-color: #e9d8a6;
-  --sub-color-light: #94d2bd;
-  --sub-color-dark: #0a9396;
-  --accent-color-light: #ca6702;
-  --accent-color-dark: #ae2012;
+  --main-muted: #e9d8a6;
+  --sub-muted-light: #94d2bd;
+  --sub-muted-dark: #0a9396;
+  --accent-muted-light: #ca6702;
+  --accent-muted-dark: #ae2012;
+
+  --main-vibrant: #e9d8a6;
+  --sub-vibrant-light: #94d2bd;
+  --sub-vibrant-dark: #0a9396;
+  --accent-vibrant-light: #ca6702;
+  --accent-vibrant-dark: #ae2012;
 }
 
 * {
@@ -16,7 +23,8 @@
 }
 
 body {
-  background-color: var(--main-color);
+  overflow: hidden;
+  background-color: var(--main-muted);
   transition: background-color 2s;
 }
 

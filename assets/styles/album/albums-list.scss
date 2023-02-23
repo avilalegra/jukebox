@@ -14,16 +14,16 @@
 
   @media (min-width: 768px) {
     flex-direction: row;
-    justify-content: center;
     flex-wrap: wrap;
+    padding-left: 90px;
 
     .album {
       margin-right: 25px;
-      width: 250px;
-      height: 250px;
+      width: 200px;
+      height: 200px;
 
       .image {
-        height: 250px;
+        height: 200px;
       }
     }
   }
