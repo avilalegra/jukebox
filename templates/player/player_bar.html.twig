@@ -1,5 +1,8 @@
 <div {{ turbo_stream_listen('player-bar') }}>
 
+    {% set isRunning = nowPlaying is null ? 0 : 1 %}
+    {% set subjectAudio = isRunning ? nowPlaying.audio : lastPlayed %}
+
     <div id="player-bar" class="player-bar" data-controller="adaptative-bg">
         {% if nowPlaying != null %}
             <form action="{{ path('player.stop') }}" method="post">
@@ -19,9 +22,8 @@
 
 
         <div class="center-block">
-            <p class="audio-title">{{ nowPlaying.audio.title | default('') }}</p>
+            <p class="audio-title">{{ subjectAudio.title | default('') }}</p>
 
-            {% set isRunning = nowPlaying is null ? 0 : 1 %}
 
             <div class="playing-progress"
                  data-controller="player-progress"
@@ -37,14 +39,15 @@
 
                 <div class="progress-time">
                     <span data-player-progress-target="elapsed">{{ 0 | date('i:s') }}</span>
-                    <span data-player-progress-target="remain">{{ nowPlaying.duration | default(0) | date('i:s') }}</span>
+                    <span data-player-progress-target="remain">{{ subjectAudio.duration | default(0) | date('i:s') }}</span>
                 </div>
             </div>
 
         </div>
 
-        {% if nowPlaying != null %}
-            <img class="album-image" src="{{ asset('covers/' ~ albumCover(nowPlaying.audio.album)) }}" alt=""
+        {% if subjectAudio is not null %}
+            <img class="album-image"
+                 src="{{ asset('covers/' ~ albumCover(subjectAudio.album)) }}" alt=""
                  data-adaptative-bg-target="image">
         {% endif %}
 

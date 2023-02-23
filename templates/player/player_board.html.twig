@@ -2,8 +2,11 @@
      class="player-board"
         {{ turbo_stream_listen('player-board') }}>
 
-    {% if nowPlaying is not null %}
-        <img class="album-image" src="{{ asset('covers/' ~ albumCover(nowPlaying.album)) }}">
+    {% set isRunning = nowPlaying is null ? 0 : 1 %}
+    {% set subjectAudio = isRunning ? nowPlaying : lastPlayed %}
+
+    {% if subjectAudio is not null %}
+        <img class="album-image" src="{{ asset('covers/' ~ albumCover(subjectAudio.album)) }}">
     {% endif %}
 
     <ul class="audios-list">

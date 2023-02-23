@@ -47,7 +47,8 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->render('player/player.html.twig',
             [
                 'playlist' => $playlist,
-                'nowPlaying' => $status->playingAudio?->audio
+                'nowPlaying' => $status->playingAudio?->audio,
+                'lastPlayed' => $status->lastPlayedAudio,
             ]
         );
     }

@@ -24,9 +24,12 @@
             </a>
         </li>
 
-        {#        <li class="entry"> #}
-        {#            <a href="{{ path('albums.index') }}">Sync source</a> #}
-        {#            <i class="fa-solid fa-arrows-rotate fa-xl"></i> #}
-        {#        </li> #}
+        <hr class="separator"/>
+        <li>
+            <a class="entry {{ route == 'albums.index' ? '-active' : '' }}" href="{{ path('albums.index') }}">
+                <span class="title"> Configuración </span>
+                <i class="fa-solid fa-gear fa-xl"></i>
+            </a>
+        </li>
     </ul>
 </nav>
