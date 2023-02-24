@@ -26,4 +26,11 @@ class AudioBrowser implements AudioBrowserInterface
     {
         return $this->repository->find($audioId)->readModel();
     }
+
+    public function paginateAudios(): array
+    {
+        $audios = $this->repository->findAll();
+
+        return array_map(fn(AudioEntity $a) => $a->readModel(), $audios);
+    }
 }

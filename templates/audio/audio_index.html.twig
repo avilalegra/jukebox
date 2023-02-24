@@ -1,0 +1,35 @@
+{% extends 'player_base.html.twig' %}
+
+
+{% block contents %}
+    <div class="audios-browser">
+        <table class="audio-list">
+            <tr>
+                <th class="priority-1">Título</th>
+                <th class="priority-2">Artista</th>
+                <th class="priority-3">Album</th>
+                <th class="priority-4">Año</th>
+                <th class="priority-5">Género</th>
+                <th class="priority-6">Duración</th>
+                <th></th>
+            </tr>
+            {% for audio in audios %}
+                <tr>
+                    <td class="priority-1">{{ audio.title }}</td>
+                    <td class="priority-2">{{ audio.artist }}</td>
+                    <td class="priority-3">{{ audio.album }}</td>
+                    <td class="priority-4">{{ audio.year | date('Y') }}</td>
+                    <td class="priority-5">{{ audio.genre }}</td>
+                    <td class="priority-6">{{ audio.duration |date('i:s') }}</td>
+                    <td class="actions">
+                        <button class="_inv-button" title="Add to queue">
+                            <i class="fa-solid fa-bars-staggered fa-xl"></i>
+{#                            <i class="fa-regular fa-square-plus fa-xl"></i>#}
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {{ render(path('player.bar')) }}
+{% endblock %}

@@ -40,7 +40,6 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     #[Route('/', name: 'index')]
     public function playerIndex(Request $request) : Response
     {
-//        dd($request->headers->get('referer'));
         $playlist = $this->playListBrowser->mainPlaylist();
         $status = $this->player->getStatus();
 
