@@ -1,7 +1,6 @@
 .albums-list {
   display: flex;
   flex-direction: column;
-  padding: 20px;
 
   .album {
     margin-bottom: 25px;
@@ -15,7 +14,6 @@
   @media (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
-    padding-left: 90px;
 
     .album {
       margin-right: 25px;
@@ -24,6 +22,7 @@
 
       .image {
         height: 200px;
+        width: 200px;
       }
     }
   }

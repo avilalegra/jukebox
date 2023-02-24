@@ -1,26 +1,32 @@
 <?php
 
-declare(strict_types=1);
-
-namespace App\Audio\WebUI;
+namespace App\Configuration\WebUI;
 
 use App\Audio\Application\Import\AudiosFolderImporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/library', name: 'library.')]
-class LibraryController extends AbstractController
+
+#[Route('/config', name: 'config.')]
+class ConfigController extends AbstractController
 {
     public function __construct(
-        private string               $importSourceFolder,
+        private string $importSourceFolder,
         private AudiosFolderImporter $audiosImporter
     )
     {
     }
 
+    #[Route('/', name: 'index')]
+    public function configurationIndex(): Response
+    {
+        return $this->render('configuration/config_index.html.twig',
+            ['importFolder' => $this->importSourceFolder]
+        );
+    }
 
-    #[Route('/audios/source', name: 'source', methods: ['POST'])]
+    #[Route('/audios/source', name: 'import.audios', methods: ['POST'])]
     public function importAudios(): Response
     {
         $this->audiosImporter->importAudios($this->importSourceFolder);

@@ -4,8 +4,6 @@
              data-action="click->navbar#open"/>
         <img class="action-icon close-icon" src="https://img.icons8.com/windows/32/null/macos-close.png"
              data-action="click->navbar#close"/>
-        {#        <i class="close-icon fa-regular fa-circle-xmark fa-xl" data-action="click->navbar#close"></i> #}
-        {#        <i class="open-icon fa-solid fa-down-left-and-up-right-to-center fa-xl" "></i> #}
     </div>
 
     {% set route = app.request.attributes.get('_route') %}
@@ -26,7 +24,7 @@
 
         <hr class="separator"/>
         <li>
-            <a class="entry {{ route == 'albums.index' ? '-active' : '' }}" href="{{ path('albums.index') }}">
+            <a class="entry {{ route == 'config.index' ? '-active' : '' }}" href="{{ path('config.index') }}">
                 <span class="title"> Configuración </span>
                 <i class="fa-solid fa-gear fa-xl"></i>
             </a>

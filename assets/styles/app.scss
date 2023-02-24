@@ -2,6 +2,7 @@
 @import "player/player";
 @import "album/album";
 @import "navbar";
+@import "config";
 
 :root {
   --main-muted: #e9d8a6;
@@ -34,6 +35,7 @@ ul {
 }
 
 ._inv-button {
+  cursor: pointer;
   background-color: transparent;
   border: none;
 }

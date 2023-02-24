@@ -1,0 +1,18 @@
+{% extends 'player_base.html.twig' %}
+
+
+{% block contents %}
+    <div class="configuration">
+        <div class="config-bg"></div>
+        <div class="import">
+            <label for="importFolder">Fuente</label>
+            <input id="importFolder" type="text" readonly value="{{ importFolder }}">
+            <form action="{{ path('config.import.audios') }}" method="post">
+                <button class="import-btn _inv-button" title="Importar desde fuente">
+                    <i class="fa-solid fa-rotate fa-lg"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    {{ render(path('player.bar')) }}
+{% endblock %}
