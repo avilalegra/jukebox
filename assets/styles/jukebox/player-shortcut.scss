@@ -1,4 +1,4 @@
-.albums-player-selector {
+.player-shortcut{
   position: relative;
   display: flex;
   background-color: var(--sub-muted-dark);
@@ -32,20 +32,20 @@
     z-index: -100;
     width: 50%;
     height: 35px;
+    transition: 500ms;
   }
 
   &.-admin {
     .switch {
       left: 0;
-      animation: animateToAlbums 500ms;
       border-radius: 12px 0 0 12px;
     }
 
-    .fa-compact-disc {
+    .fa-circle-chevron-left {
       color: var(--accent-muted-light)
     }
 
-    .fa-circle-play {
+    .fa-music {
       color: var(--accent-muted-dark)
     }
   }
@@ -53,39 +53,17 @@
   &.-player {
     .switch {
       right: 0;
-      animation: animateToPlayer 500ms;
+      left: 50%;
       border-radius: 0 12px 12px 0;
     }
 
-    .fa-circle-play {
+    .fa-music {
       color: var(--accent-muted-light)
     }
 
-    .fa-compact-disc {
+    .fa-circle-chevron-left {
       color: var(--accent-muted-dark)
     }
   }
 }
 
-
-@keyframes animateToPlayer {
-  from {
-    left: 0;
-    border-radius: 12px 0 0 12px;
-  }
-  to {
-    left: 50%;
-    border-radius: 0 12px 12px 0;
-  }
-}
-
-@keyframes animateToAlbums {
-  from {
-    left: 50%;
-    border-radius: 0 12px 12px 0;
-  }
-  to {
-    left: 0;
-    border-radius: 12px 0 0 12px;
-  }
-}

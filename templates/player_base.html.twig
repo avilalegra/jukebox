@@ -1,13 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{#    <form action="{{ path('library.source') }}" method="post">#}
-{#        <button type="submit">Import</button>#}
-{#    </form>#}
-
     <div class="jukebox-player" data-controller="navbar" data-navbar-target="jukebox">
         {% include 'navbar.html.twig' %}
-        {% include 'jukebox/album_player_selector.html.twig' %}
+        {% include 'jukebox/player_shortcut.html.twig' %}
         <section class="contents-section">
             {% block contents %} {% endblock %}
         </section>

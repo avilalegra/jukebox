@@ -1,0 +1,19 @@
+{% set isPlayer = app.request.attributes.get('_route') == 'player.index' %}
+
+{% set referer = app.request.headers.get('referer') | default(path('albums.index')) %}
+
+<div class="player-shortcut {{ isPlayer ? '-player' : '-admin' }}">
+    <div class="switch"></div>
+
+    <form action="{{ referer }}">
+        <button class="albums-tab _inv-button" {{ isPlayer ? '' : 'disabled' }}>
+            <i class="fa-solid fa-circle-chevron-left fa-lg"></i>
+        </button>
+    </form>
+
+    <form action="{{ path('player.index') }}">
+        <button class="player-tab _inv-button" {{ isPlayer ? 'disabled' : '' }}>
+            <i class="fa-solid fa-music fa-lg"></i>
+        </button>
+    </form>
+</div>

@@ -1,10 +1,10 @@
-@import "albums-player-selector";
+@import "player-shortcut";
 
 
 .jukebox-player {
   height: 97vh;
 
-  & > .albums-player-selector {
+  & > .player-shortcut{
     transition: display 1s;
     position: fixed;
     top: 5px;
@@ -52,7 +52,7 @@
       position: relative;
     }
 
-    & > .albums-player-selector {
+    & > .player-shortcut{
       right: 20px;
       top: 25px;
       left: unset;
