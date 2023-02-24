@@ -10,3 +10,22 @@
     </div>
 
 {% endblock %}
+
+{% macro playPreview(audio) %}
+    <div class="play-preview"
+         data-controller="play-preview"
+         data-play-preview-target="playPreview">
+
+        <audio src="{{ '/audios/' ~ audioFile(audio) }}#t=5,20"
+               data-play-preview-target="player">
+        </audio>
+
+        <i class="play-action fa-regular fa-circle-play fa-lg"
+           data-action="click->play-preview#play" title="Reproducir en local"></i>
+
+        <i class="stop-action fa-regular fa-circle-stop fa-lg"
+           data-action="click->play-preview#stop"></i>
+
+        <span class="audio-title"> {{ audio.title }} </span>
+    </div>
+{% endmacro %}

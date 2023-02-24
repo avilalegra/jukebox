@@ -1,30 +1,31 @@
 {% extends 'player_base.html.twig' %}
-
+{% from 'player_base.html.twig' import playPreview %}
 
 {% block contents %}
     <div class="audios-browser">
         <table class="audio-list">
             <tr>
-                <th class="priority-1">Título</th>
-                <th class="priority-2">Artista</th>
-                <th class="priority-3">Album</th>
-                <th class="priority-4">Año</th>
-                <th class="priority-5">Género</th>
-                <th class="priority-6">Duración</th>
+                <th class="audio-title">Título</th>
+                <th class="audio-artist">Artista</th>
+                <th class="audio-album">Album</th>
+                <th class="audio-year">Año</th>
+                <th class="audio-genre">Género</th>
+                <th class="audio-duration">Duración</th>
                 <th></th>
             </tr>
             {% for audio in audios %}
                 <tr>
-                    <td class="priority-1">{{ audio.title }}</td>
-                    <td class="priority-2">{{ audio.artist }}</td>
-                    <td class="priority-3">{{ audio.album }}</td>
-                    <td class="priority-4">{{ audio.year | date('Y') }}</td>
-                    <td class="priority-5">{{ audio.genre }}</td>
-                    <td class="priority-6">{{ audio.duration |date('i:s') }}</td>
+                    <td class="audio-title">
+                        {{ playPreview(audio) }}
+                    </td>
+                    <td class="audio-artist">{{ audio.artist }}</td>
+                    <td class="audio-album">{{ audio.album }}</td>
+                    <td class="audio-year">{{ audio.year | date('Y') }}</td>
+                    <td class="audio-genre">{{ audio.genre }}</td>
+                    <td class="audio-duration">{{ audio.duration |date('i:s') }}</td>
                     <td class="actions">
                         <button class="_inv-button" title="Add to queue">
                             <i class="fa-solid fa-bars-staggered fa-xl"></i>
-{#                            <i class="fa-regular fa-square-plus fa-xl"></i>#}
                         </button>
                     </td>
                 </tr>

@@ -41,3 +41,26 @@ ul {
   border: none;
 }
 
+.play-preview {
+  display: flex;
+  align-items: center;
+
+  .audio-title {
+    margin-left: 10px;
+  }
+
+  .stop-action {
+    display: none;
+  }
+
+  &.-play {
+    .play-action {
+      display: none;
+    }
+
+    .stop-action {
+      display: block;
+    }
+  }
+}
+
