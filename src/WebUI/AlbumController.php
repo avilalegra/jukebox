@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Album\WebUI;
+namespace App\WebUI;
 
 use App\Album\Application\AlbumBrowserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

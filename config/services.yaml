@@ -37,6 +37,6 @@ services:
 
   Mhor\MediaInfo\MediaInfo: ~
 
-  App\Player\WebUI\PlayerController:
+  App\WebUI\PlayerController:
     tags:
       - { name: kernel.event_subscriber }

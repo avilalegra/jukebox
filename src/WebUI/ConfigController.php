@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Configuration\WebUI;
+namespace App\WebUI;
 
 use App\Audio\Application\Import\AudiosFolderImporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

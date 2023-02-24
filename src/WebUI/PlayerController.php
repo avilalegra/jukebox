@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Player\WebUI;
+namespace App\WebUI;
 
-use App\Player\Application\Player\AsyncPlayerInterface;
 use App\Player\Application\Player\AudioPlayingStarted;
 use App\Player\Application\Player\AudioPlayingStopped;
 use App\Player\Application\Player\PlayerManager;
