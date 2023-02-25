@@ -18,7 +18,7 @@
                             class="audio _inv-button {{ activeAudio ? '-active' : '' }}">
                         <div class="marker"></div>
                         <span class="material-symbols-outlined icon"> equalizer </span>
-                        {{ audio.title }}
+                        <span class="title"> {{ audio.title }} </span>
                     </button>
                 </form>
             </li>
@@ -27,7 +27,7 @@
                 <hr class="separator">
             {% endif %}
         {% else %}
-            <span class="emptyMsg">No audios found</span>
+            <span class="emptyMsg">No se ha añadido nada a la lista de reproducción </span>
         {% endfor %}
     </ul>
 </div>

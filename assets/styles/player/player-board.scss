@@ -20,6 +20,7 @@
 
     .album-image {
       width: 300px;
+      margin-bottom: 55px;
     }
 
     > .audios-list {
@@ -29,29 +30,29 @@
 }
 
 .player-board .audios-list {
-  padding: 20px;
   border-radius: 5px;
   opacity: 0.75;
   min-height: 260px;
 
-  > .emptyMsg {
-    font-size: 1.2rem;
-    font-style: italic;
-  }
-
   .audio {
     width: 100%;
+
+    .title {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 
   @media (min-width: 768px) {
-    padding: 55px 55px 55px 10px;
+    padding: 0 55px 55px 10px;
   }
 }
 
 .player-board .audios-list .audio {
   display: flex;
   align-items: center;
-  padding: 15px 0 15px 0;
+  padding: 15px 10px 15px 10px;
   cursor: pointer;
   color: var(--accent-muted-light);
 
