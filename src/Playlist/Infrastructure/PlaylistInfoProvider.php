@@ -2,13 +2,13 @@
 
 namespace App\Playlist\Infrastructure;
 
-use App\Playlist\Application\PlayListBrowserInterface;
+use App\Playlist\Application\Interactor\PlaylistInfoProviderInterface;
 use App\Playlist\Domain\PlaylistEntity;
 use App\Playlist\Domain\PlaylistReadModel;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
-class PlaylistBrowser implements PlayListBrowserInterface
+class PlaylistInfoProvider implements PlaylistInfoProviderInterface
 {
     /**
      * @var EntityRepository<PlaylistEntity>
@@ -22,10 +22,8 @@ class PlaylistBrowser implements PlayListBrowserInterface
         $this->repository = $this->em->getRepository(PlaylistEntity::class);
     }
 
-    public function mainPlaylist(): PlaylistReadModel
+    public function findPlaylist(string $name): PlaylistReadModel
     {
-        return $this->repository
-            ->findOneBy(['name' => 'main'])
-            ->readModel();
+        return $this->repository->findOneBy(['name' => $name])->readModel();
     }
 }

@@ -2,16 +2,16 @@
 
 namespace App\Player\Application\Player;
 
-use App\Album\Application\AlbumBrowserInterface;
-use App\Player\Application\Player\Status\PlayerStatus;
-use App\Playlist\Application\PlaylistManagerFactory;
+use App\Album\Application\Interactor\AlbumInfoProviderInterface;
+use App\Player\Application\Interactor\JukeboxPlayerInterface;
+use App\Player\Application\Player\Status\AudioPlayingStatus;
 
-class PlayerManager
+class PlayerManager implements JukeboxPlayerInterface
 {
     public function __construct(
-        private AsyncPlayerInterface   $asyncPlayer,
-        private AlbumBrowserInterface  $albumBrowser,
-        private PlaylistManagerFactory $playlistManagerFactory
+        private AsyncPlayerInterface       $asyncPlayer,
+        private AlbumInfoProviderInterface $albumBrowser,
+        private PlayerQueue                $playerQueue
     )
     {
     }
@@ -24,18 +24,13 @@ class PlayerManager
     public function playAlbum(string $albumName): void
     {
         $audios = $this->albumBrowser->findAlbumAudios($albumName);
-        $mainPlaylistEditor = $this->playlistManagerFactory->mainPlaylistEditor();
-        $mainPlaylistEditor->replaceAudios($audios);
-        $this->asyncPlayer->playMainPlaylistAsync();
+        $this->playerQueue->clear();
+        $this->playerQueue->add(...$audios);
+        $this->asyncPlayer->playQueueAsync();
     }
 
     public function stop(): void
     {
         $this->asyncPlayer->stop();
-    }
-
-    public function getStatus(): PlayerStatus
-    {
-        return $this->asyncPlayer->getStatus();
     }
 }

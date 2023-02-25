@@ -17,7 +17,7 @@
                     <td class="audio-title">
                         {{ playPreview(audio) }}
                         {% if not nowPlaying or not nowPlaying.equals(audio) %}
-                            {% include 'audio/playlist_actions.html.twig' with {'queued': mainPlaylist.hasAudio(audio)} %}
+                            {% include 'audio/playlist_actions.html.twig' with {'queued': queue.hasAudio(audio)} %}
                         {% endif %}
                     </td>
                     <td class="audio-artist">{{ audio.artist }}</td>

@@ -7,7 +7,7 @@ namespace App\Player\Infrastructure;
 use App\Kernel;
 use App\Player\Application\Player\AsyncPlayerInterface;
 use App\Player\Application\Player\Player;
-use App\Player\Application\Player\Status\PlayerStatus;
+use App\Player\Application\Player\Status\AudioPlayingStatus;
 use App\Player\Infrastructure\OSProccess\OSProcessRunner;
 
 class AsyncPlayer implements AsyncPlayerInterface
@@ -25,7 +25,7 @@ class AsyncPlayer implements AsyncPlayerInterface
         $this->projectDir = $kernel->getProjectDir();
     }
 
-    public function playMainPlaylistAsync(): void
+    public function playQueueAsync(): void
     {
         $this->executePlayCommandAsync(['play-main-playlist']);
     }
@@ -64,10 +64,5 @@ class AsyncPlayer implements AsyncPlayerInterface
     private function saveProcessPid(int $pid): void
     {
         file_put_contents(self::PID_FILE, $pid);
-    }
-
-    public function getStatus(): PlayerStatus
-    {
-        return $this->player->getStatus();
     }
 }

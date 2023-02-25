@@ -2,9 +2,10 @@
 
 namespace App\Command;
 
+use App\Audio\Application\Interactor\AudioInfoProviderInterface;
+use App\Player\Application\Interactor\PlayerQueueInfoProviderInterface;
+use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Player\Application\Player\Player;
-use App\Playlist\Application\PlayListBrowserInterface;
-use App\Shared\Application\AudioBrowserInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -19,10 +20,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PlayerCommand extends Command
 {
     public function __construct(
-        private Player                   $player,
-        private AudioBrowserInterface    $audioBrowser,
-        private LoggerInterface          $logger,
-        private PlayListBrowserInterface $playListBrowser
+        private Player                            $player,
+        private AudioInfoProviderInterface        $audioBrowser,
+        private LoggerInterface                   $logger,
+        private PlayerStatusInfoProviderInterface $statusInfoProvider
     )
     {
         parent::__construct();
@@ -61,7 +62,7 @@ class PlayerCommand extends Command
 
     private function playMainPlaylist(): void
     {
-        $mainPlaylist = $this->playListBrowser->mainPlaylist();
-        $this->player->playAll(...$mainPlaylist->audios);
+        $queue = $this->statusInfoProvider->status()->queue;
+        $this->player->playAll(...$queue->audios);
     }
 }

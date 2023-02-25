@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\WebUI;
 
+use App\Player\Application\Interactor\JukeboxPlayerInterface;
+use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Player\Application\Player\AudioPlayingStarted;
 use App\Player\Application\Player\AudioPlayingStopped;
-use App\Player\Application\Player\PlayerManager;
-use App\Playlist\Application\PlayListBrowserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,9 +21,9 @@ use Symfony\UX\Turbo\TurboBundle;
 class PlayerController extends AbstractController implements EventSubscriberInterface
 {
     public function __construct(
-        private HubInterface         $mercureHub,
-        private PlayerManager $player,
-        private PlayListBrowserInterface $playListBrowser
+        private HubInterface                     $mercureHub,
+        private JukeboxPlayerInterface           $player,
+        private PlayerStatusInfoProviderInterface $statusInfoProvider
     )
     {
     }
@@ -38,16 +38,15 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 
 
     #[Route('/', name: 'index')]
-    public function playerIndex(Request $request) : Response
+    public function playerIndex(): Response
     {
-        $playlist = $this->playListBrowser->mainPlaylist();
-        $status = $this->player->getStatus();
+        $status = $this->statusInfoProvider->status();
 
         return $this->render('player/player.html.twig',
             [
-                'playlist' => $playlist,
-                'nowPlaying' => $status->playingAudio?->audio,
-                'lastPlayed' => $status->lastPlayedAudio,
+                'queue' => $status->queue,
+                'nowPlaying' => $status->audioPlayStatus->playingAudio?->audio,
+                'lastPlayed' => $status->audioPlayStatus->lastPlayedAudio
             ]
         );
     }
@@ -55,12 +54,12 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     #[Route('/bar', name: 'bar')]
     public function playerBar(): Response
     {
-        $status = $this->player->getStatus();
+        $status = $this->statusInfoProvider->status();
 
         return $this->render('player/player_bar.html.twig',
             [
-                'nowPlaying' => $status->playingAudio,
-                'lastPlayed' => $status->lastPlayedAudio,
+                'nowPlaying' => $status->audioPlayStatus->playingAudio,
+                'lastPlayed' => $status->audioPlayStatus->lastPlayedAudio
             ]
         );
     }
@@ -102,14 +101,14 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 
     public function onAudioPlayingStarted(AudioPlayingStarted $event)
     {
-        $playlist = $this->playListBrowser->mainPlaylist();
+        $queue = $this->statusInfoProvider->status()->queue;
 
         $status = $event->playerStatus;
 
         $this->mercureHub->publish(new Update('player-board',
             $this->renderView('player/player_board_stream.html.twig',
                 [
-                    'playlist' => $playlist,
+                    'queue' => $queue,
                     'nowPlaying' => $status->playingAudio?->audio,
                     'lastPlayed' => $status->lastPlayedAudio,
                 ]
@@ -128,13 +127,13 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 
     public function onAudioPlayingStopped(AudioPlayingStopped $event)
     {
-        $status = $this->player->getStatus();
+        $status = $this->statusInfoProvider->status();
 
         $this->mercureHub->publish(new Update('player-bar',
             $this->renderView('player/player_bar_stream.html.twig',
                 [
                     'nowPlaying' => null,
-                    'lastPlayed' => $status->lastPlayedAudio,
+                    'lastPlayed' => $status->audioPlayStatus->lastPlayedAudio
                 ]
             )
         ));

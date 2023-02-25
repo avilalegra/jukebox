@@ -2,9 +2,10 @@
 
 namespace App\Audio\Application\Import;
 
+use App\Audio\Application\Interactor\AudiosFolderImporterInterface;
 use Psr\Log\LoggerInterface;
 
-class AudiosFolderImporter
+class AudiosFolderImporter implements AudiosFolderImporterInterface
 {
     public function __construct(
         private FolderAudiosIteratorInterface $audiosIterator,
@@ -15,7 +16,7 @@ class AudiosFolderImporter
     }
 
     /**
-     * @throws FolderAudiosIterationException
+     * @inheritDoc
      */
     public function importAudios(string $folder): void
     {

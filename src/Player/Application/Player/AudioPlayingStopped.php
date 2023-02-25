@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Player\Application\Player;
 
-use App\Player\Application\Player\Status\PlayerStatus;
+use App\Player\Application\Player\Status\AudioPlayingStatus;
 use App\Shared\Application\ApplicationEventInterface;
 
 class AudioPlayingStopped implements ApplicationEventInterface
 {
     public function __construct(
-        public readonly PlayerStatus $playerStatus
+        public readonly AudioPlayingStatus $playerStatus
     ) {
     }
 

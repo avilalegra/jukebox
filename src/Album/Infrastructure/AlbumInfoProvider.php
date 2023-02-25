@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Album\Infrastructure;
 
-use App\Album\Application\AlbumBrowserInterface;
 use App\Album\Application\AlbumInfo;
 use App\Album\Application\CoverStorageInterface;
+use App\Album\Application\Interactor\AlbumInfoProviderInterface;
 use App\Audio\Domain\AudioEntity;
 use Doctrine\ORM\EntityManagerInterface;
 
 
-class AlbumBrowser implements AlbumBrowserInterface
+class AlbumInfoProvider implements AlbumInfoProviderInterface
 {
 
     public function __construct(
@@ -21,7 +21,7 @@ class AlbumBrowser implements AlbumBrowserInterface
     {
     }
 
-    public function albumsIndex(): array
+    public function albums(): array
     {
         $qb = $this->em
             ->createQueryBuilder()

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Shared\Infrastructure;
+namespace App\Audio\Infrastructure;
 
+use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Audio\Domain\AudioEntity;
-use App\Shared\Application\AudioBrowserInterface;
 use App\Shared\Domain\AudioReadModel;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
-class AudioBrowser implements AudioBrowserInterface
+class AudioInfoProvider implements AudioInfoProviderInterface
 {
     /**
      * @var EntityRepository<AudioEntity>

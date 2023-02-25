@@ -1,45 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Player\Application\Player\Status;
 
-use App\Shared\Domain\AudioReadModel;
+use App\Playlist\Domain\PlaylistReadModel;
 
-class PlayerStatus implements \JsonSerializable
+readonly class PlayerStatus
 {
     public function __construct(
-        public readonly ?AudioPlayingStatus $playingAudio,
-        public readonly ?AudioReadModel $lastPlayedAudio
+        public AudioPlayingStatus $audioPlayStatus,
+        public PlaylistReadModel  $queue
     )
     {
-    }
-
-    public static function default(): PlayerStatus
-    {
-        return new PlayerStatus( null, null);
-    }
-
-    public function playingTransition(AudioReadModel $audio, int $startedAt): self
-    {
-        return new PlayerStatus(new AudioPlayingStatus($audio, $startedAt), $this->playingAudio?->audio);
-    }
-
-    public function stopTransition(): self
-    {
-        return new PlayerStatus(null, $this->playingAudio?->audio);
-    }
-
-
-    #[\ReturnTypeWillChange]
-    public function jsonSerialize()
-    {
-        return [
-            'playingAudio' => $this->playingAudio ? [
-                'playingAudioId' => $this->playingAudio->audio->id,
-                'startedAt' => $this->playingAudio->startedAt,
-            ] : null,
-            'lastPlayedAudioId' => $this->lastPlayedAudio?->id,
-        ];
     }
 }

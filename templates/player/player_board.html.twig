@@ -10,7 +10,7 @@
     {% endif %}
 
     <ul class="audios-list">
-        {% for audio in playlist.audios %}
+        {% for audio in queue.audios %}
             {% set activeAudio = audio.id in [nowPlaying.id|default(null), lastPlayed.id|default(null)] %}
             <li>
                 <form action="{{ path('player.play.audio', {'id': audio.id}) }}" method="post">

@@ -3,10 +3,11 @@
 namespace App\Playlist\Application;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
+use App\Playlist\Application\Interactor\PlaylistManagerInterface;
 use App\Playlist\Domain\PlaylistEntity;
 use App\Shared\Domain\AudioReadModel;
 
-class PlaylistManager
+class PlaylistManager implements PlaylistManagerInterface
 {
     public function __construct(
         private PlaylistEntity                    $playlist,
@@ -16,31 +17,24 @@ class PlaylistManager
     {
     }
 
-    /**
-     * @param array<AudioReadModel> $audios
-     */
-    public function replaceAudios(array $audios): void
+    public function clear(): void
     {
-        $audios = array_map(
-            fn(AudioReadModel $audio) => $this->audioRepository->find($audio->id),
-            $audios
-        );
-
-        $this->playlist->replaceAudios($audios);
-        $this->playlistRepository->update($this->playlist);
+        $this->playlist->clear();
     }
 
-    public function addToPlaylist(AudioReadModel $audio): void
+    public function add(AudioReadModel ...$audios): void
     {
-        $audio = $this->audioRepository->find($audio->id);
-        $this->playlist->addAudio($audio);
-        $this->playlistRepository->update($this->playlist);
+        foreach ($audios as $audio) {
+            $audioEntity = $this->audioRepository->find($audio->id);
+            $this->playlist->add($audioEntity);
+            $this->playlistRepository->update($this->playlist);
+        }
     }
 
-    public function removeFromPlaylist(AudioReadModel $audio): void
+    public function remove(AudioReadModel $audio): void
     {
-        $audio = $this->audioRepository->find($audio->id);
-        $this->playlist->removeAudio($audio);
+        $audioEntity = $this->audioRepository->find($audio->id);
+        $this->playlist->remove($audioEntity);
         $this->playlistRepository->update($this->playlist);
     }
 }

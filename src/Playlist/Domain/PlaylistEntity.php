@@ -41,23 +41,19 @@ class PlaylistEntity
         $this->audios = new ArrayCollection();
     }
 
-    /**
-     * @param array<AudioEntity> $audios
-     */
-    public function replaceAudios(array $audios): void
+    public function clear(): void
     {
         $this->audios->clear();
+    }
+
+    public function add(AudioEntity ...$audios): void
+    {
         foreach ($audios as $audio) {
             $this->audios->add($audio);
         }
     }
 
-    public function addAudio(AudioEntity $audio): void
-    {
-        $this->audios->add($audio);
-    }
-
-    public function removeAudio(AudioEntity $audio): void
+    public function remove(AudioEntity $audio): void
     {
         $this->audios->removeElement($audio);
     }

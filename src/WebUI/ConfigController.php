@@ -2,7 +2,7 @@
 
 namespace App\WebUI;
 
-use App\Audio\Application\Import\AudiosFolderImporter;
+use App\Audio\Application\Interactor\AudiosFolderImporterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +13,7 @@ class ConfigController extends AbstractController
 {
     public function __construct(
         private string $importSourceFolder,
-        private AudiosFolderImporter $audiosImporter
+        private AudiosFolderImporterInterface $audiosImporter
     )
     {
     }

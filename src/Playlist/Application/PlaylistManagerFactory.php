@@ -3,8 +3,9 @@
 namespace App\Playlist\Application;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
+use App\Playlist\Application\Interactor\PlaylistManagerFactoryInterface;
 
-class PlaylistManagerFactory
+class PlaylistManagerFactory implements PlaylistManagerFactoryInterface
 {
     public function __construct(
         private PlaylistEntityRepositoryInterface $playlistRepository,
@@ -17,10 +18,5 @@ class PlaylistManagerFactory
     {
         $playlist = $this->playlistRepository->findPlaylist($playlistId);
         return new PlaylistManager($playlist, $this->playlistRepository, $this->audioRepository);
-    }
-
-    public function mainPlaylistEditor(): PlaylistManager
-    {
-        return $this->playlistEditor('main');
     }
 }
