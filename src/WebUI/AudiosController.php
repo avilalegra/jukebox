@@ -15,7 +15,7 @@ use Symfony\UX\Turbo\TurboBundle;
 class AudiosController extends AbstractController
 {
     public function __construct(
-        private AudioInfoProviderInterface        $audioBrowser,
+        private AudioInfoProviderInterface        $audioInfoProvider,
         private PlayerStatusInfoProviderInterface $statusInfoProvider,
         private PlayerQueueInterface              $playerQueue,
     )
@@ -26,15 +26,15 @@ class AudiosController extends AbstractController
     public function index(): Response
     {
         $status = $this->statusInfoProvider->status();
-        $audios = $this->audioBrowser->paginateAudios();
+        $audios = $this->audioInfoProvider->paginateAudios();
         $queue = $status->queue;
-        $nowPlaying = $status->audioPlayStatus->playingAudio?->audio;
+        $nowPlaying = $status->audioPlayStatus->currentPlayingAudio?->audio;
 
         return $this->render(
             'audio/audio_browser.html.twig',
             [
                 'audios' => $audios,
-                'queue' => $queue,
+                'playerStatus' => $status,
                 'nowPlaying' => $nowPlaying
             ]
         );
@@ -43,7 +43,7 @@ class AudiosController extends AbstractController
     #[Route('/{id}/queue', name: 'addToPlayingQueue', methods: ['post'])]
     public function addToPlayingQueue(string $id, Request $request): Response
     {
-        $audio = $this->audioBrowser->findAudio($id);
+        $audio = $this->audioInfoProvider->findAudio($id);
         $this->playerQueue->add($audio);
 
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
@@ -61,7 +61,7 @@ class AudiosController extends AbstractController
     #[Route('/{id}/queue', name: 'removeFromPlayingQueue', methods: ['delete'])]
     public function removeFromPlayingQueue(string $id, Request $request): Response
     {
-        $audio = $this->audioBrowser->findAudio($id);
+        $audio = $this->audioInfoProvider->findAudio($id);
         $this->playerQueue->remove($audio);
 
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {

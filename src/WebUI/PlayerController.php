@@ -45,7 +45,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->render('player/player.html.twig',
             [
                 'queue' => $status->queue,
-                'nowPlaying' => $status->audioPlayStatus->playingAudio?->audio,
+                'nowPlaying' => $status->audioPlayStatus->currentPlayingAudio?->audio,
                 'lastPlayed' => $status->audioPlayStatus->lastPlayedAudio
             ]
         );
@@ -58,7 +58,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 
         return $this->render('player/player_bar.html.twig',
             [
-                'nowPlaying' => $status->audioPlayStatus->playingAudio,
+                'nowPlaying' => $status->audioPlayStatus->currentPlayingAudio,
                 'lastPlayed' => $status->audioPlayStatus->lastPlayedAudio
             ]
         );
@@ -109,7 +109,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
             $this->renderView('player/player_board_stream.html.twig',
                 [
                     'queue' => $queue,
-                    'nowPlaying' => $status->playingAudio?->audio,
+                    'nowPlaying' => $status->currentPlayingAudio?->audio,
                     'lastPlayed' => $status->lastPlayedAudio,
                 ]
             )
@@ -118,7 +118,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         $this->mercureHub->publish(new Update('player-bar',
             $this->renderView('player/player_bar_stream.html.twig',
                 [
-                    'nowPlaying' => $status->playingAudio,
+                    'nowPlaying' => $status->currentPlayingAudio,
                     'lastPlayed' => $status->lastPlayedAudio,
                 ]
             )

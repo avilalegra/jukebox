@@ -21,8 +21,8 @@ readonly class AudioReadModel
     {
     }
 
-    public function equals(AudioReadModel $audio): bool
+    public function equals(?AudioReadModel $audio): bool
     {
-        return $this->id === $audio->id;
+        return $audio !== null && ($this->id === $audio->id);
     }
 }
