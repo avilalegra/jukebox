@@ -7,13 +7,13 @@
 
     <form action="{{ referer }}">
         <button class="albums-tab _inv-button" {{ isPlayer ? '' : 'disabled' }}>
-            <i class="fa-solid fa-circle-chevron-left fa-lg"></i>
+            <i class="fa-solid fa-left-long fa-lg"></i>
         </button>
     </form>
 
     <form action="{{ path('player.index') }}">
         <button class="player-tab _inv-button" {{ isPlayer ? 'disabled' : '' }}>
-            <i class="fa-solid fa-music fa-lg"></i>
+            <i class="fa-regular fa-circle-play fa-lg"></i>
         </button>
     </form>
 </div>

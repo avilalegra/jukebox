@@ -1,9 +1,14 @@
 <nav class="navbar">
     <div class="navbar-header">
-        <img class="action-icon open-icon" src="https://img.icons8.com/ios/50/null/menu-rounded.png"
-             data-action="click->navbar#open"/>
-        <img class="action-icon close-icon" src="https://img.icons8.com/windows/32/null/macos-close.png"
-             data-action="click->navbar#close"/>
+        <i class="action-icon open-icon fa-solid fa-bars fa-xl"
+           data-action="click->navbar#open"></i>
+        {#        <img class="action-icon open-icon" src="https://img.icons8.com/ios/50/null/menu-rounded.png" #}
+        {#             data-action="click->navbar#open"/> #}
+        {#        <img class="action-icon close-icon" src="https://img.icons8.com/windows/32/null/macos-close.png" #}
+        {#             data-action="click->navbar#close"/> #}
+
+        <i class="action-icon close-icon fa-solid fa-circle-xmark fa-xl"
+           data-action="click->navbar#close"></i>
     </div>
 
     {% set route = app.request.attributes.get('_route') %}
