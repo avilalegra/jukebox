@@ -17,4 +17,14 @@ readonly class PlaylistReadModel
     )
     {
     }
+
+    public function hasAudio(AudioReadModel $audio): bool
+    {
+        foreach ($this->audios as $a) {
+            if ($a->equals($audio)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

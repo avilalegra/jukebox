@@ -29,7 +29,7 @@ class PlaylistEntity
     #[JoinColumn(name: 'playlist_id')]
     #[InverseJoinColumn(name: 'audio_id')]
     #[JoinTable('playlist_audio')]
-    public Collection $audios;
+    private Collection $audios;
 
     public function __construct(
         string $id,
@@ -50,6 +50,16 @@ class PlaylistEntity
         foreach ($audios as $audio) {
             $this->audios->add($audio);
         }
+    }
+
+    public function addAudio(AudioEntity $audio): void
+    {
+        $this->audios->add($audio);
+    }
+
+    public function removeAudio(AudioEntity $audio): void
+    {
+        $this->audios->removeElement($audio);
     }
 
     public function readModel(): PlaylistReadModel

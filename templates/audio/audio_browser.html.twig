@@ -11,23 +11,20 @@
                 <th class="audio-year">Año</th>
                 <th class="audio-genre">Género</th>
                 <th class="audio-duration">Duración</th>
-                <th></th>
             </tr>
             {% for audio in audios %}
                 <tr>
                     <td class="audio-title">
                         {{ playPreview(audio) }}
+                        {% if not nowPlaying or not nowPlaying.equals(audio) %}
+                            {% include 'audio/playlist_actions.html.twig' with {'queued': mainPlaylist.hasAudio(audio)} %}
+                        {% endif %}
                     </td>
                     <td class="audio-artist">{{ audio.artist }}</td>
                     <td class="audio-album">{{ audio.album }}</td>
                     <td class="audio-year">{{ audio.year | date('Y') }}</td>
                     <td class="audio-genre">{{ audio.genre }}</td>
                     <td class="audio-duration">{{ audio.duration |date('i:s') }}</td>
-                    <td class="actions">
-                        <button class="_inv-button" title="Add to queue">
-                            <i class="fa-solid fa-bars-staggered fa-xl"></i>
-                        </button>
-                    </td>
                 </tr>
             {% endfor %}
         </table>

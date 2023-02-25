@@ -9,10 +9,6 @@
   .audio-list {
     width: 100%;
 
-    .actions {
-      text-align: center;
-    }
-
     th {
       position: sticky;
       top: -50px;
@@ -32,16 +28,6 @@
       }
     }
 
-    .play-preview {
-      width: 100%;
-      padding: 10px 10px 10px 15px;
-
-      &.-play {
-        background-color: var(--sub-muted-light);
-        color: var(--accent-muted-light);
-      }
-    }
-
     td.audio-title {
       display: flex;
       padding: 0;
@@ -58,6 +44,22 @@
           opacity: 0.8;
         }
       }
+    }
+
+    .play-preview {
+      width: 100%;
+      padding: 10px 10px 10px 15px;
+
+      &.-play {
+        background-color: var(--sub-muted-light);
+        color: var(--accent-muted-light);
+      }
+    }
+
+    .playlist-actions {
+      display: flex;
+      align-items: center;
+      padding: 10px;
     }
 
     @media (min-width: 768px) {

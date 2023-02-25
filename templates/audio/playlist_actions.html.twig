@@ -1,0 +1,20 @@
+<div id="playlist-actions-{{ audio.id }}" class="playlist-actions">
+    {% if queued %}
+        <form action="{{ path('audios.removeFromPlayingQueue', {'id': audio.id}) }}"
+              method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button class="_inv-button" type="submit">
+                <i class="fa-solid fa-circle-minus fa-lg"
+                   title="Eliminar de la cola de reproducción"></i>
+            </button>
+        </form>
+    {% else %}
+        <form action="{{ path('audios.addToPlayingQueue', {'id': audio.id}) }}" method="post">
+            <input type="hidden" name="_method" value="post">
+            <button class="_inv-button" type="submit">
+                <i class="fa-solid fa-circle-plus fa-lg"
+                   title="Añadir a la cola de reproducción"></i>
+            </button>
+        </form>
+    {% endif %}
+</div>

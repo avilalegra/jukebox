@@ -15,7 +15,8 @@ class PlaylistManagerFactory
 
     public function playlistEditor(string $playlistId): PlaylistManager
     {
-        return new PlaylistManager($playlistId, $this->playlistRepository, $this->audioRepository);
+        $playlist = $this->playlistRepository->findPlaylist($playlistId);
+        return new PlaylistManager($playlist, $this->playlistRepository, $this->audioRepository);
     }
 
     public function mainPlaylistEditor(): PlaylistManager
