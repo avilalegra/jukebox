@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Player\Application\Device;
 
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioReadModel;
 
 interface AudioDeviceInterface
 {

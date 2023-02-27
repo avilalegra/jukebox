@@ -6,7 +6,7 @@ namespace App\Album\Application\Interactor;
 
 
 use App\Album\Application\AlbumInfo;
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioReadModel;
 
 interface AlbumInfoProviderInterface
 {

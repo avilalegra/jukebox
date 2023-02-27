@@ -2,11 +2,11 @@
 
 namespace spec\App\Player\Infrastructure;
 
+use App\Audio\Application\AudioFileName;
 use App\Audio\Application\Storage\AudioStorageInterface;
 use App\Player\Application\Device\AudioDeviceException;
 use App\Player\Infrastructure\OSProccess\OsProcessException;
 use App\Player\Infrastructure\OSProccess\OSProcessRunnerInterface;
-use App\Shared\Application\AudioFileName;
 use PhpSpec\ObjectBehavior;
 
 class AudioDeviceSpec extends ObjectBehavior

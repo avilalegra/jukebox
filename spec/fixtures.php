@@ -2,7 +2,7 @@
 
 use App\Audio\Application\Metadata\AudioMetadata;
 use App\Audio\Domain\AudioEntity;
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioReadModel;
 
 
 const SAMPLE_GUID = 'c1bc7bd8-be49-477e-9d72-38cc385c8bbf';

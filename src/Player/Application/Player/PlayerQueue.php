@@ -2,10 +2,10 @@
 
 namespace App\Player\Application\Player;
 
+use App\Audio\Domain\AudioReadModel;
 use App\Player\Application\Interactor\PlayerQueueInterface;
 use App\Playlist\Application\PlaylistManager;
 use App\Playlist\Application\PlaylistManagerFactory;
-use App\Shared\Domain\AudioReadModel;
 
 class PlayerQueue implements PlayerQueueInterface
 {

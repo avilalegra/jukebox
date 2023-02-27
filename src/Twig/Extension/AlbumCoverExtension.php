@@ -3,10 +3,9 @@
 namespace App\Twig\Extension;
 
 use App\Album\Application\CoverStorageInterface;
+use App\Audio\Application\AudioFileName;
 use App\Audio\Application\Storage\AudioStorageInterface;
-use App\Shared\Application\AudioFileName;
-use App\Shared\Domain\AudioReadModel;
-use App\Twig\Runtime\AlbumCoverExtensionRuntime;
+use App\Audio\Domain\AudioReadModel;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

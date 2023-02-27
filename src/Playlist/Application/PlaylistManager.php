@@ -3,9 +3,9 @@
 namespace App\Playlist\Application;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
+use App\Audio\Domain\AudioReadModel;
 use App\Playlist\Application\Interactor\PlaylistManagerInterface;
 use App\Playlist\Domain\PlaylistEntity;
-use App\Shared\Domain\AudioReadModel;
 
 class PlaylistManager implements PlaylistManagerInterface
 {

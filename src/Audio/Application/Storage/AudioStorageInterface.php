@@ -2,7 +2,7 @@
 
 namespace App\Audio\Application\Storage;
 
-use App\Shared\Application\AudioFileName;
+use App\Audio\Application\AudioFileName;
 
 interface AudioStorageInterface
 {

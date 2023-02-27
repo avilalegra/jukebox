@@ -2,8 +2,8 @@
 
 namespace App\Player\Application\Player\Status;
 
+use App\Audio\Domain\AudioReadModel;
 use App\Playlist\Domain\PlaylistReadModel;
-use App\Shared\Domain\AudioReadModel;
 
 readonly class PlayerStatus
 {

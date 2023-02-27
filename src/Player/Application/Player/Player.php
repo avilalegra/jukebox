@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Player\Application\Player;
 
+use App\Audio\Domain\AudioReadModel;
 use App\Player\Application\Device\AudioDeviceException;
 use App\Player\Application\Device\AudioDeviceInterface;
 use App\Player\Application\Player\Status\AudioPlayingStatus;
 use App\Player\Application\Player\Status\AudioPlayingStatusRepositoryInterface;
 use App\Shared\Application\EventDispatcherInterface;
-use App\Shared\Domain\AudioReadModel;
 
 class Player
 {

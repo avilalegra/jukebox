@@ -2,7 +2,7 @@
 
 namespace App\Playlist\Application\Interactor;
 
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioReadModel;
 
 interface PlaylistManagerInterface
 {

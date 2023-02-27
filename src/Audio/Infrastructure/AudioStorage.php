@@ -2,9 +2,9 @@
 
 namespace App\Audio\Infrastructure;
 
+use App\Audio\Application\AudioFileName;
 use App\Audio\Application\Storage\AudioStorageException;
 use App\Audio\Application\Storage\AudioStorageInterface;
-use App\Shared\Application\AudioFileName;
 
 class AudioStorage implements AudioStorageInterface
 {

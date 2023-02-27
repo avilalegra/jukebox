@@ -4,7 +4,7 @@ namespace App\Audio\Infrastructure;
 
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Audio\Domain\AudioEntity;
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioReadModel;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 

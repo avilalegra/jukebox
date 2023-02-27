@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Shared\Application;
+namespace App\Audio\Application;
 
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioReadModel;
 
 readonly class AudioFileName
 {

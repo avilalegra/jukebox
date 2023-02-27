@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Player\Application\Player\Status;
 
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioReadModel;
 
 readonly class AudioPlayingStatus implements \JsonSerializable
 {

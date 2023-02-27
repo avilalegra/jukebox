@@ -3,7 +3,7 @@
 namespace App\Playlist\Domain;
 
 
-use App\Shared\Domain\AudioReadModel;
+use App\Audio\Domain\AudioReadModel;
 
 readonly class PlaylistReadModel
 {

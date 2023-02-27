@@ -3,13 +3,13 @@
 namespace spec\App\Audio\Application\Import;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
+use App\Audio\Application\AudioFileName;
 use App\Audio\Application\GuidGeneratorInterface;
 use App\Audio\Application\Import\AudioImportException;
 use App\Audio\Application\Metadata\AudioMetadataExtractionException;
 use App\Audio\Application\Metadata\AudioMetadataExtractorInterface;
 use App\Audio\Application\Storage\AudioStorageException;
 use App\Audio\Application\Storage\AudioStorageInterface;
-use App\Shared\Application\AudioFileName;
 use PhpSpec\ObjectBehavior;
 
 class AudioImporterSpec extends ObjectBehavior

@@ -3,11 +3,11 @@
 namespace App\Audio\Application\Import;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
+use App\Audio\Application\AudioFileName;
 use App\Audio\Application\GuidGeneratorInterface;
 use App\Audio\Application\Metadata\AudioMetadataExtractorInterface;
 use App\Audio\Application\Storage\AudioStorageInterface;
 use App\Audio\Domain\AudioEntity;
-use App\Shared\Application\AudioFileName;
 
 class AudioImporter implements AudioImporterInterface
 {
