@@ -25,9 +25,11 @@ class AudiosController extends AbstractController
     }
 
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $paginationParams = new PaginationParams(1, 15, PaginationOrder::asc('title'));
+        $pageNum = $request->get('pageNumber', 1);
+        $paginationParams = new PaginationParams($pageNum, 12, PaginationOrder::asc('title'));
+
         $status = $this->statusInfoProvider->status();
         $paginationResults = $this->audioInfoProvider->paginateAudios($paginationParams);
         $nowPlaying = $status->audioPlayStatus->currentPlayingAudio?->audio;
@@ -35,7 +37,7 @@ class AudiosController extends AbstractController
         return $this->render(
             'audio/audio_browser.html.twig',
             [
-                'audios' => $paginationResults->pageResults,
+                'pagination' => $paginationResults,
                 'playerStatus' => $status,
                 'nowPlaying' => $nowPlaying
             ]

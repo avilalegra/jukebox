@@ -1,10 +1,18 @@
 
 .audios-browser {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
   position: relative;
   padding: 50px 10px;
   height: 90%;
   color: var(--accent-muted-light);
   overflow: auto;
+
+  > .pagination-bar {
+    width: 100%;
+    margin-bottom: 15px;
+  }
 
   .audio-list {
     width: 100%;
@@ -62,14 +70,11 @@
       padding: 10px;
     }
 
-    @media (min-width: 768px) {
-      width: 95%;
-    }
-
     @media (max-width: 576px) {
       .audio-artist, .audio-album, .audio-year, .audio-genre, .audio-duration {
         display: none
       }
+
     }
 
     @media (max-width: 768px) {
@@ -95,5 +100,15 @@
         display: none;
       }
     }
+  }
+
+  @media (min-width: 576px) {
+    > .pagination-bar {
+      width: unset;
+    }
+  }
+
+  @media (min-width: 768px) {
+    margin-right: 5%;
   }
 }

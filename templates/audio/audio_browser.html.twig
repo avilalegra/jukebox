@@ -3,6 +3,7 @@
 
 {% block contents %}
     <div class="audios-browser">
+        {% include 'pagination_bar.html.twig' %}
         <table class="audio-list">
             <tr>
                 <th class="audio-title">Título</th>
@@ -12,7 +13,7 @@
                 <th class="audio-genre">Género</th>
                 <th class="audio-duration">Duración</th>
             </tr>
-            {% for audio in audios %}
+            {% for audio in pagination.pageResults %}
                 <tr>
                     <td class="audio-title">
                         {{ playPreview(audio) }}
