@@ -5,8 +5,12 @@ namespace App\Audio\Infrastructure;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Audio\Domain\AudioEntity;
 use App\Audio\Domain\AudioReadModel;
+use App\Shared\Application\Pagination\PaginationOrder;
+use App\Shared\Application\Pagination\PaginationParams;
+use App\Shared\Application\Pagination\PaginationResults;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+
 
 class AudioInfoProvider implements AudioInfoProviderInterface
 {
@@ -27,10 +31,30 @@ class AudioInfoProvider implements AudioInfoProviderInterface
         return $this->repository->find($audioId)->readModel();
     }
 
-    public function paginateAudios(): array
-    {
-        $audios = $this->repository->findAll();
 
-        return array_map(fn(AudioEntity $a) => $a->readModel(), $audios);
+    public function paginateAudios(PaginationParams $params): PaginationResults
+    {
+        $qb = $this->repository->createQueryBuilder('a');
+        $order = $params->order === null ? PaginationOrder::asc('title') : $params->order;
+
+        $qb
+            ->orderBy('a.' . $order->field, $order->direction);
+
+        foreach ($params->filters as $field => $value) {
+            $qb->andWhere("a.{$field} LIKE :{$field}")
+                ->setParameter($field, "%$value%");
+        }
+
+        $totalCount = $qb->select('count(a.id)')->getQuery()->getSingleScalarResult();
+
+        $qb
+            ->select('a')
+            ->setFirstResult($params->offset())
+            ->setMaxResults($params->pageLimit);
+
+        $audios = $qb->getQuery()->getResult();
+        $audios = array_map(fn(AudioEntity $a) => $a->readModel(), $audios);
+
+        return new PaginationResults(params: $params, pageResults: $audios, totalResultsCount: $totalCount);
     }
 }

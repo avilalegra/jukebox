@@ -5,6 +5,8 @@ namespace App\WebUI;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Player\Application\Interactor\PlayerQueueInterface;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
+use App\Shared\Application\Pagination\PaginationOrder;
+use App\Shared\Application\Pagination\PaginationParams;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,15 +27,15 @@ class AudiosController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
+        $paginationParams = new PaginationParams(1, 15, PaginationOrder::asc('title'));
         $status = $this->statusInfoProvider->status();
-        $audios = $this->audioInfoProvider->paginateAudios();
-        $queue = $status->queue;
+        $paginationResults = $this->audioInfoProvider->paginateAudios($paginationParams);
         $nowPlaying = $status->audioPlayStatus->currentPlayingAudio?->audio;
 
         return $this->render(
             'audio/audio_browser.html.twig',
             [
-                'audios' => $audios,
+                'audios' => $paginationResults->pageResults,
                 'playerStatus' => $status,
                 'nowPlaying' => $nowPlaying
             ]
