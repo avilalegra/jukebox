@@ -27,7 +27,7 @@ class AudiosController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request): Response
     {
-        $pageNum = $request->get('pageNumber', 1);
+        $pageNum = $request->get('page', 1);
         $paginationParams = new PaginationParams($pageNum, 12, PaginationOrder::asc('title'));
 
         $status = $this->statusInfoProvider->status();

@@ -4,19 +4,16 @@
 {% set lastPage = pagination.totalPages %}
 
 <div class="pagination-bar">
-    <a class="page-link btn" href="{{ path('audios.index', {'pageNumber': 1}) }}">
+    <a class="page-link btn" href="{{ currentRouteWithParam('page', 1) }}">
         <i class="fa-solid fa-circle-chevron-left"></i>
     </a>
 
     {% if prevPage != null %}
-        <a class="page-link btn" href="{{ path('audios.index', {'pageNumber': prevPage}) }}">
+        <a class="page-link btn" href="{{ currentRouteWithParam('page', prevPage) }}">
             <i class="fa-solid fa-caret-left fa-lg"></i>
         </a>
-{#        {% if prevPage != 1 %}#}
-{#            ...#}
-{#        {% endif %}#}
 
-        <a class="page-link" href="{{ path('audios.index', {'pageNumber': prevPage}) }}">
+        <a class="page-link" href="{{ currentRouteWithParam('page', prevPage) }}">
             {{ prevPage }}
         </a>
     {% else %}
@@ -26,18 +23,18 @@
     <span class="page-link -current"> {{ currentPage }} </span>
 
     {% if nextPage != null %}
-        <a class="page-link" href="{{ path('audios.index', {'pageNumber': nextPage}) }}">
+        <a class="page-link" href="{{ currentRouteWithParam('page', nextPage) }}">
             {{ nextPage }}
         </a>
-{#        ...#}
-        <a class="page-link btn" href="{{ path('audios.index', {'pageNumber': nextPage}) }}">
+
+        <a class="page-link btn" href="{{ currentRouteWithParam('page', nextPage) }}">
             <i class="fa-solid fa-caret-right fa-lg"></i>
         </a>
     {% else %}
         <i class="page-link btn -inactive fa-solid fa-caret-right fa-lg"></i>
     {% endif %}
 
-    <a class="page-link btn" href="{{ path('audios.index', {'pageNumber': lastPage}) }}">
+    <a class="page-link btn" href="{{ currentRouteWithParam('page', lastPage) }}">
         <i class="fa-solid fa-circle-chevron-right"></i>
     </a>
 </div>
