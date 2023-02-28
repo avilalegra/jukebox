@@ -9,7 +9,10 @@
   color: var(--accent-muted-light);
   overflow: auto;
 
-  > .pagination-bar {
+  .pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     margin-bottom: 15px;
   }

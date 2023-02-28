@@ -1,4 +1,12 @@
 
+.page-limit {
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--sub-muted-light);
+  color: var(--accent-muted-light);
+  font-weight: 600;
+}
+
 .pagination-bar {
   background-color: var(--sub-muted-light);
   border-radius: 5px;

@@ -16,6 +16,9 @@ use Symfony\UX\Turbo\TurboBundle;
 #[Route('/audios', name: 'audios.')]
 class AudiosController extends AbstractController
 {
+    const DEFAULT_PAGE_NUMBER = 1;
+    const DEFAULT_PAGE_LIMIT = 12;
+
     public function __construct(
         private AudioInfoProviderInterface        $audioInfoProvider,
         private PlayerStatusInfoProviderInterface $statusInfoProvider,
@@ -27,8 +30,10 @@ class AudiosController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request): Response
     {
-        $pageNum = $request->get('page', 1);
-        $paginationParams = new PaginationParams($pageNum, 12, PaginationOrder::asc('title'));
+        $pageNum = $request->get('page', self::DEFAULT_PAGE_NUMBER);
+        $limit = $request->get('limit', self::DEFAULT_PAGE_LIMIT);
+
+        $paginationParams = new PaginationParams($pageNum, $limit, PaginationOrder::asc('title'));
 
         $status = $this->statusInfoProvider->status();
         $paginationResults = $this->audioInfoProvider->paginateAudios($paginationParams);

@@ -9,7 +9,7 @@
     {% set route = app.request.attributes.get('_route') %}
     <ul class="navbar-content">
         <li>
-            <a class="entry {{ route == 'audios.index' ? '-active' : '' }}" href="{{ path('audios.index') }}">
+            <a class="entry {{ route == 'audios.index' ? '-active' : '' }}" href="{{ path('audios.index', {'page': 1, 'limit': 12}) }}">
                 <span class="title">Audios</span>
                 <i class="icon fa-solid fa-music fa-xl"></i>
             </a>

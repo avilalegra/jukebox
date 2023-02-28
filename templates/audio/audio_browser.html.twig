@@ -3,7 +3,10 @@
 
 {% block contents %}
     <div class="audios-browser">
-        {% include 'pagination/pagination_bar.html.twig' %}
+        <div class="pagination-controls">
+            {% include 'pagination/page_limit_selector.html.twig' %}
+            {% include 'pagination/pagination_bar.html.twig' %}
+        </div>
         <table class="audio-list">
             <tr>
                 <th class="audio-title">Título</th>
