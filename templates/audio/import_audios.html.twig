@@ -1,0 +1,11 @@
+{% extends 'player_base.html.twig' %}
+
+{% block contents %}
+    <div class="audios-dropzone">
+        {{ form_start(form) }}
+        {{ form_widget(form, { label: false }) }}
+
+        <button type="submit" class="">Hecho</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

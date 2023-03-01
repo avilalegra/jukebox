@@ -8,10 +8,13 @@ use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Shared\Application\Pagination\PaginationOrder;
 use App\Shared\Application\Pagination\PaginationParams;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/audios', name: 'audios.')]
@@ -80,6 +83,28 @@ class AudiosController extends AbstractController
         }
 
         return $this->redirectToRoute('audios.index');
+    }
+
+
+    #[Route('/library', name: 'import', methods: ['get', 'post'])]
+    public function uploadAudios(Request $request, ): Response
+    {
+        $form = ($this->createFormBuilder())->add('file',
+            DropzoneType::class, ['attr' => ['placeholder' => 'Arrastre un audio o un archivo zip con varios audios'],
+            ])->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $file */
+            $file = $form->get('file')->getData();
+
+            dd($file->getFileInfo());
+        }
+
+        return $this->render('audio/import_audios.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     private function parsePaginationParams(Request $request): PaginationParams

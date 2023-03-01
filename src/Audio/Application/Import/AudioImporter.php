@@ -2,52 +2,36 @@
 
 namespace App\Audio\Application\Import;
 
-use App\Audio\Application\AudioEntityRepositoryInterface;
-use App\Audio\Application\AudioFileName;
-use App\Audio\Application\GuidGeneratorInterface;
-use App\Audio\Application\Metadata\AudioMetadataExtractorInterface;
-use App\Audio\Application\Storage\AudioStorageInterface;
-use App\Audio\Domain\AudioEntity;
+use App\Audio\Application\Import\Strategy\AudioImportStrategyInterface;
+use App\Audio\Application\Import\Strategy\SingleAudioImportStrategy;
+use App\Audio\Application\Interactor\AudioImporterInterface;
 
 class AudioImporter implements AudioImporterInterface
 {
+
+    /**
+     * @var SingleAudioImportStrategy[]|array
+     */
+    private array $importStrategies;
+
     public function __construct(
-        private GuidGeneratorInterface          $guidGenerator,
-        private AudioStorageInterface           $audioStorage,
-        private AudioMetadataExtractorInterface $metadataExtractor,
-        private AudioEntityRepositoryInterface  $audioRepository
+        SingleAudioImportStrategy $singleAudioImportStrategy
     )
     {
+        $this->importStrategies = [$singleAudioImportStrategy];
     }
+
 
     /**
      * @inheritDoc
      */
-    public function importAudio(string $audioFilePath): void
+    public function importFrom(string $filePath): AudiosImportResult
     {
-        try {
-            $metadata = $this->metadataExtractor->extractMetadata($audioFilePath);
-
-            $defaultName = explode('.', basename($audioFilePath))[0];
-
-            $audio = new AudioEntity(
-                id: $this->guidGenerator->generateGuid(),
-                title: $metadata->title ?? $defaultName,
-                artist: $metadata->artist,
-                album: $metadata->album,
-                year: $metadata->year,
-                track: $metadata->track,
-                genre: $metadata->genre,
-                lyrics: $metadata->lyrics,
-                duration: $metadata->duration,
-                extension: $metadata->extension
-            );
-
-            $this->audioStorage->importAudioFileAs(AudioFileName::fromAudio($audio->readModel()), $audioFilePath);
-            $this->audioRepository->add($audio);
-
-        } catch (\Throwable $t) {
-            throw  AudioImportException::importException($audioFilePath, $t);
+        foreach ($this->importStrategies as $importStrategy) {
+            if ($importStrategy->canImport($filePath)) {
+                return $importStrategy->import($filePath);
+            }
         }
+        throw new AudioImportException($filePath);
     }
 }

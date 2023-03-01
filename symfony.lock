@@ -311,6 +311,9 @@
             "config/packages/uid.yaml"
         ]
     },
+    "symfony/ux-dropzone": {
+        "version": "v2.7.1"
+    },
     "symfony/ux-turbo": {
         "version": "v2.6.1"
     },

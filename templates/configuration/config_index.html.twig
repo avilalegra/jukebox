@@ -5,9 +5,9 @@
     <div class="configuration">
         <div class="config-bg"></div>
         <div class="import">
-            <label for="importFolder">Fuente</label>
-            <input id="importFolder" type="text" readonly value="{{ importFolder }}">
             <form action="{{ path('config.import.audios') }}" method="post">
+                <label for="importSource">Importar archivo </label>
+                <input id="importSource" name="importSource" type="text" required>
                 <button class="import-btn _inv-button" title="Importar desde fuente">
                     <i class="fa-solid fa-rotate fa-lg"></i>
                 </button>
