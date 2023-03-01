@@ -22,7 +22,7 @@ yarn-error.log
 public/player.pid
 public/player-status
 public/audios/
-public/covers/
+public/covers/ 
 
 .idea/
 
@@ -35,3 +35,4 @@ public/covers/
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+/player-status
