@@ -1,9 +1,6 @@
 {% set limit = pagination.params.pageLimit %}
 
-<select class="page-limit"
-        data-controller="page-limit"
-        data-action="change->page-limit#changeLimit"
-        data-page-limit-target="pageLimit">
+<select class="page-limit" onchange="Turbo.visit(this.value)">
     <option {{ limit == 6 ? 'selected' : '' }} value="{{ currentRouteWithParam('limit', 6 ) }}"> 6</option>
     <option {{ limit == 12 ? 'selected' : '' }} value="{{ currentRouteWithParam('limit', 12 ) }}"> 12</option>
     <option {{ limit == 18 ? 'selected' : '' }} value="{{ currentRouteWithParam('limit', 18 ) }}"> 18</option>

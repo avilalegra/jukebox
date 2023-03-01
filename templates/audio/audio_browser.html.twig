@@ -9,12 +9,13 @@
         </div>
         <table class="audio-list">
             <tr>
-                <th class="audio-title">Título</th>
-                <th class="audio-artist">Artista</th>
-                <th class="audio-album">Album</th>
-                <th class="audio-year">Año</th>
-                <th class="audio-genre">Género</th>
-                <th class="audio-duration">Duración</th>
+                {{ _self.sortableHeader('Titulo', 'title', pagination.params.order) }}
+                {{ _self.sortableHeader('Artista', 'artist', pagination.params.order) }}
+                {{ _self.sortableHeader('Album', 'album',pagination.params.order) }}
+                {{ _self.sortableHeader('Año', 'year', pagination.params.order) }}
+                {{ _self.sortableHeader('Género', 'genre', pagination.params.order) }}
+                {{ _self.sortableHeader('Duración', 'duration', pagination.params.order) }}
+
             </tr>
             {% for audio in pagination.pageResults %}
                 <tr>
@@ -35,3 +36,26 @@
     </div>
     {{ render(path('player.bar')) }}
 {% endblock %}
+
+{% macro sortableHeader(title, field ,paginationOrder) %}
+    <th class="audio-{{ field }}">
+        {% if paginationOrder == null or paginationOrder.field != field %}
+            <a class="page-link sortable-header"
+               href="{{ currentRouteWithParam('orderBy', field ~ ',asc') }}">
+                {{ title }}
+                <i class="fa-solid fa-sort"></i>
+            </a>
+        {% else %}
+            {% set nextDirection = paginationOrder.direction == 'asc' ? 'desc' : 'asc' %}
+            <a class="page-link sortable-header"
+               href="{{ currentRouteWithParam('orderBy', field ~ ',' ~ nextDirection) }}">
+                    {{ title }}
+                    {% if nextDirection == 'asc' %}
+                        <i class="fa-solid fa-arrow-down"></i>
+                    {% else %}
+                        <i class="fa-solid fa-arrow-up"></i>
+                    {% endif %}
+            </a>
+        {% endif %}
+    </th>
+{% endmacro %}

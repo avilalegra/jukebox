@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="jukebox-player" data-controller="navbar" data-navbar-target="jukebox">
+    <div class="jukebox-player"
+            {{ stimulus_controller('navbar') }}
+            {{ stimulus_target('navbar', 'jukebox') }}>
+
         {% include 'navbar.html.twig' %}
         {% include 'jukebox/player_shortcut.html.twig' %}
+
         <section class="contents-section">
             {% block contents %} {% endblock %}
         </section>
@@ -13,18 +17,17 @@
 
 {% macro playPreview(audio) %}
     <div class="play-preview"
-         data-controller="play-preview"
-         data-play-preview-target="playPreview">
+            {{ stimulus_controller('play-preview') }}
+            {{ stimulus_target('play-preview', 'playPreview') }} >
 
         <audio src="{{ '/audios/' ~ audioFile(audio) }}#t=30,50"
-               data-play-preview-target="player">
+                {{ stimulus_target('play-preview', 'player') }} >
         </audio>
 
-        <i class="play-action fa-regular fa-circle-play fa-xl"
-           data-action="click->play-preview#play" title="Reproducir en local"></i>
+        <i class="play-action fa-regular fa-circle-play fa-xl" title="Reproducir en local"
+                {{ stimulus_action('play-preview', 'play') }}></i>
 
-        <i class="stop-action fa-regular fa-circle-stop fa-xl"
-           data-action="click->play-preview#stop"></i>
+        <i class="stop-action fa-regular fa-circle-stop fa-xl" {{ stimulus_action('play-preview', 'stop') }}"></i>
 
         <span class="audio-title"> {{ audio.title }} </span>
     </div>

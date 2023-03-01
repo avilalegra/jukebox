@@ -3,7 +3,6 @@
 namespace App\Command;
 
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
-use App\Player\Application\Interactor\PlayerQueueInfoProviderInterface;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Player\Application\Player\Player;
 use Psr\Log\LoggerInterface;
@@ -46,7 +45,7 @@ class PlayerCommand extends Command
                 'play-main-playlist' => $this->playMainPlaylist()
             };
         } catch (\Throwable $t) {
-            $this->logger->error($t->getMessage());
+            $this->logger->error($t->getTraceAsString());
 
             return Command::FAILURE;
         }

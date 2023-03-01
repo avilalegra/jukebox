@@ -1,15 +1,16 @@
 <nav class="navbar">
     <div class="navbar-header">
         <i class="action-icon open-icon fa-solid fa-bars fa-xl"
-           data-action="click->navbar#open"></i>
+                {{ stimulus_action('navbar', 'open', 'click') }}></i>
         <i class="action-icon close-icon fa-solid fa-circle-xmark fa-xl"
-           data-action="click->navbar#close"></i>
+                {{ stimulus_action('navbar', 'close', 'click') }} ></i>
     </div>
 
     {% set route = app.request.attributes.get('_route') %}
     <ul class="navbar-content">
         <li>
-            <a class="entry {{ route == 'audios.index' ? '-active' : '' }}" href="{{ path('audios.index', {'page': 1, 'limit': 12}) }}">
+            <a class="entry {{ route == 'audios.index' ? '-active' : '' }}"
+               href="{{ path('audios.index', {'page': 1, 'limit': 12}) }}">
                 <span class="title">Audios</span>
                 <i class="icon fa-solid fa-music fa-xl"></i>
             </a>

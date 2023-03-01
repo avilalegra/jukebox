@@ -7,8 +7,8 @@ export default class extends Controller {
 
     close() {
         this.jukeboxTarget.classList.remove('-navbar-opened')
-    }
 
+    }
     open() {
         this.jukeboxTarget.classList.add('-navbar-opened')
     }

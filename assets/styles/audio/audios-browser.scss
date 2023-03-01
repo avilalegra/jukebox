@@ -25,10 +25,17 @@
       top: -50px;
       text-align: left;
       background-color: var(--sub-muted-dark);
-      color: var(--accent-muted-dark);
-      padding: 10px;
       z-index: 1000;
+
+      .sortable-header {
+        padding: 10px 15px 10px 10px;
+        display: flex;
+        justify-content: space-between;
+        text-decoration: none;
+        color: var(--accent-muted-dark);
+      }
     }
+
 
     td {
       padding: 10px 10px 10px 15px;

@@ -3,7 +3,7 @@
 {% block contents %}
     <ul id="albums-list" class="albums-list">
         {% for album in albums %}
-            <li data-action="click->jukebox-player#showPlayer">
+            <li {{ stimulus_action('jukebox-player', 'showPlayer') }}>
                 <form action="{{ path('player.play.album', {'name': album.name}) }}" method="POST">
                     <div class="album">
                         <button class="_inv-button" type="submit">
