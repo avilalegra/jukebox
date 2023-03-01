@@ -25,9 +25,10 @@
         </audio>
 
         <i class="play-action fa-regular fa-circle-play fa-xl" title="Reproducir en local"
-                {{ stimulus_action('play-preview', 'play') }}></i>
+                {{ stimulus_action('play-preview', 'play', 'click') }}></i>
 
-        <i class="stop-action fa-regular fa-circle-stop fa-xl" {{ stimulus_action('play-preview', 'stop') }}"></i>
+        <i class="stop-action fa-regular fa-circle-stop fa-xl"
+                {{ stimulus_action('play-preview', 'stop', 'click') }}"></i>
 
         <span class="audio-title"> {{ audio.title }} </span>
     </div>
