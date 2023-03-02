@@ -1,7 +1,7 @@
 {% extends '/player_base.html.twig' %}
 
 {% block contents %}
-    <turbo-frame id="audios-dropzone">
+    <turbo-frame id="import-audios">
         <div class="audios-dropzone">
             <h3 class="header">Seleccione un archivo de audio o un zip con varios audios</h3>
 
@@ -15,18 +15,23 @@
                 </button>
             </div>
             {{ form_end(form) }}
+
+            {% if errors %}
+                <div class="audios-import-errors">
+                    <h4 class="error-header">Los siguientes archivos no se pudieron importar</h4>
+                    <ul class="failed-paths">
+                        {% for error in errors %}
+                            <li class="failed-path">
+                                {{ error.audioFilePath | split('/')|last }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
         </div>
 
-        {% if errors %}
-            <h6>Los siguientes archivos no se pudieron importar</h6>
-            <ul class="audios-import-errors">
-                {% for error in errors %}
-                    <li>
-                        {{ error.audioFilePath | split('/')|last }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+        {% include 'busy_modal.html.twig' with {'message': 'Por favor espere mientras se importan los audios'} %}
+
     </turbo-frame>
 
 {% endblock %}

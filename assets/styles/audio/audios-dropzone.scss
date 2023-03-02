@@ -1,3 +1,10 @@
+#import-audios {
+  &:not([busy]) {
+    .busy-modal {
+      display: none;
+    }
+  }
+}
 
 .audios-dropzone {
   display: flex;
@@ -23,16 +30,38 @@
     button {
       padding: 7px;
       border-radius: 5px;
-      background-color: var(--sub-vibrant-light);
-      color: var(--accent-vibrant-light);
+      background-color: var(--sub-muted-dark);
+      color: var(--accent-vibrant-dark);
       cursor: pointer;
     }
   }
 
+  .audios-import-errors {
+    margin-top: 30px;
+
+    .error-header {
+      color: var(--accent-vibrant-light);
+      margin-bottom: 35px;
+    }
+
+    .failed-paths {
+      list-style-type: disc;
+
+      .failed-path {
+        margin-left: 35px;
+      }
+    }
+  }
+
   @media (min-width: 768px) {
-    height: 85%;
+    height: 100%;
     .submit-block {
       justify-content: flex-end;
+    }
+
+    .audios-import-errors {
+      max-height: 270px;
+      overflow: auto;
     }
   }
 }

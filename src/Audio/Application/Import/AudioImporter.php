@@ -4,6 +4,7 @@ namespace App\Audio\Application\Import;
 
 use App\Audio\Application\Import\Strategy\AudioImportStrategyInterface;
 use App\Audio\Application\Import\Strategy\SingleAudioImportStrategy;
+use App\Audio\Application\Import\Strategy\ZipFileAudioImportStrategy;
 use App\Audio\Application\Interactor\AudioImporterInterface;
 
 class AudioImporter implements AudioImporterInterface
@@ -15,10 +16,11 @@ class AudioImporter implements AudioImporterInterface
     private array $importStrategies;
 
     public function __construct(
-        SingleAudioImportStrategy $singleAudioImportStrategy
+        SingleAudioImportStrategy  $singleAudioStrategy,
+        ZipFileAudioImportStrategy $zipFileStrategy
     )
     {
-        $this->importStrategies = [$singleAudioImportStrategy];
+        $this->importStrategies = [$singleAudioStrategy, $zipFileStrategy];
     }
 
 
