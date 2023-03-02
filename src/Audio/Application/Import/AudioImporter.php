@@ -2,25 +2,17 @@
 
 namespace App\Audio\Application\Import;
 
-use App\Audio\Application\Import\Strategy\AudioImportStrategyInterface;
-use App\Audio\Application\Import\Strategy\SingleAudioImportStrategy;
-use App\Audio\Application\Import\Strategy\ZipFileAudioImportStrategy;
+
 use App\Audio\Application\Interactor\AudioImporterInterface;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
 class AudioImporter implements AudioImporterInterface
 {
 
-    /**
-     * @var SingleAudioImportStrategy[]|array
-     */
-    private array $importStrategies;
-
     public function __construct(
-        SingleAudioImportStrategy  $singleAudioStrategy,
-        ZipFileAudioImportStrategy $zipFileStrategy
+        #[TaggedIterator( 'audio.import_strategy')] private iterable $importStrategies
     )
     {
-        $this->importStrategies = [$singleAudioStrategy, $zipFileStrategy];
     }
 
 

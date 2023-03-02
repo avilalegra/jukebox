@@ -8,7 +8,10 @@ use App\Audio\Application\Import\AudiosImportResult;
 use App\Audio\Application\Import\FileInfoExtractorInterface;
 use App\Audio\Application\Import\SingleAudioImporter;
 use App\Audio\Application\Import\ZipIteratorInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+
+#[AutoconfigureTag('audio.import_strategy')]
 class ZipFileAudioImportStrategy implements AudioImportStrategyInterface
 {
     public function __construct(
