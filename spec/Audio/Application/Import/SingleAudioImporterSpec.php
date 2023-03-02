@@ -12,7 +12,7 @@ use App\Audio\Application\Storage\AudioStorageException;
 use App\Audio\Application\Storage\AudioStorageInterface;
 use PhpSpec\ObjectBehavior;
 
-class AudioImporterSpec extends ObjectBehavior
+class SingleAudioImporterSpec extends ObjectBehavior
 {
     const AUDIO_FILE_PATH = 'audio/path/Like You Evanescence.mp3';
 
@@ -34,7 +34,7 @@ class AudioImporterSpec extends ObjectBehavior
 
         $this->beConstructedWith($guidGenerator, $audioStorage, $metadataExtractor, $audioRepository);
 
-        $this->import(self::AUDIO_FILE_PATH);
+        $this->importAudio(self::AUDIO_FILE_PATH);
 
         $audioRepository
             ->add(sampleAudioEntity())
@@ -60,7 +60,7 @@ class AudioImporterSpec extends ObjectBehavior
 
         $this->beConstructedWith($guidGenerator, $audioStorage, $metadataExtractor, $audioRepository);
 
-        $this->import(self::AUDIO_FILE_PATH);
+        $this->importAudio(self::AUDIO_FILE_PATH);
 
         $audioRepository
             ->add($expectedAudio)
