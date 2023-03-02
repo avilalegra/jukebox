@@ -3,27 +3,32 @@
 namespace App\Audio\Application\Import\Strategy;
 
 use App\Audio\Application\Import\AudioImportError;
+use App\Audio\Application\Import\FileInfoExtractorInterface;
 use App\Audio\Application\Import\SingleAudioImporter;
 use App\Audio\Application\Import\AudioImportException;
 use App\Audio\Application\Import\AudiosImportResult;
 
 class SingleAudioImportStrategy implements AudioImportStrategyInterface
 {
-    const ALLOWED_FORMATS = ['mp3'];
+    const ALLOWED_MIME_TYPES = ['audio/mpeg'];
 
     public function __construct(
-        private SingleAudioImporter $audioImporter
+        private SingleAudioImporter $audioImporter,
+        private FileInfoExtractorInterface $fileInfoExtractor
     )
     {
     }
 
     public function canImport(string $filePath): bool
     {
-        $ext = explode('.', basename($filePath))[1];
+        $mimeType = $this->fileInfoExtractor->mimeType($filePath);
 
-        return in_array($ext, self::ALLOWED_FORMATS);
+        return in_array($mimeType, self::ALLOWED_MIME_TYPES);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function import(string $filePath): AudiosImportResult
     {
         try {
@@ -31,7 +36,7 @@ class SingleAudioImportStrategy implements AudioImportStrategyInterface
 
             return AudiosImportResult::noErrors();
         } catch (AudioImportException $e) {
-            return AudiosImportResult::withErrors(new AudioImportError($filePath, $e->getMessage()));
+            return AudiosImportResult::withErrors(new AudioImportError($filePath, $e->getTraceAsString()));
         }
     }
 }

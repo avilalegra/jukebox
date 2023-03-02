@@ -25,8 +25,7 @@ class AudioMetadataExtractor implements AudioMetadataExtractorInterface
             $info = $this->mediaInfo->getInfo($audioFilePath);
             $general = $info->getGeneral();
 
-
-            $metadata = new AudioMetadata(
+            return new AudioMetadata(
                 title: $general->get('title'),
                 artist: $general->get('performer'),
                 album: $general->get('album'),
@@ -35,10 +34,8 @@ class AudioMetadataExtractor implements AudioMetadataExtractorInterface
                 genre: $general->get('genre'),
                 lyrics: $general->get('lyrics'),
                 duration: (int)floor($general->get('duration')->getMilliseconds() / 1000),
-                extension: $general->get('file_extension')
+                extension: 'mp3',
             );
-
-            return $metadata;
         } catch (\Throwable $t) {
             throw AudioMetadataExtractionException::forAudioFilePath($audioFilePath, $t);
         }

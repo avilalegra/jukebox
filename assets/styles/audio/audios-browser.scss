@@ -8,12 +8,22 @@
   color: var(--accent-muted-light);
   overflow: auto;
 
-  .pagination-controls {
+  .actions-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-bottom: 15px;
+
+    .right-block {
+      display: flex;
+      align-items: baseline;
+
+      .upload-audio-link {
+        margin-right: 30px;
+        color: var(--accent-muted-light);
+      }
+    }
   }
 
   .audio-list {

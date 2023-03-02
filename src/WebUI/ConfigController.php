@@ -27,7 +27,7 @@ class ConfigController extends AbstractController
     #[Route('/audios/source', name: 'import.audios', methods: ['POST'])]
     public function importAudios(Request $request): Response
     {
-        $this->audioImporter->importFrom($request->get('importSource'));
+        $this->audioImporter->import($request->get('importSource'));
 
         return $this->redirectToRoute('albums.index');
     }

@@ -13,9 +13,14 @@ readonly class AudiosImportResult
     {
     }
 
-    public function success(): bool
+    public function ok(): bool
     {
         return count($this->errors) === 0;
+    }
+
+    public function ko() : bool
+    {
+       return !$this->ok();
     }
 
     public static function noErrors() : self

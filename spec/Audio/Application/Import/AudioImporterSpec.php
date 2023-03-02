@@ -34,7 +34,7 @@ class AudioImporterSpec extends ObjectBehavior
 
         $this->beConstructedWith($guidGenerator, $audioStorage, $metadataExtractor, $audioRepository);
 
-        $this->importFrom(self::AUDIO_FILE_PATH);
+        $this->import(self::AUDIO_FILE_PATH);
 
         $audioRepository
             ->add(sampleAudioEntity())
@@ -60,7 +60,7 @@ class AudioImporterSpec extends ObjectBehavior
 
         $this->beConstructedWith($guidGenerator, $audioStorage, $metadataExtractor, $audioRepository);
 
-        $this->importFrom(self::AUDIO_FILE_PATH);
+        $this->import(self::AUDIO_FILE_PATH);
 
         $audioRepository
             ->add($expectedAudio)

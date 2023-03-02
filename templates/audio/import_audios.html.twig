@@ -1,11 +1,32 @@
-{% extends 'player_base.html.twig' %}
+{% extends '/player_base.html.twig' %}
 
 {% block contents %}
-    <div class="audios-dropzone">
-        {{ form_start(form) }}
-        {{ form_widget(form, { label: false }) }}
+    <turbo-frame id="audios-dropzone">
+        <div class="audios-dropzone">
+            <h3 class="header">Seleccione un archivo de audio o un zip con varios audios</h3>
 
-        <button type="submit" class="">Hecho</button>
-        {{ form_end(form) }}
-    </div>
+            {{ form_start(form) }}
+            {{ form_widget(form, {'attr': {'placeholder': 'Arrastre un audio o un archivo zip con varios audios'}}) }}
+
+            <div class="submit-block">
+                <button type="submit">
+                    <i class="fa-solid fa-cloud-arrow-up fa-xl"></i>
+                    Importar
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+        {% if errors %}
+            <h6>Los siguientes archivos no se pudieron importar</h6>
+            <ul class="audios-import-errors">
+                {% for error in errors %}
+                    <li>
+                        {{ error.audioFilePath | split('/')|last }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </turbo-frame>
+
 {% endblock %}

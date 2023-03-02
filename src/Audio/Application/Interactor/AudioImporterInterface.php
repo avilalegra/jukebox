@@ -10,5 +10,5 @@ interface AudioImporterInterface
     /**
      * @throws AudioImportException
      */
-    public function importFrom(string $filePath) : AudiosImportResult;
+    public function import(string $filePath) : AudiosImportResult;
 }

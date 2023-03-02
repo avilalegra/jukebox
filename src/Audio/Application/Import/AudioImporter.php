@@ -25,7 +25,7 @@ class AudioImporter implements AudioImporterInterface
     /**
      * @inheritDoc
      */
-    public function importFrom(string $filePath): AudiosImportResult
+    public function import(string $filePath): AudiosImportResult
     {
         foreach ($this->importStrategies as $importStrategy) {
             if ($importStrategy->canImport($filePath)) {

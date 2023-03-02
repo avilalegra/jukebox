@@ -11,6 +11,8 @@
         <section class="contents-section">
             {% block contents %} {% endblock %}
         </section>
+
+        {{ render(path('player.bar')) }}
     </div>
 
 {% endblock %}

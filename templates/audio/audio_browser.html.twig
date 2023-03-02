@@ -3,13 +3,15 @@
 
 {% block contents %}
     <div class="audios-browser">
-        <a href="{{ path('audios.import') }}">
-            <i class="fa-solid fa-cloud-arrow-up fa-2xl"></i>
-        </a>
 
-        <div class="pagination-controls">
+        <div class="actions-bar">
             {% include 'pagination/page_limit_selector.html.twig' %}
-            {% include 'pagination/pagination_bar.html.twig' %}
+            <div class="right-block">
+                <a class="upload-audio-link" href="{{ path('audios.import') }}">
+                    <i class="fa-solid fa-cloud-arrow-up fa-xl"></i>
+                </a>
+                {% include 'pagination/pagination_bar.html.twig' %}
+            </div>
         </div>
         <table class="audio-list">
             <tr>
@@ -38,7 +40,6 @@
             {% endfor %}
         </table>
     </div>
-    {{ render(path('player.bar')) }}
 {% endblock %}
 
 {% macro sortableHeader(title, field ,paginationOrder) %}
@@ -53,12 +54,12 @@
             {% set nextDirection = paginationOrder.direction == 'asc' ? 'desc' : 'asc' %}
             <a class="page-link sortable-header"
                href="{{ currentRouteWithParam('orderBy', field ~ ',' ~ nextDirection) }}">
-                    {{ title }}
-                    {% if nextDirection == 'asc' %}
-                        <i class="fa-solid fa-arrow-down"></i>
-                    {% else %}
-                        <i class="fa-solid fa-arrow-up"></i>
-                    {% endif %}
+                {{ title }}
+                {% if nextDirection == 'asc' %}
+                    <i class="fa-solid fa-arrow-down"></i>
+                {% else %}
+                    <i class="fa-solid fa-arrow-up"></i>
+                {% endif %}
             </a>
         {% endif %}
     </th>
