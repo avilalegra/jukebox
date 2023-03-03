@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Player\Infrastructure\OSProccess;
+namespace App\Player\Infrastructure\OSProcess;
 
 use Symfony\Component\Process\Process;
 
-class OSProcessRunner implements OSProcessRunnerInterface
+class OSProcessManager implements OSProcessManagerInterface
 {
-    public static function kill(int $pid): void
+    /**
+     * @inheritDoc
+     */
+    public function kill(int $pid): void
     {
-        shell_exec("kill {$pid}");
+        $this->run(['kill', $pid]);
     }
 
     /**

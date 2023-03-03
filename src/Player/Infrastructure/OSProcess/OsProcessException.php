@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Player\Infrastructure\OSProccess;
+namespace App\Player\Infrastructure\OSProcess;
 
 use App\Player\PlayerException;
 

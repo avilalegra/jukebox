@@ -7,8 +7,8 @@ namespace App\Player\Infrastructure;
 use App\Kernel;
 use App\Player\Application\Player\AsyncPlayerInterface;
 use App\Player\Application\Player\Player;
-use App\Player\Application\Player\Status\AudioPlayingStatus;
-use App\Player\Infrastructure\OSProccess\OSProcessRunner;
+use App\Player\Infrastructure\OSProcess\OSProcessManager;
+
 
 class AsyncPlayer implements AsyncPlayerInterface
 {
@@ -19,7 +19,7 @@ class AsyncPlayer implements AsyncPlayerInterface
     public function __construct(
         Kernel                  $kernel,
         private Player          $player,
-        private OSProcessRunner $processRunner
+        private OSProcessManager $processManager
     )
     {
         $this->projectDir = $kernel->getProjectDir();
@@ -39,7 +39,7 @@ class AsyncPlayer implements AsyncPlayerInterface
     private function executePlayCommandAsync(array $args): void
     {
         $this->stop();
-        $pid = $this->processRunner->runAsync(['php', "{$this->projectDir}/bin/console", 'app:player', ...$args]);
+        $pid = $this->processManager->runAsync(['php', "{$this->projectDir}/bin/console", 'app:player', ...$args]);
         $this->saveProcessPid($pid);
     }
 
@@ -47,7 +47,7 @@ class AsyncPlayer implements AsyncPlayerInterface
     {
         $pid = $this->getActiveProcessPid();
         if (null !== $pid) {
-            OSProcessRunner::kill($pid);
+            $this->processManager->kill($pid);
         }
         $this->player->stop();
     }

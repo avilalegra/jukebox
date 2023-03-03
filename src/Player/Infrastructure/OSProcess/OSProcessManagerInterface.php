@@ -1,9 +1,14 @@
 <?php
 
-namespace App\Player\Infrastructure\OSProccess;
+namespace App\Player\Infrastructure\OSProcess;
 
-interface OSProcessRunnerInterface
+interface OSProcessManagerInterface
 {
+    /**
+     * @throws OsProcessException
+     */
+    public function kill(int $pid): void;
+
     /**
      * @throws OsProcessException
      */
