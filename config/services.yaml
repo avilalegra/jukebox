@@ -4,12 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 
-#TODO: Revisar estas variables
 parameters:
   audios_folder: '%env(resolve:AUDIOS_FOLDER)%'
   covers_folder: '%env(resolve:COVERS_FOLDER)%'
-  storage_folder: '%env(resolve:STORAGE_FOLDER)%'
-  import_source_folder: '%env(resolve:IMPORT_SOURCE_FOLDER)%'
 
 services:
   # default configuration for services in *this* file
@@ -20,10 +17,7 @@ services:
       $projectDir: '%kernel.project_dir%'
       $audiosFolder: '%audios_folder%'
       $coversFolder: '%covers_folder%'
-      $storageFolder: '%storage_folder%'
-      $importSourceFolder: '%import_source_folder%'
 
-#  TODO: Eliminar eventos del exclude
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
   App\:

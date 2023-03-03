@@ -12,7 +12,7 @@ use App\Shared\Application\File\LocalFileSystemInterface;
 readonly class AudioStorage implements AudioStorageInterface
 {
     public function __construct(
-        private string                   $storageFolder,
+        private string                   $audiosFolder,
         private LocalFileSystemInterface $localFileSystem
     )
     {
