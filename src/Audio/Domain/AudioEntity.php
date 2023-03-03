@@ -30,22 +30,24 @@ class AudioEntity
     #[Column()]
     #[Id()]
     public readonly string $id;
-    #[Column()]
+
+    #[Column(nullable: true)]
     private ?string $title;
-    #[Column()]
+    #[Column(nullable: true)]
     private ?string $artist;
 
-    #[Column()]
+    #[Column(nullable: true)]
     private ?string $album;
-    #[Column()]
+    #[Column(nullable: true)]
     private ?string $year;
-    #[Column()]
+    #[Column(nullable: true)]
     private ?int $track;
-    #[Column()]
+    #[Column(nullable: true)]
     private ?string $genre;
-    #[Column()]
+    #[Column(nullable: true)]
     private ?string $lyrics;
-    #[Column()]
+
+    #[Column(nullable: true)]
     private ?int $duration;
 
     #[Column()]
