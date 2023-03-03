@@ -9,13 +9,14 @@ use App\Playlist\Application\PlaylistManagerFactory;
 
 class PlayerQueue implements PlayerQueueInterface
 {
+    const MAIN_PLAYLIST_ID = 'c8420338-16d0-4584-9b06-9b3697e084d9';
     private PlaylistManager $queueManager;
 
     public function __construct(
         PlaylistManagerFactory $managerFactory
     )
     {
-        $this->queueManager = $managerFactory->playlistEditor('main');
+        $this->queueManager = $managerFactory->playlistEditor(self::MAIN_PLAYLIST_ID);
     }
 
     public function clear(): void

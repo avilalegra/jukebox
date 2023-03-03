@@ -4,6 +4,7 @@ namespace App\Playlist\Application;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
 use App\Playlist\Application\Interactor\PlaylistManagerFactoryInterface;
+use App\Shared\Application\Exception\EntityNotFoundException;
 
 class PlaylistManagerFactory implements PlaylistManagerFactoryInterface
 {
@@ -13,6 +14,7 @@ class PlaylistManagerFactory implements PlaylistManagerFactoryInterface
     )
     {
     }
+
 
     public function playlistEditor(string $playlistId): PlaylistManager
     {

@@ -4,11 +4,13 @@ namespace App\Playlist\Infrastructure;
 
 use App\Playlist\Application\PlaylistEntityRepositoryInterface;
 use App\Playlist\Domain\PlaylistEntity;
+use App\Shared\Application\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
 class PlaylistEntityRepository implements PlaylistEntityRepositoryInterface
 {
+    /** @var EntityRepository<PlaylistEntity> */
     private EntityRepository $repository;
 
     public function __construct(
@@ -24,8 +26,13 @@ class PlaylistEntityRepository implements PlaylistEntityRepositoryInterface
         $this->em->flush();
     }
 
+    /** @inheritDoc */
     public function findPlaylist(string $playlistId): PlaylistEntity
     {
-        return $this->repository->findOneBy(['name' => $playlistId]);
+        $playlist = $this->repository->find($playlistId);
+        if ($playlist === null) {
+            throw new EntityNotFoundException(PlaylistEntity::class, $playlistId);
+        }
+        return $playlist;
     }
 }
