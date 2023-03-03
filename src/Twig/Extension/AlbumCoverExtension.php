@@ -3,8 +3,6 @@
 namespace App\Twig\Extension;
 
 use App\Album\Application\CoverStorageInterface;
-use App\Audio\Application\AudioFile\AudioStorageInterface;
-use App\Audio\Domain\AudioReadModel;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -12,7 +10,6 @@ class AlbumCoverExtension extends AbstractExtension
 {
     public function __construct(
         private CoverStorageInterface $coverStorage,
-        private AudioStorageInterface $audioStorage
     )
     {
     }
@@ -38,10 +35,5 @@ class AlbumCoverExtension extends AbstractExtension
     public function albumCover(string $album): string
     {
         return $this->coverStorage->getCoverFileName($album) ?? '__default__';
-    }
-
-    public function audioFile(AudioReadModel $audio): string
-    {
-        return $this->audioStorage->findAudioFile($audio)->fullPath;
     }
 }

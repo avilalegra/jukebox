@@ -22,7 +22,7 @@
             {{ stimulus_controller('play-preview') }}
             {{ stimulus_target('play-preview', 'playPreview') }} >
 
-        <audio src="{{ '/audios/' ~ audioFile(audio) }}#t=30,50"
+        <audio src="{{ '/audios/' ~ audio.id }}#t=30,50"
                 {{ stimulus_target('play-preview', 'player') }} >
         </audio>
 
