@@ -19,11 +19,11 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
-public/player.pid
-public/player-status
-public/audios/
+/public/player.pid
+/player-status
+/public/audios/
 
-.idea/
+/.idea/
 
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
