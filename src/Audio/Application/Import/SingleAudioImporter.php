@@ -38,8 +38,7 @@ class SingleAudioImporter
                 track: $metadata->track,
                 genre: $metadata->genre,
                 lyrics: $metadata->lyrics,
-                duration: $metadata->duration,
-                extension: $metadata->extension
+                duration: $metadata->duration
             );
 
             $this->audioStorage->importAudioFile($audio->readModel(), $audioFilePath);

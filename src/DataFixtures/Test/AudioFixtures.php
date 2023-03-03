@@ -13,7 +13,6 @@ class AudioFixtures extends Fixture implements FixtureGroupInterface
         [
             'id' => '7bd23661-8dd1-45e3-ad34-64772bb56e17',
             'title' => 'Just Push Play (Radio Remix)',
-            'extension' => 'mp3',
             'duration' => 191,
             'album' => 'The Essential Aerosmith',
             'artist' => 'Aerosmith',
@@ -25,7 +24,6 @@ class AudioFixtures extends Fixture implements FixtureGroupInterface
         [
             'id' => '6bd57da6-4d4f-4185-ad9e-33911330ce7a',
             'title' => 'Deuces Are Wild',
-            'extension' => 'mp3',
             'duration' => 216,
             'album' => 'The Essential Aerosmith',
             'artist' => 'Aerosmith',
@@ -37,7 +35,6 @@ class AudioFixtures extends Fixture implements FixtureGroupInterface
         [
             'id' => '9b4c87de-4b25-4c37-84bf-6c5d0629a1b3',
             'title' => "Nobody's Listening",
-            'extension' => 'mp3',
             'duration' => 178,
             'album' => 'Meteora',
             'artist' => 'Linkin Park',
@@ -49,7 +46,6 @@ class AudioFixtures extends Fixture implements FixtureGroupInterface
         [
             'id' => '27b2808d-db58-41c1-a998-9a02487206e8',
             'title' => 'Somewhere I Belong',
-            'extension' => 'mp3',
             'duration' => 213,
             'album' => 'Meteora',
             'artist' => 'Linkin Park',
@@ -61,7 +57,6 @@ class AudioFixtures extends Fixture implements FixtureGroupInterface
         [
             'id' => '9ca48662-8c4b-448e-89a2-fd6dd1b042a9',
             'title' => 'Like You',
-            'extension' => 'mp3',
             'duration' => 257,
             'album' => 'The Open Door',
             'artist' => 'Evanescence',
@@ -85,7 +80,6 @@ class AudioFixtures extends Fixture implements FixtureGroupInterface
                 genre: $data['genre'],
                 lyrics: $data['lyrics'],
                 duration: $data['duration'],
-                extension: $data['extension']
             );
 
             $manager->persist($audio);

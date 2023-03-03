@@ -17,7 +17,6 @@ readonly class AudioMetadata
         public ?string $genre,
         public ?string $lyrics,
         public ?int $duration,
-        public string $extension
     )
     {
     }

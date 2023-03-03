@@ -15,8 +15,7 @@ readonly class AudioReadModel
         public ?int    $track,
         public ?string $genre,
         public ?string $lyrics,
-        public ?int    $duration,
-        public string  $extension
+        public ?int    $duration
     )
     {
     }

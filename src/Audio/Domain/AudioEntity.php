@@ -22,8 +22,7 @@ class AudioEntity
             track: $audio->track,
             genre: $audio->genre,
             lyrics: $audio->lyrics,
-            duration: $audio->duration,
-            extension: $audio->extension
+            duration: $audio->duration
         );
     }
 
@@ -50,9 +49,6 @@ class AudioEntity
     #[Column(nullable: true)]
     private ?int $duration;
 
-    #[Column()]
-    private string $extension;
-
     public function __construct(
         string  $id,
         ?string $title,
@@ -62,8 +58,7 @@ class AudioEntity
         ?int    $track,
         ?string $genre,
         ?string $lyrics,
-        ?int    $duration,
-        string  $extension
+        ?int    $duration
     )
     {
         $this->id = $id;
@@ -75,7 +70,6 @@ class AudioEntity
         $this->genre = $genre;
         $this->lyrics = $lyrics;
         $this->duration = $duration;
-        $this->extension = $extension;
     }
 
     public function readModel(): AudioReadModel
@@ -90,7 +84,6 @@ class AudioEntity
             genre: $this->genre,
             lyrics: $this->lyrics,
             duration: $this->duration,
-            extension: $this->extension
         );
     }
 

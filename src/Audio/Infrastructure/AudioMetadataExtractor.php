@@ -34,7 +34,6 @@ readonly class AudioMetadataExtractor implements AudioMetadataExtractorInterface
                 genre: $general->get('genre'),
                 lyrics: $general->get('lyrics'),
                 duration: (int)floor($general->get('duration')->getMilliseconds() / 1000),
-                extension: 'mp3',
             );
         } catch (\Throwable $t) {
             throw new AudioMetadataExtractionException($audioFilePath, $t);

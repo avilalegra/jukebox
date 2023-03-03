@@ -46,7 +46,6 @@ class AudioInfoProviderTest extends KernelTestCase
                         genre: 'Rock',
                         lyrics: '',
                         duration: 216,
-                        extension: 'mp3'
                     ),
                     new AudioReadModel(
                         id: '7bd23661-8dd1-45e3-ad34-64772bb56e17',
@@ -58,7 +57,6 @@ class AudioInfoProviderTest extends KernelTestCase
                         genre: 'Rock',
                         lyrics: '',
                         duration: 191,
-                        extension: 'mp3'
                     )
                 ],
                 5
@@ -76,7 +74,6 @@ class AudioInfoProviderTest extends KernelTestCase
                         genre: 'Alternative',
                         lyrics: '',
                         duration: 178,
-                        extension: 'mp3'
                     ),
                     new AudioReadModel(
                         id: '27b2808d-db58-41c1-a998-9a02487206e8',
@@ -88,7 +85,6 @@ class AudioInfoProviderTest extends KernelTestCase
                         genre: 'Alternative',
                         lyrics: '',
                         duration: 213,
-                        extension: 'mp3'
                     )
                 ],
                 5
@@ -106,7 +102,6 @@ class AudioInfoProviderTest extends KernelTestCase
                         genre: 'Alternative Rock',
                         lyrics: "Stay low / Soft, dark, and dreamless",
                         duration: 257,
-                        extension: 'mp3'
                     )
                 ],
                 1
@@ -124,7 +119,6 @@ class AudioInfoProviderTest extends KernelTestCase
                         genre: 'Alternative',
                         lyrics: '',
                         duration: 178,
-                        extension: 'mp3'
                     ),
                 ],
                 3
@@ -142,7 +136,6 @@ class AudioInfoProviderTest extends KernelTestCase
                         genre: 'Alternative',
                         lyrics: '',
                         duration: 213,
-                        extension: 'mp3'
                     )
                 ],
                 2
