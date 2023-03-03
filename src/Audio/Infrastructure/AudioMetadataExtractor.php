@@ -7,7 +7,7 @@ use App\Audio\Application\Metadata\AudioMetadataExtractionException;
 use App\Audio\Application\Metadata\AudioMetadataExtractorInterface;
 use Mhor\MediaInfo\MediaInfo;
 
-class AudioMetadataExtractor implements AudioMetadataExtractorInterface
+readonly class AudioMetadataExtractor implements AudioMetadataExtractorInterface
 {
 
     public function __construct(
@@ -37,7 +37,7 @@ class AudioMetadataExtractor implements AudioMetadataExtractorInterface
                 extension: 'mp3',
             );
         } catch (\Throwable $t) {
-            throw AudioMetadataExtractionException::forAudioFilePath($audioFilePath, $t);
+            throw new AudioMetadataExtractionException($audioFilePath, $t);
         }
     }
 }

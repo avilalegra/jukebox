@@ -6,7 +6,7 @@ namespace App\Player\Infrastructure;
 
 use App\Audio\Application\AudioFile\AudioStorageInterface;
 use App\Audio\Domain\AudioReadModel;
-use App\Player\Application\Device\AudioDeviceException;
+use App\Player\Application\Device\AudioDevicePlayingException;
 use App\Player\Application\Device\AudioDeviceInterface;
 use App\Player\Infrastructure\OSProccess\OsProcessException;
 use App\Player\Infrastructure\OSProccess\OSProcessRunnerInterface;
@@ -30,7 +30,7 @@ class AudioDevice implements AudioDeviceInterface
             $audioFile = $this->audioStorage->findAudioFile($audio);
             $this->processRunner->run(['mplayer', $audioFile->fullPath]);
         } catch (OsProcessException $e) {
-            throw AudioDeviceException::playAudioException($audio, $e);
+            throw new AudioDevicePlayingException($audio, $e);
         }
     }
 }

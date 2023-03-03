@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Player\Application\Player;
 
 use App\Audio\Domain\AudioReadModel;
-use App\Player\Application\Device\AudioDeviceException;
+use App\Player\Application\Device\AudioDevicePlayingException;
 use App\Player\Application\Device\AudioDeviceInterface;
 use App\Player\Application\Player\Status\AudioPlayingStatus;
 use App\Player\Application\Player\Status\AudioPlayingStatusRepositoryInterface;
@@ -33,7 +33,7 @@ class Player
     }
 
     /**
-     * @throws AudioDeviceException
+     * @throws AudioDevicePlayingException
      */
     public function playAudio(AudioReadModel $audio): void
     {

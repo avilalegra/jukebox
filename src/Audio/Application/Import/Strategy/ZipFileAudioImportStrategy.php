@@ -26,11 +26,17 @@ class ZipFileAudioImportStrategy implements AudioImportStrategyInterface
     {
     }
 
+    /**
+     * @inheritDoc
+     */
     public function canImport(string $filePath): bool
     {
         return $this->fileInfoExtractor->mimeType($filePath) === 'application/zip';
     }
 
+    /**
+     * @inheritDoc
+     */
     public function import(string $filePath): AudiosImportResult
     {
         $tempDirPath = $this->localFileSystem->makeTempDir();

@@ -2,21 +2,16 @@
 
 namespace App\Audio\Application\Metadata;
 
-class AudioMetadataExtractionException extends \Exception
+use App\Player\PlayerException;
+
+class AudioMetadataExtractionException extends PlayerException
 {
-    private function __construct(
+    public function __construct(
         public readonly string $audioFilePath,
-        ?\Throwable $previous = null
+        ?\Throwable            $previous = null
     )
     {
-        parent::__construct("couldn't extract audio metadata from file", 0, $previous);
-    }
-
-    public static function forAudioFilePath(string $audioFilePath, ?\Throwable $previous = null): self
-    {
-        return new self(
-            $audioFilePath,
-            $previous
-        );
+        $message = sprintf("audio metadata extraction exception: file: %s", $this->audioFilePath);
+        parent::__construct($message, $previous);
     }
 }

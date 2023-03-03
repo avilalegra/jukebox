@@ -20,16 +20,26 @@ class OSProcessRunner implements OSProcessRunnerInterface
         $process->run();
 
         if (!$process->isSuccessful()) {
-            throw OsProcessException::runException($command, $process->getErrorOutput());
+            throw new OsProcessException($command, $process->getErrorOutput());
         }
     }
 
+
+    /**
+     * @inheritDoc
+     */
     public function runAsync(array $command): int
     {
         $process = $this->createProc($command);
         $process->start();
 
-        return $process->getPid();
+        $pid = $process->getPid();
+
+        if ($pid === null) {
+            throw new OsProcessException($command, $process->getErrorOutput());
+        }
+
+        return $pid;
     }
 
     private function createProc(array $command): Process

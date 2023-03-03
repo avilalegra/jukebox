@@ -8,10 +8,13 @@ use App\Audio\Domain\AudioReadModel;
 interface AudioStorageInterface
 {
     /**
-     * @throws AudioStorageException
+     * @throws AudioFileImportException
      */
-    public function importAudioFile(AudioReadModel $audio, string $audioFilePath) : void;
+    public function importAudioFile(AudioReadModel $audio, string $audioFilePath): void;
 
+    /**
+     * @throws AudioFileNotFoundException
+     */
     public function findAudioFile(AudioReadModel $audio): AudioFile;
 
 }

@@ -9,6 +9,8 @@ interface OSProcessRunnerInterface
      */
     public function run(array $command): void;
 
-
+    /**
+     * @throws OsProcessException
+     */
     public function runAsync(array $command): int;
 }

@@ -4,7 +4,7 @@ namespace spec\App\Player\Infrastructure;
 
 use App\Audio\Application\AudioFileName;
 use App\Audio\Application\AudioFile\AudioStorageInterface;
-use App\Player\Application\Device\AudioDeviceException;
+use App\Player\Application\Device\AudioDevicePlayingException;
 use App\Player\Infrastructure\OSProccess\OsProcessException;
 use App\Player\Infrastructure\OSProccess\OSProcessRunnerInterface;
 use PhpSpec\ObjectBehavior;
@@ -39,7 +39,7 @@ class AudioDeviceSpec extends ObjectBehavior
 
         $this->beConstructedWith($audioStorage, $osProcessRunner);
 
-        $this->shouldThrow(AudioDeviceException::class)
+        $this->shouldThrow(AudioDevicePlayingException::class)
             ->duringPlay(sampleAudioReadModel());
     }
 }

@@ -2,13 +2,16 @@
 
 namespace App\Audio\Application\Import;
 
-class AudioImportException extends \Exception
+use App\Audio\Application\AudioException;
+
+class AudioImportException extends AudioException
 {
     public function __construct(
         public readonly string $filePath,
         ?\Throwable            $previous = null
     )
     {
-        parent::__construct("audio importation failed", 0, $previous);
+        $message = sprintf("audio importation exception: file: %s", $this->filePath);
+        parent::__construct($message, $previous);
     }
 }

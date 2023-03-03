@@ -8,6 +8,6 @@ use App\Audio\Domain\AudioReadModel;
 
 interface AudioDeviceInterface
 {
-    /** @throws AudioDeviceException */
+    /** @throws AudioDevicePlayingException */
     public function play(AudioReadModel $audio): void;
 }
