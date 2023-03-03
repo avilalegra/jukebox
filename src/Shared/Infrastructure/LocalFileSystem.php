@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Audio\Infrastructure;
+namespace App\Shared\Infrastructure;
 
+use App\Shared\Application\File\LocalFileSystemInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 

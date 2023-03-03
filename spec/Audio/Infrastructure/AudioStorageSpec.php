@@ -4,7 +4,7 @@ namespace spec\App\Audio\Infrastructure;
 
 use App\Audio\Application\AudioFileName;
 use App\Audio\Application\Storage\AudioStorageException;
-use App\Audio\Infrastructure\LocalFileSystemInterface;
+use App\Shared\Application\File\LocalFileSystemInterface;
 use PhpSpec\ObjectBehavior;
 
 class AudioStorageSpec extends ObjectBehavior

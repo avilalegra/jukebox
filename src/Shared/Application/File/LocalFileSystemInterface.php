@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Audio\Infrastructure;
+namespace App\Shared\Application\File;
 
 interface LocalFileSystemInterface
 {

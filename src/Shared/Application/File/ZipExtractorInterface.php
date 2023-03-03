@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Application\Zip;
+namespace App\Shared\Application\File;
 
 interface ZipExtractorInterface
 {

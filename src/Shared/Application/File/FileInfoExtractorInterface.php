@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Audio\Application\Import;
+namespace App\Shared\Application\File;
 
 interface FileInfoExtractorInterface
 {

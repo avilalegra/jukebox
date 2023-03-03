@@ -3,7 +3,7 @@
 namespace App\Album\Infrastructure;
 
 use App\Album\Application\CoverStorageInterface;
-use App\Audio\Infrastructure\LocalFileSystemInterface;
+use App\Shared\Application\File\LocalFileSystemInterface;
 
 class CoverStorage implements CoverStorageInterface
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure;
 
-use App\Shared\Application\Zip\ZipExtractorInterface;
+use App\Shared\Application\File\ZipExtractorInterface;
 
 
 class ZipExtractor implements ZipExtractorInterface

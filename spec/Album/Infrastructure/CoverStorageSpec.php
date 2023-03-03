@@ -3,7 +3,7 @@
 namespace spec\App\Album\Infrastructure;
 
 
-use App\Audio\Infrastructure\LocalFileSystemInterface;
+use App\Shared\Application\File\LocalFileSystemInterface;
 use PhpSpec\ObjectBehavior;
 
 class CoverStorageSpec extends ObjectBehavior

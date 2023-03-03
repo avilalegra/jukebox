@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Audio\Infrastructure;
+namespace App\Shared\Infrastructure;
 
-use App\Audio\Application\Import\FileInfoExtractorInterface;
+use App\Shared\Application\File\FileInfoExtractorInterface;
 use Symfony\Component\Process\Process;
 
 class FileInfoExtractor implements FileInfoExtractorInterface

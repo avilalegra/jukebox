@@ -6,8 +6,8 @@ namespace App\Audio\Application\Import\Strategy;
 use App\Audio\Application\Import\AudioImportError;
 use App\Audio\Application\Import\AudioImportException;
 use App\Audio\Application\Import\AudiosImportResult;
-use App\Audio\Application\Import\FileInfoExtractorInterface;
 use App\Audio\Application\Import\SingleAudioImporter;
+use App\Shared\Application\File\FileInfoExtractorInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 

@@ -6,10 +6,10 @@ namespace App\Audio\Application\Import\Strategy;
 use App\Audio\Application\Import\AudioImportError;
 use App\Audio\Application\Import\AudioImportException;
 use App\Audio\Application\Import\AudiosImportResult;
-use App\Audio\Application\Import\FileInfoExtractorInterface;
 use App\Audio\Application\Import\SingleAudioImporter;
-use App\Audio\Infrastructure\LocalFileSystemInterface;
-use App\Shared\Application\Zip\ZipExtractorInterface;
+use App\Shared\Application\File\FileInfoExtractorInterface;
+use App\Shared\Application\File\LocalFileSystemInterface;
+use App\Shared\Application\File\ZipExtractorInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 
