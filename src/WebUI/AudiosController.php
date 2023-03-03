@@ -7,8 +7,7 @@ use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Form\AudioImportSourceType;
 use App\Player\Application\Interactor\PlayerQueueInterface;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
-use App\Shared\Application\Pagination\PaginationOrder;
-use App\Shared\Application\Pagination\PaginationParams;
+use App\Shared\WebUI\PaginationParamsTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +18,7 @@ use Symfony\UX\Turbo\TurboBundle;
 #[Route('/audios', name: 'audios.')]
 class AudiosController extends AbstractController
 {
-    const DEFAULT_PAGE_NUMBER = 1;
-    const DEFAULT_PAGE_LIMIT = 12;
+    use PaginationParamsTrait;
 
     public function __construct(
         private AudioInfoProviderInterface        $audioInfoProvider,
@@ -114,26 +112,5 @@ class AudiosController extends AbstractController
             'form' => $form->createView(),
             'errors' => $errors
         ]);
-    }
-
-    private function parsePaginationParams(Request $request): PaginationParams
-    {
-        $pageNum = $request->get('page', self::DEFAULT_PAGE_NUMBER);
-        $limit = $request->get('limit', self::DEFAULT_PAGE_LIMIT);
-        $order = null;
-
-        if ($request->get('orderBy') !== null) {
-            try {
-                [$field, $dir] = explode(',', $request->get('orderBy'));
-
-                $order = match ($dir) {
-                    'desc' => PaginationOrder::desc($field),
-                    default => PaginationOrder::asc($field)
-                };
-            } catch (\Throwable $_) {
-            }
-        }
-
-        return new PaginationParams($pageNum, $limit, $order);
     }
 }
