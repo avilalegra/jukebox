@@ -22,7 +22,6 @@ yarn-error.log
 public/player.pid
 public/player-status
 public/audios/
-public/covers/ 
 
 .idea/
 
