@@ -2,12 +2,14 @@
 
 namespace App\Audio\Application\Import\Strategy;
 
+
 use App\Audio\Application\Import\AudioImportError;
-use App\Audio\Application\Import\FileInfoExtractorInterface;
-use App\Audio\Application\Import\SingleAudioImporter;
 use App\Audio\Application\Import\AudioImportException;
 use App\Audio\Application\Import\AudiosImportResult;
+use App\Audio\Application\Import\FileInfoExtractorInterface;
+use App\Audio\Application\Import\SingleAudioImporter;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
 
 #[AutoconfigureTag('audio.import_strategy')]
 class SingleAudioImportStrategy implements AudioImportStrategyInterface
@@ -15,7 +17,7 @@ class SingleAudioImportStrategy implements AudioImportStrategyInterface
     const ALLOWED_MIME_TYPES = ['audio/mpeg'];
 
     public function __construct(
-        private SingleAudioImporter $audioImporter,
+        private SingleAudioImporter        $audioImporter,
         private FileInfoExtractorInterface $fileInfoExtractor
     )
     {

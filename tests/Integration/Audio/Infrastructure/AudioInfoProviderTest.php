@@ -9,7 +9,8 @@ use App\Shared\Application\Pagination\PaginationParams;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class AudioInfoProviderTest extends KernelTestCase
-{ private AudioInfoProvider $audioInfoProvider;
+{
+    private AudioInfoProvider $audioInfoProvider;
 
     protected function setUp(): void
     {

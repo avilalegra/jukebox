@@ -2,7 +2,6 @@
 
 namespace App\WebUI;
 
-use App\Audio\Application\Import\AudioImportException;
 use App\Audio\Application\Interactor\AudioImporterInterface;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Form\AudioImportSourceType;
@@ -15,8 +14,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\UX\Dropzone\Form\DropzoneType;
 use Symfony\UX\Turbo\TurboBundle;
 
 #[Route('/audios', name: 'audios.')]

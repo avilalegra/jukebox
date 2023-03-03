@@ -4,6 +4,7 @@ namespace App\Audio\Infrastructure;
 
 use Symfony\Component\Filesystem\Filesystem;
 
+
 class LocalFileSystem implements LocalFileSystemInterface
 {
     public function __construct(
@@ -26,12 +27,24 @@ class LocalFileSystem implements LocalFileSystemInterface
         file_put_contents($targetPath, $h);
     }
 
-
     public function makeTempDir(): string
     {
         $path =  '/tmp/'.time();
         $this->filesystem->mkdir($path);
 
         return $path;
+    }
+
+    public function iterateFilesRecursive(string $dirPath): iterable
+    {
+        $directory = new \RecursiveDirectoryIterator($dirPath);
+        $iterator = new \RecursiveIteratorIterator($directory);
+
+        /** @var \SplFileInfo $fileInfo */
+        foreach ($iterator as $fileInfo) {
+            if($fileInfo->isFile()){
+                yield $fileInfo->getRealPath();
+            }
+        }
     }
 }

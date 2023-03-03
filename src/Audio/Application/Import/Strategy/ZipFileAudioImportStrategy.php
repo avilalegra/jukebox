@@ -2,12 +2,14 @@
 
 namespace App\Audio\Application\Import\Strategy;
 
+
 use App\Audio\Application\Import\AudioImportError;
 use App\Audio\Application\Import\AudioImportException;
 use App\Audio\Application\Import\AudiosImportResult;
 use App\Audio\Application\Import\FileInfoExtractorInterface;
 use App\Audio\Application\Import\SingleAudioImporter;
-use App\Audio\Application\Import\ZipIteratorInterface;
+use App\Audio\Infrastructure\LocalFileSystemInterface;
+use App\Shared\Application\Zip\ZipExtractorInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 
@@ -15,7 +17,8 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 class ZipFileAudioImportStrategy implements AudioImportStrategyInterface
 {
     public function __construct(
-        private ZipIteratorInterface       $zipIterator,
+        private LocalFileSystemInterface   $localFileSystem,
+        private ZipExtractorInterface      $zipExtractor,
         private FileInfoExtractorInterface $fileInfoExtractor,
         private SingleAudioImporter        $audioImporter,
 
@@ -30,8 +33,12 @@ class ZipFileAudioImportStrategy implements AudioImportStrategyInterface
 
     public function import(string $filePath): AudiosImportResult
     {
+        $tempDirPath = $this->localFileSystem->makeTempDir();
+        $this->zipExtractor->extract($filePath, $tempDirPath);
+
         $errors = [];
-        foreach ($this->zipIterator->iterateZipFiles($filePath) as $audioFilePath) {
+
+        foreach ($this->localFileSystem->iterateFilesRecursive($tempDirPath) as $audioFilePath) {
             try {
                 $this->audioImporter->importAudio($audioFilePath);
             } catch (AudioImportException $e) {
