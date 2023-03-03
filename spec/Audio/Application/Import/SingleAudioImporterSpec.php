@@ -8,8 +8,8 @@ use App\Audio\Application\GuidGeneratorInterface;
 use App\Audio\Application\Import\AudioImportException;
 use App\Audio\Application\Metadata\AudioMetadataExtractionException;
 use App\Audio\Application\Metadata\AudioMetadataExtractorInterface;
-use App\Audio\Application\Storage\AudioStorageException;
-use App\Audio\Application\Storage\AudioStorageInterface;
+use App\Audio\Application\AudioFile\AudioStorageException;
+use App\Audio\Application\AudioFile\AudioStorageInterface;
 use PhpSpec\ObjectBehavior;
 
 class SingleAudioImporterSpec extends ObjectBehavior

@@ -3,7 +3,7 @@
 namespace spec\App\Player\Infrastructure;
 
 use App\Audio\Application\AudioFileName;
-use App\Audio\Application\Storage\AudioStorageInterface;
+use App\Audio\Application\AudioFile\AudioStorageInterface;
 use App\Player\Application\Device\AudioDeviceException;
 use App\Player\Infrastructure\OSProccess\OsProcessException;
 use App\Player\Infrastructure\OSProccess\OSProcessRunnerInterface;

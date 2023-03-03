@@ -3,10 +3,9 @@
 namespace App\Audio\Application\Import;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
-use App\Audio\Application\AudioFileName;
 use App\Audio\Application\GuidGeneratorInterface;
 use App\Audio\Application\Metadata\AudioMetadataExtractorInterface;
-use App\Audio\Application\Storage\AudioStorageInterface;
+use App\Audio\Application\AudioFile\AudioStorageInterface;
 use App\Audio\Domain\AudioEntity;
 
 class SingleAudioImporter
@@ -43,7 +42,7 @@ class SingleAudioImporter
                 extension: $metadata->extension
             );
 
-            $this->audioStorage->importAudioFileAs(AudioFileName::fromAudio($audio->readModel()), $audioFilePath);
+            $this->audioStorage->importAudioFile($audio->readModel(), $audioFilePath);
             $this->audioRepository->add($audio);
 
         } catch (\Throwable $t) {

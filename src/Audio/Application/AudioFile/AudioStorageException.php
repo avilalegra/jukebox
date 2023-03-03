@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Audio\Application\Storage;
+namespace App\Audio\Application\AudioFile;
 
 class AudioStorageException extends \Exception
 {

@@ -3,7 +3,7 @@
 namespace spec\App\Audio\Infrastructure;
 
 use App\Audio\Application\AudioFileName;
-use App\Audio\Application\Storage\AudioStorageException;
+use App\Audio\Application\AudioFile\AudioStorageException;
 use App\Shared\Application\File\LocalFileSystemInterface;
 use PhpSpec\ObjectBehavior;
 
