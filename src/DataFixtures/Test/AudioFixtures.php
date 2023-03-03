@@ -4,9 +4,10 @@ namespace App\DataFixtures\Test;
 
 use App\Audio\Domain\AudioEntity;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AudioFixtures extends Fixture
+class AudioFixtures extends Fixture implements FixtureGroupInterface
 {
     const AUDIOS_DATA = [
         [
@@ -91,6 +92,11 @@ class AudioFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['test'];
     }
 }
 
