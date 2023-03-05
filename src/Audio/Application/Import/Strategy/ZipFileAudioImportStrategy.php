@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 
 #[AutoconfigureTag('audio.import_strategy')]
-class ZipFileAudioImportStrategy implements AudioImportStrategyInterface
+readonly class ZipFileAudioImportStrategy implements AudioImportStrategyInterface
 {
     public function __construct(
         private LocalFileSystemInterface   $localFileSystem,

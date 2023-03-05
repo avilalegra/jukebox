@@ -7,7 +7,7 @@ use App\Audio\Domain\AudioReadModel;
 use App\Playlist\Application\Interactor\PlaylistManagerInterface;
 use App\Playlist\Domain\PlaylistEntity;
 
-class PlaylistManager implements PlaylistManagerInterface
+readonly class PlaylistManager implements PlaylistManagerInterface
 {
     public function __construct(
         private PlaylistEntity                    $playlist,

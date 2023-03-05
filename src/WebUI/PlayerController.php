@@ -21,14 +21,14 @@ use Symfony\UX\Turbo\TurboBundle;
 class PlayerController extends AbstractController implements EventSubscriberInterface
 {
     public function __construct(
-        private HubInterface                     $mercureHub,
-        private JukeboxPlayerInterface           $player,
-        private PlayerStatusInfoProviderInterface $statusInfoProvider
+        private readonly HubInterface             $mercureHub,
+        private readonly JukeboxPlayerInterface   $player,
+        private readonly PlayerStatusInfoProviderInterface $playerStatusInfoProvider
     )
     {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents() : array
     {
         return [
             AudioPlayingStarted::name() => 'onAudioPlayingStarted',
@@ -40,13 +40,13 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     #[Route('/', name: 'index')]
     public function playerIndex(): Response
     {
-        $status = $this->statusInfoProvider->status();
+        $status = $this->playerStatusInfoProvider->status();
 
         return $this->render('player/player.html.twig',
             [
-                'queue' => $status->queue,
-                'nowPlaying' => $status->audioPlayStatus->currentPlayingAudio?->audio,
-                'lastPlayed' => $status->audioPlayStatus->lastPlayedAudio
+                'queuedAudios' => $status->queuedAudios,
+                'nowPlaying' => $status->audioPlayingStatus->currentPlayingAudio?->audio,
+                'lastPlayed' => $status->audioPlayingStatus->lastPlayedAudio
             ]
         );
     }
@@ -54,12 +54,12 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     #[Route('/bar', name: 'bar')]
     public function playerBar(): Response
     {
-        $status = $this->statusInfoProvider->status();
+        $status = $this->playerStatusInfoProvider->status();
 
         return $this->render('player/player_bar.html.twig',
             [
-                'nowPlaying' => $status->audioPlayStatus->currentPlayingAudio,
-                'lastPlayed' => $status->audioPlayStatus->lastPlayedAudio
+                'nowPlaying' => $status->audioPlayingStatus->currentPlayingAudio,
+                'lastPlayed' => $status->audioPlayingStatus->lastPlayedAudio
             ]
         );
     }
@@ -99,18 +99,16 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->redirectToRoute('player.index');
     }
 
-    public function onAudioPlayingStarted(AudioPlayingStarted $event)
+    public function onAudioPlayingStarted(AudioPlayingStarted $_)
     {
-        $queue = $this->statusInfoProvider->status()->queue;
-
-        $status = $event->playerStatus;
+        $status = $this->playerStatusInfoProvider->status();
 
         $this->mercureHub->publish(new Update('player-board',
             $this->renderView('player/player_board_stream.html.twig',
                 [
-                    'queue' => $queue,
-                    'nowPlaying' => $status->currentPlayingAudio?->audio,
-                    'lastPlayed' => $status->lastPlayedAudio,
+                    'queuedAudios' => $status->queuedAudios,
+                    'nowPlaying' => $status->audioPlayingStatus->currentPlayingAudio?->audio,
+                    'lastPlayed' => $status->audioPlayingStatus->lastPlayedAudio,
                 ]
             )
         ));
@@ -118,22 +116,22 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         $this->mercureHub->publish(new Update('player-bar',
             $this->renderView('player/player_bar_stream.html.twig',
                 [
-                    'nowPlaying' => $status->currentPlayingAudio,
-                    'lastPlayed' => $status->lastPlayedAudio,
+                    'nowPlaying' => $status->audioPlayingStatus->currentPlayingAudio,
+                    'lastPlayed' => $status->audioPlayingStatus->lastPlayedAudio,
                 ]
             )
         ));
     }
 
-    public function onAudioPlayingStopped(AudioPlayingStopped $event)
+    public function onAudioPlayingStopped(AudioPlayingStopped $_)
     {
-        $status = $this->statusInfoProvider->status();
+        $status = $this->playerStatusInfoProvider->status();
 
         $this->mercureHub->publish(new Update('player-bar',
             $this->renderView('player/player_bar_stream.html.twig',
                 [
                     'nowPlaying' => null,
-                    'lastPlayed' => $status->audioPlayStatus->lastPlayedAudio
+                    'lastPlayed' => $status->audioPlayingStatus->lastPlayedAudio
                 ]
             )
         ));

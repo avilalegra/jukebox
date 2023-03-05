@@ -7,9 +7,6 @@ use App\Audio\Domain\AudioReadModel;
 
 interface AudioStorageInterface
 {
-    /**
-     * @throws AudioFileImportException
-     */
     public function importAudioFile(AudioReadModel $audio, string $audioFilePath): void;
 
     /**

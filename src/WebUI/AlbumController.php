@@ -12,7 +12,7 @@ class AlbumController extends AbstractController
 {
 
     public function __construct(
-        private AlbumInfoProviderInterface $albumBrowser
+        private readonly AlbumInfoProviderInterface $albumBrowser
     )
     {
     }

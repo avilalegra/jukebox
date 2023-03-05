@@ -15,8 +15,8 @@ class AudioPlayingStatusRepository implements AudioPlayingStatusRepositoryInterf
     private string $statusFilePath;
 
     public function __construct(
-        private AudioInfoProviderInterface $audioBrowser,
-        private string                     $projectDir,
+        private readonly AudioInfoProviderInterface $audioBrowser,
+        private readonly string                     $projectDir,
     )
     {
         $this->statusFilePath = $this->projectDir . '/player-status';

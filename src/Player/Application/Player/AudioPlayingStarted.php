@@ -7,10 +7,10 @@ namespace App\Player\Application\Player;
 use App\Player\Application\Player\Status\AudioPlayingStatus;
 use App\Shared\Application\ApplicationEventInterface;
 
-class AudioPlayingStarted implements ApplicationEventInterface
+readonly class AudioPlayingStarted implements ApplicationEventInterface
 {
     public function __construct(
-        public readonly AudioPlayingStatus $playerStatus
+        public AudioPlayingStatus $playerStatus
     ) {
     }
 

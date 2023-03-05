@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Player\Application\Player\Player;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -19,10 +18,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PlayerCommand extends Command
 {
     public function __construct(
-        private Player                            $player,
-        private AudioInfoProviderInterface        $audioBrowser,
-        private LoggerInterface                   $logger,
-        private PlayerStatusInfoProviderInterface $statusInfoProvider
+        private readonly Player                            $player,
+        private readonly AudioInfoProviderInterface        $audioBrowser,
+        private readonly PlayerStatusInfoProviderInterface $statusInfoProvider
     )
     {
         parent::__construct();
@@ -31,7 +29,7 @@ class PlayerCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('action', InputArgument::REQUIRED, 'play-audio|play-main-playlist')
+            ->addArgument('action', InputArgument::REQUIRED, 'play-audio|play-queue')
             ->addArgument('id', InputArgument::OPTIONAL, 'audio id');
     }
 
@@ -42,11 +40,10 @@ class PlayerCommand extends Command
         try {
             match ($input->getArgument('action')) {
                 'play-audio' => $this->playAudio($id),
-                'play-main-playlist' => $this->playMainPlaylist()
+                'play-queue' => $this->playQueue()
             };
         } catch (\Throwable $t) {
-            $this->logger->error($t->getTraceAsString());
-
+            dd($t);
             return Command::FAILURE;
         }
 
@@ -59,9 +56,9 @@ class PlayerCommand extends Command
         $this->player->playAudio($audio);
     }
 
-    private function playMainPlaylist(): void
+    private function playQueue(): void
     {
-        $queue = $this->statusInfoProvider->status()->queue;
-        $this->player->playAll(...$queue->audios);
+        $queuedAudios = $this->statusInfoProvider->status()->queuedAudios;
+        $this->player->playAll(...$queuedAudios);
     }
 }

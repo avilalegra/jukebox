@@ -6,8 +6,5 @@ use App\Shared\Application\Exception\EntityNotFoundException;
 
 interface PlaylistManagerFactoryInterface
 {
-    /**
-     * @throws EntityNotFoundException
-     */
-    public function playlistEditor(string $playlistId): PlaylistManagerInterface;
+    public function playlistManager(string $playlistId): PlaylistManagerInterface;
 }

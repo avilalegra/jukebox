@@ -4,7 +4,7 @@ namespace App\Player\Application\Interactor;
 
 use App\Audio\Domain\AudioReadModel;
 
-interface PlayerQueueInterface
+interface PlayerQueueManagerInterface
 {
     public function clear(): void;
 

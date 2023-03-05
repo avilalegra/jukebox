@@ -27,8 +27,8 @@
                 <tr>
                     <td class="audio-title">
                         {{ playPreview(audio) }}
-                        {% if playerStatus.canAddToQueue(audio) or playerStatus.canRemoveFromQueue(audio) %}
-                            {% include 'audio/playlist_actions.html.twig' with {'queued': playerStatus.canRemoveFromQueue(audio)} %}
+                        {% if not playerStatus.isPlaying(audio) %}
+                            {% include 'audio/queue_actions.html.twig' with {'queued': playerStatus.hasQueuedAudio(audio)} %}
                         {% endif %}
                     </td>
                     <td class="audio-artist">{{ audio.artist }}</td>

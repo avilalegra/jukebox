@@ -20,7 +20,7 @@ class AudioInfoProvider implements AudioInfoProviderInterface
     private EntityRepository $repository;
 
     public function __construct(
-        private EntityManagerInterface $em
+        private readonly EntityManagerInterface $em
     )
     {
         $this->repository = $this->em->getRepository(AudioEntity::class);

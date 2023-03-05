@@ -4,7 +4,7 @@ namespace App\WebUI\Audio;
 
 use App\Audio\Application\Interactor\AudioImporterInterface;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
-use App\Player\Application\Interactor\PlayerQueueInterface;
+use App\Player\Application\Interactor\PlayerQueueManagerInterface;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Shared\WebUI\PaginationParamsTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,10 +19,10 @@ class AudiosController extends AbstractController
     use PaginationParamsTrait;
 
     public function __construct(
-        private AudioInfoProviderInterface        $audioInfoProvider,
-        private PlayerStatusInfoProviderInterface $statusInfoProvider,
-        private PlayerQueueInterface              $playerQueue,
-        private AudioImporterInterface            $audioImporter
+        private readonly AudioInfoProviderInterface        $audioInfoProvider,
+        private readonly PlayerStatusInfoProviderInterface $statusInfoProvider,
+        private readonly PlayerQueueManagerInterface       $playerQueue,
+        private readonly AudioImporterInterface $audioImporter
     )
     {
     }
@@ -33,7 +33,7 @@ class AudiosController extends AbstractController
 
         $status = $this->statusInfoProvider->status();
         $paginationResults = $this->audioInfoProvider->paginateAudios($this->parsePaginationParams($request));
-        $nowPlaying = $status->audioPlayStatus->currentPlayingAudio?->audio;
+        $nowPlaying = $status->audioPlayingStatus->currentPlayingAudio?->audio;
 
         return $this->render(
             'audio/audio_browser.html.twig',

@@ -17,8 +17,8 @@ class SingleAudioImportStrategy implements AudioImportStrategyInterface
     const ALLOWED_MIME_TYPES = ['audio/mpeg'];
 
     public function __construct(
-        private SingleAudioImporter        $audioImporter,
-        private FileInfoExtractorInterface $fileInfoExtractor
+        private readonly SingleAudioImporter $audioImporter,
+        private readonly FileInfoExtractorInterface $fileInfoExtractor
     )
     {
     }

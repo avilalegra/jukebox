@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ImportController extends AbstractController
 {
     public function __construct(
-        private AudioImporterInterface $audioImporter
+        private readonly AudioImporterInterface $audioImporter
     )
     {
     }

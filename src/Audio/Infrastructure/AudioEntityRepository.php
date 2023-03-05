@@ -4,7 +4,6 @@ namespace App\Audio\Infrastructure;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
 use App\Audio\Domain\AudioEntity;
-use App\Shared\Application\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -27,14 +26,8 @@ class AudioEntityRepository implements AudioEntityRepositoryInterface
         $this->em->flush();
     }
 
-    /** @inheritDoc */
     public function find(string $audioId): AudioEntity
     {
-        $audio = $this->repository->find($audioId);
-        if ($audio === null) {
-            throw  new EntityNotFoundException(AudioEntity::class, $audioId);
-        }
-
-        return $audio;
+        return $this->repository->find($audioId);
     }
 }

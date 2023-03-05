@@ -6,11 +6,12 @@ namespace App\Audio\Application\Import;
 use App\Audio\Application\Interactor\AudioImporterInterface;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
-class AudioImporter implements AudioImporterInterface
+readonly class AudioImporter implements AudioImporterInterface
 {
 
     public function __construct(
-        #[TaggedIterator( 'audio.import_strategy')] private iterable $importStrategies
+        #[TaggedIterator('audio.import_strategy')]
+        private iterable $importStrategies
     )
     {
     }

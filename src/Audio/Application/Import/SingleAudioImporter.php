@@ -8,7 +8,7 @@ use App\Audio\Application\Metadata\AudioMetadataExtractorInterface;
 use App\Audio\Application\AudioFile\AudioStorageInterface;
 use App\Audio\Domain\AudioEntity;
 
-class SingleAudioImporter
+readonly class SingleAudioImporter
 {
     public function __construct(
         private GuidGeneratorInterface          $guidGenerator,

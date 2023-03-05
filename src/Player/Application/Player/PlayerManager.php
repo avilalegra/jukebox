@@ -4,15 +4,15 @@ namespace App\Player\Application\Player;
 
 use App\Album\Application\Interactor\AlbumInfoProviderInterface;
 use App\Player\Application\Interactor\JukeboxPlayerInterface;
-use App\Player\Application\Interactor\PlayerQueueInterface;
+use App\Player\Application\Interactor\PlayerQueueManagerInterface;
 
 
-class PlayerManager implements JukeboxPlayerInterface
+readonly class PlayerManager implements JukeboxPlayerInterface
 {
     public function __construct(
-        private AsyncPlayerInterface       $asyncPlayer,
-        private AlbumInfoProviderInterface $albumBrowser,
-        private PlayerQueueInterface       $playerQueue
+        private AsyncPlayerInterface        $asyncPlayer,
+        private AlbumInfoProviderInterface  $albumBrowser,
+        private PlayerQueueManagerInterface $playerQueue
     )
     {
     }

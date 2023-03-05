@@ -5,24 +5,23 @@ declare(strict_types=1);
 namespace App\Player\Application\Player;
 
 use App\Audio\Domain\AudioReadModel;
-use App\Player\Application\Device\AudioDevicePlayingException;
-use App\Player\Application\Device\AudioDeviceInterface;
 use App\Player\Application\Player\Status\AudioPlayingStatus;
 use App\Player\Application\Player\Status\AudioPlayingStatusRepositoryInterface;
 use App\Shared\Application\EventDispatcherInterface;
 
+
 class Player
 {
-    private ?AudioPlayingStatus $currentStatus;
+    private ?AudioPlayingStatus $currentAudioPlayingStatus;
 
     public function __construct(
-        private AudioDeviceInterface                  $audioDevice,
-        private EventDispatcherInterface              $eventDispatcher,
-        private AudioPlayingStatusRepositoryInterface $playingStatusRepository,
-        private TimeGeneratorInterface                $timeGenerator
+        private readonly AudioDeviceInterface                  $audioDevice,
+        private readonly EventDispatcherInterface              $eventDispatcher,
+        private readonly AudioPlayingStatusRepositoryInterface $audioPlayingStatusRepository,
+        private readonly TimeGeneratorInterface                $timeGenerator
     )
     {
-        $this->currentStatus = null;
+        $this->currentAudioPlayingStatus = null;
     }
 
     public function playAll(AudioReadModel ...$audios): void
@@ -32,9 +31,7 @@ class Player
         }
     }
 
-    /**
-     * @throws AudioDevicePlayingException
-     */
+
     public function playAudio(AudioReadModel $audio): void
     {
         $this->changeToPlayingStatus($audio);
@@ -48,29 +45,30 @@ class Player
 
     public function changeToPlayingStatus(AudioReadModel $audio): void
     {
-        $this->currentStatus = $this->playingStatusRepository->status()->playingTransition($audio, $this->timeGenerator->epochTime());
-        $this->playingStatusRepository->save($this->currentStatus);
+        $this->currentAudioPlayingStatus = $this->audioPlayingStatusRepository
+            ->status()->playingTransition($audio, $this->timeGenerator->epochTime());
+        $this->audioPlayingStatusRepository->save($this->currentAudioPlayingStatus);
     }
 
     public function getStatus(): AudioPlayingStatus
     {
-        if (null === $this->currentStatus) {
-            $this->currentStatus = $this->playingStatusRepository->status();
+        if (null === $this->currentAudioPlayingStatus) {
+            $this->currentAudioPlayingStatus = $this->audioPlayingStatusRepository->status();
         }
 
-        return $this->currentStatus;
+        return $this->currentAudioPlayingStatus;
     }
 
     public function changeToStoppedStatus(): void
     {
-        $this->currentStatus = $this->getStatus()->stopTransition();
-        $this->playingStatusRepository->save($this->currentStatus);
+        $this->currentAudioPlayingStatus = $this->getStatus()->stopTransition();
+        $this->audioPlayingStatusRepository->save($this->currentAudioPlayingStatus);
     }
 
     public function stop(): void
     {
-        $currentStatus = $this->playingStatusRepository->status()->stopTransition();
-        $this->playingStatusRepository->save($currentStatus);
+        $currentStatus = $this->audioPlayingStatusRepository->status()->stopTransition();
+        $this->audioPlayingStatusRepository->save($currentStatus);
         $this->eventDispatcher->fireEvent(new AudioPlayingStopped($currentStatus));
     }
 }

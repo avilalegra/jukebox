@@ -6,5 +6,5 @@ use App\Playlist\Domain\PlaylistReadModel;
 
 interface PlaylistInfoProviderInterface
 {
-    public function findPlaylist(string $name): PlaylistReadModel;
+    public function findPlaylist(string $playlistId): PlaylistReadModel;
 }

@@ -9,6 +9,5 @@ interface AudioEntityRepositoryInterface
 {
     public function add(AudioEntity $audio) : void;
 
-    /** @throws EntityNotFoundException */
     public function find(string $audioId) : AudioEntity;
 }

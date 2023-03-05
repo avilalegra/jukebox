@@ -16,14 +16,14 @@ class PlaylistInfoProvider implements PlaylistInfoProviderInterface
     private EntityRepository $repository;
 
     public function __construct(
-        private EntityManagerInterface $em
+        private readonly EntityManagerInterface $em
     )
     {
         $this->repository = $this->em->getRepository(PlaylistEntity::class);
     }
 
-    public function findPlaylist(string $name): PlaylistReadModel
+    public function findPlaylist(string $playlistId): PlaylistReadModel
     {
-        return $this->repository->findOneBy(['name' => $name])->readModel();
+        return $this->repository->find($playlistId)->readModel();
     }
 }

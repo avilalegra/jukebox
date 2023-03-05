@@ -2,7 +2,6 @@
 
 namespace App\Audio\Infrastructure;
 
-use App\Audio\Application\AudioFile\AudioFileImportException;
 use App\Audio\Application\AudioFile\AudioFileNotFoundException;
 use App\Audio\Application\AudioFile\AudioStorageInterface;
 use App\Audio\Domain\AudioFile;
@@ -18,20 +17,12 @@ readonly class AudioStorage implements AudioStorageInterface
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function importAudioFile(AudioReadModel $audio, string $audioFilePath): void
     {
         $targetPath = $this->targetPath($audio);
-
-        try {
-            $this->localFileSystem->moveFile($audioFilePath, $targetPath);
-        } catch (\Throwable $t) {
-            throw new AudioFileImportException($audio, $audioFilePath, $t);
-        }
+        $this->localFileSystem->moveFile($audioFilePath, $targetPath);
     }
-
 
     /**
      * @inheritDoc
@@ -49,6 +40,6 @@ readonly class AudioStorage implements AudioStorageInterface
 
     private function targetPath(AudioReadModel $audio): string
     {
-        return $this->storageFolder . '/' . $audio->id;
+        return $this->audiosFolder . '/' . $audio->id;
     }
 }
