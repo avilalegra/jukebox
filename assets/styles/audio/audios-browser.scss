@@ -46,7 +46,7 @@
 
 
     td {
-      padding: 10px 10px 10px 15px;
+      padding: 6px 10px 6px 15px;
       background-color: var(--sub-vibrant-dark);
 
       * {
@@ -56,8 +56,28 @@
 
     td.audio-title {
       display: flex;
-      padding: 0;
+      align-items: center;
+
+      .play-preview {
+        margin-right: 5px;
+
+        &.-play {
+          background-color: var(--sub-muted-light);
+          color: var(--accent-muted-light);
+        }
+      }
+
+      .title {
+        flex: 1;
+      }
+
+      .playlist-actions {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+      }
     }
+
 
     tr {
       cursor: pointer;
@@ -70,22 +90,6 @@
           opacity: 0.8;
         }
       }
-    }
-
-    .play-preview {
-      width: 100%;
-      padding: 10px 10px 10px 15px;
-
-      &.-play {
-        background-color: var(--sub-muted-light);
-        color: var(--accent-muted-light);
-      }
-    }
-
-    .playlist-actions {
-      display: flex;
-      align-items: center;
-      padding: 10px;
     }
 
     @media (max-width: 576px) {

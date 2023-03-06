@@ -1,0 +1,14 @@
+<div class="play-preview"
+        {{ stimulus_controller('play-preview') }}
+        {{ stimulus_target('play-preview', 'playPreview') }} >
+
+    <audio src="{{ '/audios/' ~ audio.id }}#t=30,50"
+            {{ stimulus_target('play-preview', 'player') }} >
+    </audio>
+
+    <i class="play-action fa-regular fa-circle-play fa-xl" title="Reproducir en local"
+            {{ stimulus_action('play-preview', 'play', 'click') }}></i>
+
+    <i class="stop-action fa-regular fa-circle-stop fa-xl"
+    {{ stimulus_action('play-preview', 'stop', 'click') }}"></i>
+</div>
