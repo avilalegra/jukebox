@@ -6,17 +6,17 @@
 @import "pagination/pagination";
 
 :root {
-  --main-muted: #e9d8a6;
-  --sub-muted-light: #94d2bd;
-  --sub-muted-dark: #0a9396;
-  --accent-muted-light: #ca6702;
-  --accent-muted-dark: #ae2012;
+  --main-muted: #2C3333;
+  --sub-muted-light: #0E8388;
+  --sub-muted-dark: #2E4F4F;
+  --accent-muted-light: white;
+  --accent-muted-dark: white;
 
-  --main-vibrant: #e9d8a6;
-  --sub-vibrant-light: #94d2bd;
-  --sub-vibrant-dark: #0a9396;
-  --accent-vibrant-light: #ca6702;
-  --accent-vibrant-dark: #ae2012;
+  --main-vibrant: var(--main-muted);
+  --sub-vibrant-light: var(--sub-muted-light);
+  --sub-vibrant-dark: var(--sub-muted-dark);
+  --accent-vibrant-light: var(--accent-muted-light);
+  --accent-vibrant-dark: var(--accent-muted-dark);
 }
 
 * {
@@ -40,12 +40,6 @@ ul {
   background-color: transparent;
   border: none;
 }
-
-.emptyMsg {
-  font-size: 1.2rem;
-  font-style: italic;
-}
-
 
 .busy-modal {
   cursor: progress;
