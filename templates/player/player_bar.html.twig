@@ -53,7 +53,7 @@
         </div>
 
         {% if subjectAudio is not null %}
-            <img class="album-image" src="{{ asset('covers/' ~ albumCover(subjectAudio.album)) }}"
+            <img class="album-image" src="{{ asset('storage/covers/' ~ albumCover(subjectAudio.album)) }}"
                  alt="" {{ stimulus_target('adaptative-bg', 'image') }}>
         {% endif %}
 

@@ -1,7 +1,6 @@
 <div id="playlist-actions-{{ audio.id }}" class="playlist-actions">
     {% if queued %}
-        <form action="{{ path('audios.removeFromPlayingQueue', {'id': audio.id}) }}"
-              method="post">
+        <form action="{{ path('audios.removeFromPlayingQueue', {'id': audio.id}) }}" method="POST">
             <input type="hidden" name="_method" value="delete">
             <button class="_inv-button" type="submit">
                 <i class="fa-solid fa-circle-minus fa-lg"

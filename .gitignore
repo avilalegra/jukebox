@@ -21,7 +21,7 @@ yarn-error.log
 
 /public/player.pid
 /player-status
-/public/audios/
+/public/storage/audios/
 
 /.idea/
 

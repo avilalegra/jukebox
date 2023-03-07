@@ -1,5 +1,4 @@
 {% extends 'player_base.html.twig' %}
-{% from 'player_base.html.twig' import playPreview %}
 
 {% block contents %}
     <div class="audios-browser">
@@ -26,7 +25,8 @@
             {% for audio in pagination.pageResults %}
                 <tr>
                     <td class="audio-title">
-                        {{ playPreview(audio) }}
+                        {% include 'play_preview.html.twig' %}
+                        <span class="title">{{ audio.title }}</span>
                         {% if not playerStatus.isPlaying(audio) %}
                             {% include 'audio/queue_actions.html.twig' with {'queued': playerStatus.hasQueuedAudio(audio)} %}
                         {% endif %}

@@ -6,7 +6,7 @@
     {% set subjectAudio = isRunning ? nowPlaying : lastPlayed %}
 
     {% if subjectAudio is not null %}
-        <img class="album-image" src="{{ asset('covers/' ~ albumCover(subjectAudio.album)) }}">
+        <img class="album-image" src="{{ asset('storage/covers/' ~ albumCover(subjectAudio.album)) }}">
     {% endif %}
 
     <ul class="audios-list">
