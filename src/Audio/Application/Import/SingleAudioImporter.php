@@ -19,33 +19,29 @@ readonly class SingleAudioImporter
     {
     }
 
-    /**
-     * @throws AudioImportException
-     */
     public function importAudio(string $audioFilePath): void
     {
-        try {
-            $metadata = $this->metadataExtractor->extractMetadata($audioFilePath);
+        $metadata = $this->metadataExtractor->extractMetadata($audioFilePath);
 
-            $defaultName = explode('.', basename($audioFilePath))[0];
+        $defaultName = explode('.', basename($audioFilePath))[0];
 
-            $audio = new AudioEntity(
-                id: $this->guidGenerator->generateGuid(),
-                title: $metadata->title ?? $defaultName,
-                artist: $metadata->artist,
-                album: $metadata->album,
-                year: $metadata->year,
-                track: $metadata->track,
-                genre: $metadata->genre,
-                lyrics: $metadata->lyrics,
-                duration: $metadata->duration
-            );
+        $audio = new AudioEntity(
+            id: $this->guidGenerator->generateGuid(),
+            title: $metadata->title ?? $defaultName,
+            artist: $metadata->artist,
+            album: $metadata->album,
+            year: $metadata->year,
+            track: $metadata->track,
+            genre: $metadata->genre,
+            lyrics: $metadata->lyrics,
+            duration: $metadata->duration
+        );
 
-            $this->audioStorage->importAudioFile($audio->readModel(), $audioFilePath);
-            $this->audioRepository->add($audio);
-
-        } catch (\Throwable $t) {
-            throw  new AudioImportException($audioFilePath, $t);
+        if ($this->audioRepository->hasOneWithSameTitleAndDuration($audio)) {
+            return;
         }
+
+        $this->audioStorage->importAudioFile($audio->readModel(), $audioFilePath);
+        $this->audioRepository->add($audio);
     }
 }

@@ -47,7 +47,7 @@ readonly class ZipFileAudioImportStrategy implements AudioImportStrategyInterfac
         foreach ($this->localFileSystem->iterateFilesRecursive($tempDirPath) as $audioFilePath) {
             try {
                 $this->audioImporter->importAudio($audioFilePath);
-            } catch (AudioImportException $e) {
+            } catch (\Throwable $e) {
                 $errors[] = new AudioImportError($audioFilePath, $e->getTraceAsString());
             }
         }

@@ -6,9 +6,11 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+
 
 #[Entity()]
-#[Table('audio')]
+#[Table('audio', uniqueConstraints: [new UniqueConstraint(columns: ['title', 'duration'])])]
 class AudioEntity
 {
     public static function fromReadModel(AudioReadModel $audio): self
@@ -87,8 +89,13 @@ class AudioEntity
         );
     }
 
-    public function setTitle(string $title): void
+    public function title(): ?string
     {
-        $this->title = $title;
+        return $this->title;
+    }
+
+    public function duration(): ?int
+    {
+        return $this->duration;
     }
 }

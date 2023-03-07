@@ -9,7 +9,7 @@ use App\Playlist\Application\PlaylistManagerFactory;
 
 class PlayerQueueManager implements PlayerQueueManagerInterface
 {
-    const PLAYER_QUEUE_PLAYLIST_ID = 'c8420338-16d0-4584-9b06-9b3697e084d9';
+    const PLAYER_QUEUE_PLAYLIST_ID = 'ee6be059-c8d8-42aa-aad1-76c45d7cb30f';
 
     private PlaylistManager $mainPlaylistManager;
 

@@ -39,7 +39,7 @@ class SingleAudioImportStrategy implements AudioImportStrategyInterface
             $this->audioImporter->importAudio($filePath);
 
             return AudiosImportResult::noErrors();
-        } catch (AudioImportException $e) {
+        } catch (\Throwable $e) {
             return AudiosImportResult::withErrors(new AudioImportError($filePath, $e->getTraceAsString()));
         }
     }

@@ -30,4 +30,15 @@ class AudioEntityRepository implements AudioEntityRepositoryInterface
     {
         return $this->repository->find($audioId);
     }
+
+    public function hasOneWithSameTitleAndDuration(AudioEntity $audio): bool
+    {
+        $same = $this->repository->findOneBy(
+            [
+                'title' => $audio->title(),
+                'duration' => $audio->duration()
+            ]);
+
+        return $same !== null;
+    }
 }
