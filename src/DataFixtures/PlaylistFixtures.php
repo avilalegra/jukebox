@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Player\Application\Player\PlayerQueueManager;
 use App\Playlist\Domain\PlaylistEntity;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -11,7 +12,7 @@ class PlaylistFixtures extends Fixture implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $mainPlaylist = new PlaylistEntity('ee6be059-c8d8-42aa-aad1-76c45d7cb30f','main');
+        $mainPlaylist = new PlaylistEntity(PlayerQueueManager::PLAYER_QUEUE_PLAYLIST_ID,'main');
         $manager->persist($mainPlaylist);
         $manager->flush();
     }
