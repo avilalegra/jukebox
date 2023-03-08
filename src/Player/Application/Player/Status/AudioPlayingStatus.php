@@ -45,6 +45,4 @@ readonly class AudioPlayingStatus implements \JsonSerializable
             'lastPlayedAudioId' => $this->lastPlayedAudio?->id,
         ];
     }
-
-
 }

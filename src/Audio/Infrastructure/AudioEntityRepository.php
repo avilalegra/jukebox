@@ -4,6 +4,7 @@ namespace App\Audio\Infrastructure;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
 use App\Audio\Domain\AudioEntity;
+use App\Audio\Domain\AudioReadModel;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -40,5 +41,11 @@ class AudioEntityRepository implements AudioEntityRepositoryInterface
             ]);
 
         return $same !== null;
+    }
+
+    public function remove(AudioEntity $audio): void
+    {
+        $this->em->remove($audio);
+        $this->em->flush();
     }
 }

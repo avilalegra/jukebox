@@ -79,22 +79,33 @@ ul {
   }
 }
 
-.play-preview {
-  display: flex;
-  align-items: center;
+.input-label {
+  &.-up {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
 
-  .stop-action {
-    display: none;
+.text-input {
+  padding: 12px;
+  border-radius: 3px;
+  border: 1px solid gray;
+  background: var(--sub-muted-dark);
+  color: var(--accent-muted-dark);
+}
+
+.delete-btn {
+  background-color: red;
+  border-radius: 5px;
+  padding: 10px;
+
+  * {
+    font-weight: 600;
+    color: white;
   }
 
-  &.-play {
-    .play-action {
-      display: none;
-    }
-
-    .stop-action {
-      display: block;
-    }
+  .title {
+    margin-left: 5px;
   }
 }
 

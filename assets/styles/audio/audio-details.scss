@@ -1,0 +1,36 @@
+
+.audio-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px;
+  color: var(--accent-muted-dark);
+  width: 90%;
+  margin: 10px auto auto;
+  background-color: var(--sub-muted-dark);
+  border-radius: 10px;
+
+  .details-form {
+    width: 100%;
+    height: 65vh;
+    overflow: auto;
+    padding: 10px;
+
+    label {
+      margin-top: 25px;
+    }
+
+    .text-input {
+      width: 100%;
+    }
+  }
+
+  .btns-bar {
+    margin-top: 30px;
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

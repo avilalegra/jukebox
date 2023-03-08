@@ -1,5 +1,4 @@
 import {Controller} from '@hotwired/stimulus';
-import * as Vibrant from "node-vibrant";
 
 
 export default class extends Controller {

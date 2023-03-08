@@ -26,7 +26,10 @@
                 <tr>
                     <td class="audio-title">
                         {% include 'play_preview.html.twig' %}
-                        <span class="title">{{ audio.title }}</span>
+                        <span class="title">
+                            <a href="{{ path('audios.show', {'id': audio.id}) }}"> {{ audio.title }} </a>
+                        </span>
+
                         {% if not playerStatus.isPlaying(audio) %}
                             {% include 'audio/queue_actions.html.twig' with {'queued': playerStatus.hasQueuedAudio(audio)} %}
                         {% endif %}

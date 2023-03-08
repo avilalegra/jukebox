@@ -2,8 +2,8 @@
 
 namespace App\WebUI\Audio;
 
-use App\Audio\Application\Interactor\AudioImporterInterface;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
+use App\Audio\Application\Interactor\AudioLibraryManagerInterface;
 use App\Player\Application\Interactor\PlayerQueueManagerInterface;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Shared\WebUI\PaginationParamsTrait;
@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Turbo\TurboBundle;
 
-#[Route('/audios', name: 'audios.')]
-class AudiosController extends AbstractController
+#[Route('/library/audios', name: 'audios.')]
+class AudiosLibraryController extends AbstractController
 {
     use PaginationParamsTrait;
 
@@ -22,7 +22,7 @@ class AudiosController extends AbstractController
         private readonly AudioInfoProviderInterface        $audioInfoProvider,
         private readonly PlayerStatusInfoProviderInterface $statusInfoProvider,
         private readonly PlayerQueueManagerInterface       $playerQueue,
-        private readonly AudioImporterInterface $audioImporter
+        private readonly AudioLibraryManagerInterface      $audioLibraryManager
     )
     {
     }

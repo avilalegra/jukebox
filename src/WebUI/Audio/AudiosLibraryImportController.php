@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/audios', name: 'audios.')]
-class ImportController extends AbstractController
+#[Route('/library/audios', name: 'audios.')]
+class AudiosLibraryImportController extends AbstractController
 {
     public function __construct(
         private readonly AudioImporterInterface $audioImporter
@@ -21,7 +21,7 @@ class ImportController extends AbstractController
     {
     }
 
-    #[Route('/library', name: 'import', methods: ['get', 'post'])]
+    #[Route('/import', name: 'import', methods: ['get', 'post'])]
     public function uploadAudios(Request $request): Response
     {
         $form = ($this->createFormBuilder())

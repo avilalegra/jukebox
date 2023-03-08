@@ -9,9 +9,7 @@ interface AudioStorageInterface
 {
     public function importAudioFile(AudioReadModel $audio, string $audioFilePath): void;
 
-    /**
-     * @throws AudioFileNotFoundException
-     */
     public function findAudioFile(AudioReadModel $audio): AudioFile;
 
+    public function removeAudioFile(AudioReadModel $audio) : void;
 }

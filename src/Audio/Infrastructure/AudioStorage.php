@@ -24,9 +24,6 @@ readonly class AudioStorage implements AudioStorageInterface
         $this->localFileSystem->moveFile($audioFilePath, $targetPath);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function findAudioFile(AudioReadModel $audio): AudioFile
     {
         $targetPath = $this->targetPath($audio);
@@ -41,5 +38,10 @@ readonly class AudioStorage implements AudioStorageInterface
     private function targetPath(AudioReadModel $audio): string
     {
         return $this->audiosFolder . '/' . $audio->id;
+    }
+
+    public function removeAudioFile(AudioReadModel $audio): void
+    {
+        $this->localFileSystem->remove($this->targetPath($audio));
     }
 }

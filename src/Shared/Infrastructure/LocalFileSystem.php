@@ -6,7 +6,7 @@ use App\Shared\Application\File\LocalFileSystemInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 
-class LocalFileSystem implements LocalFileSystemInterface
+readonly class LocalFileSystem implements LocalFileSystemInterface
 {
     public function __construct(
         private Filesystem $filesystem
@@ -47,5 +47,10 @@ class LocalFileSystem implements LocalFileSystemInterface
                 yield $fileInfo->getRealPath();
             }
         }
+    }
+
+    public function remove(string $targetPath): void
+    {
+        $this->filesystem->remove($targetPath);
     }
 }
