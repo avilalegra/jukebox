@@ -4,6 +4,9 @@ namespace App\WebUI\Audio;
 
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Audio\Application\Interactor\AudioLibraryManagerInterface;
+use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
+use App\Player\Application\Player\AudioPlayingStarted;
+use App\Player\Application\Player\AudioPlayingStopped;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,8 +16,9 @@ class AudioController extends AbstractController
 {
 
     public function __construct(
-        private readonly AudioInfoProviderInterface   $audioInfoProvider,
-        private readonly AudioLibraryManagerInterface $audioLibraryManager
+        private readonly AudioInfoProviderInterface        $audioInfoProvider,
+        private readonly AudioLibraryManagerInterface      $audioLibraryManager,
+        private readonly PlayerStatusInfoProviderInterface $playerStatusInfoProvider,
     )
     {
     }
@@ -23,7 +27,12 @@ class AudioController extends AbstractController
     public function show(string $id): Response
     {
         $audio = $this->audioInfoProvider->findAudio($id);
-        return $this->render('audio/audio_details.html.twig', compact('audio'));
+        $status = $this->playerStatusInfoProvider->status();
+
+        return $this->render('audio/audio_details.html.twig', [
+            'audio' => $audio,
+            'status' => $status
+        ]);
     }
 
     #[Route('/{id}', name: 'delete', methods: ['delete'])]
@@ -35,3 +44,4 @@ class AudioController extends AbstractController
         return $this->redirectToRoute('audios.index');
     }
 }
+

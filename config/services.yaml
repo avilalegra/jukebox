@@ -35,6 +35,12 @@ services:
 
   Mhor\MediaInfo\MediaInfo: ~
 
+  jukebox.library:
+      class: 'App\Jukebox\Infrastructure\AudioLibraryManager'
+
+  App\Audio\Application\Interactor\AudioLibraryManagerInterface: '@jukebox.library'
+
+
   App\WebUI\PlayerController:
     tags:
       - { name: kernel.event_subscriber }

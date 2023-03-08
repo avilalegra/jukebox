@@ -1,4 +1,4 @@
-{% extends 'player_base.html.twig' %}
+{% extends '/player_base.html.twig' %}
 
 {% block contents %}
     <div class="audio-details">
@@ -40,17 +40,17 @@
         </form>
 
         <div class="btns-bar">
-            <form class="delete-btn" action="{{ path('audios.delete', {'id': audio.id}) }}"
-                  method="post"
-                    {{ stimulus_controller('ask-confirmation', {'promptMsg': '¿ Seguro que desea eliminar el audio ?'}) }}
-
-            >
+            <form {{ stimulus_controller('ask-confirmation', {'promptMsg': '¿ Seguro que desea eliminar el audio ?'}) }}
+                  action="{{ path('audios.delete', {'id': audio.id}) }}"
+                  method="post">
 
                 <input type="hidden" name="_method" value="delete">
-                <button class="_inv-button" type="submit">
+
+                <button class="delete-btn" type="submit" {{ status.isPlaying(audio) ? 'disabled' : '' }}>
                     <i class="fa-solid fa-trash"></i>
                     <span class="title">Eliminar</span>
                 </button>
+
             </form>
         </div>
     </div>

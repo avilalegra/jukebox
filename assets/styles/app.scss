@@ -95,17 +95,21 @@ ul {
 }
 
 .delete-btn {
-  background-color: red;
-  border-radius: 5px;
   padding: 10px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  border-radius: 5px;
 
-  * {
-    font-weight: 600;
-    color: white;
-  }
-
-  .title {
-    margin-left: 5px;
+  &:not([disabled]) {
+    background: red;
+    cursor: pointer;
   }
 }
+
+.title {
+  margin-left: 5px;
+}
+
+
 
