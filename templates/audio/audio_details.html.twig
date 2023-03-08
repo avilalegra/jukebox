@@ -3,37 +3,37 @@
 {% block contents %}
     <div class="audio-details">
         <form class="details-form" action="">
-            <div class="form-input">
-                <label class="input-label -up" for="audio-title">Título</label>
-                <input id="audio-title" class="text-input" type="text" value="{{ audio.title }}" readonly>
-            </div>
+                <div class="form-input">
+                    <label class="input-label -up" for="audio-title">Título</label>
+                    <input id="audio-title" class="text-input" type="text" value="{{ audio.title }}" readonly>
+                </div>
 
-            <div class="form-input">
-                <label class="input-label -up" for="audio-album">Album</label>
-                <input id="audio-album" class="text-input" type="text" value="{{ audio.album }}" readonly>
-            </div>
+                <div class="form-input">
+                    <label class="input-label -up" for="audio-album">Album</label>
+                    <input id="audio-album" class="text-input" type="text" value="{{ audio.album }}" readonly>
+                </div>
 
-            <div class="form-input">
-                <label class="input-label -up" for="audio-genre">Género</label>
-                <input id="audio-genre" class="text-input" type="text" value="{{ audio.genre }}" readonly>
-            </div>
+                <div class="form-input">
+                    <label class="input-label -up" for="audio-genre">Género</label>
+                    <input id="audio-genre" class="text-input" type="text" value="{{ audio.genre }}" readonly>
+                </div>
 
-            <div class="form-input">
-                <label class="input-label -up" for="audio-year">Año</label>
-                <input id="audio-year" class="text-input" type="text" value="{{ audio.year }}" readonly>
-            </div>
+                <div class="form-input">
+                    <label class="input-label -up" for="audio-year">Año</label>
+                    <input id="audio-year" class="text-input" type="text" value="{{ audio.year }}" readonly>
+                </div>
 
-            <div class="form-input">
-                <label class="input-label -up" for="audio-artist">Artista</label>
-                <input id="audio-artist" class="text-input" type="text" value="{{ audio.artist }}" readonly>
-            </div>
+                <div class="form-input">
+                    <label class="input-label -up" for="audio-artist">Artista</label>
+                    <input id="audio-artist" class="text-input" type="text" value="{{ audio.artist }}" readonly>
+                </div>
 
-            <div class="form-input">
-                <label class="input-label -up" for="audio-duration">Duración</label>
-                <input id="audio-duration" class="text-input" type="text" value="{{ audio.duration }}" readonly>
-            </div>
+                <div class="form-input">
+                    <label class="input-label -up" for="audio-duration">Duración</label>
+                    <input id="audio-duration" class="text-input" type="text" value="{{ audio.duration }}" readonly>
+                </div>
 
-            <div class="form-input">
+            <div class="form-input lyrics">
                 <label class="input-label -up" for="audio-lyrics">Lyrics</label>
                 <textarea id="audio-lyrics" class="text-input" rows="12" readonly>{{ audio.lyrics }}</textarea>
             </div>
@@ -41,8 +41,8 @@
 
         <div class="btns-bar">
             <form {{ stimulus_controller('ask-confirmation', {'promptMsg': '¿ Seguro que desea eliminar el audio ?'}) }}
-                  action="{{ path('audios.delete', {'id': audio.id}) }}"
-                  method="post">
+                    action="{{ path('audios.delete', {'id': audio.id}) }}"
+                    method="post">
 
                 <input type="hidden" name="_method" value="delete">
 
