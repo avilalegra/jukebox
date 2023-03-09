@@ -12,34 +12,37 @@
                 {% include 'pagination/pagination_bar.html.twig' %}
             </div>
         </div>
-        <table class="audio-list">
-            <tr>
-                {{ _self.sortableHeader('Titulo', 'title', pagination.params.order) }}
-                {{ _self.sortableHeader('Artista', 'artist', pagination.params.order) }}
-                {{ _self.sortableHeader('Album', 'album',pagination.params.order) }}
-                {{ _self.sortableHeader('Año', 'year', pagination.params.order) }}
-                {{ _self.sortableHeader('Género', 'genre', pagination.params.order) }}
-                {{ _self.sortableHeader('Duración', 'duration', pagination.params.order) }}
 
-            </tr>
-            {% for audio in pagination.pageResults %}
+        <div class="audio-list">
+            <table>
                 <tr>
-                    <td class="audio-title">
-                        {% include 'play_preview.html.twig' %}
-                        <span class="title">
+                    {{ _self.sortableHeader('Titulo', 'title', pagination.params.order) }}
+                    {{ _self.sortableHeader('Artista', 'artist', pagination.params.order) }}
+                    {{ _self.sortableHeader('Album', 'album',pagination.params.order) }}
+                    {{ _self.sortableHeader('Año', 'year', pagination.params.order) }}
+                    {{ _self.sortableHeader('Género', 'genre', pagination.params.order) }}
+                    {{ _self.sortableHeader('Duración', 'duration', pagination.params.order) }}
+
+                </tr>
+                {% for audio in pagination.pageResults %}
+                    <tr>
+                        <td class="audio-title">
+                            {% include 'play_preview.html.twig' %}
+                            <span class="title">
                             <a href="{{ path('audios.show', {'id': audio.id}) }}"> {{ audio.title }} </a>
                         </span>
 
-                        {% include 'audio/queue_actions.html.twig' with {'queued': playerStatus.hasQueuedAudio(audio)} %}
-                    </td>
-                    <td class="audio-artist">{{ audio.artist }}</td>
-                    <td class="audio-album">{{ audio.album }}</td>
-                    <td class="audio-year">{{ audio.year | date('Y') }}</td>
-                    <td class="audio-genre">{{ audio.genre }}</td>
-                    <td class="audio-duration">{{ audio.duration |date('i:s') }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+                            {% include 'audio/queue_actions.html.twig' with {'queued': playerStatus.hasQueuedAudio(audio)} %}
+                        </td>
+                        <td class="audio-artist">{{ audio.artist }}</td>
+                        <td class="audio-album">{{ audio.album }}</td>
+                        <td class="audio-year">{{ audio.year | date('Y') }}</td>
+                        <td class="audio-genre">{{ audio.genre }}</td>
+                        <td class="audio-duration">{{ audio.duration |date('i:s') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}
 
