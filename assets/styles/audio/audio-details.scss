@@ -33,6 +33,13 @@
     width: 100%;
     padding-left: 15px;
     padding-right: 15px;
+
+    .delete-btn.-playing,
+    .delete-btn.-lastplayed {
+      background-color: gray;
+      opacity: 0.8;
+      pointer-events: none;
+    }
   }
 
 
@@ -43,17 +50,6 @@
       column-gap: 10px;
       grid-template-columns: 1fr 1fr;
       grid-auto-flow: row dense;
-    }
-
-    .area-c1 {
-      grid-area: c1;
-    }
-
-    .area-c2 {
-      grid-area: c2;
-    }
-
-    .form-input {
     }
 
     .form-input.lyrics {
