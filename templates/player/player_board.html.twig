@@ -1,9 +1,6 @@
-<div id="player-board"
-     class="player-board"
-        {{ turbo_stream_listen('player-board') }}>
-
+<div id="player-board" class="player-board">
     {% set isRunning = nowPlaying is null ? 0 : 1 %}
-    {% set subjectAudio = isRunning ? nowPlaying : lastPlayed %}
+    {% set subjectAudio = isRunning ? nowPlaying.audio : lastPlayed %}
 
     {% if subjectAudio is not null %}
         <img class="album-image" src="{{ asset('storage/covers/' ~ albumCover(subjectAudio.album)) }}">
@@ -11,16 +8,29 @@
 
     <ul class="audios-list">
         {% for audio in queuedAudios %}
-            {% set activeAudio = audio.id in [nowPlaying.id|default(null), lastPlayed.id|default(null)] %}
+            {% set isActiveAudio = (audio.id == subjectAudio.id | default(null)) %}
             <li>
-                <form action="{{ path('player.play.audio', {'id': audio.id}) }}" method="post">
-                    <button id="{{ audio.id }}" type="submit"
-                            class="audio _inv-button {{ activeAudio ? '-active' : '' }}">
-                        <div class="marker"></div>
-                        <span class="material-symbols-outlined icon"> equalizer </span>
-                        <span class="title"> {{ audio.title }} </span>
-                    </button>
-                </form>
+                <div class="audio {{ isActiveAudio ? '-active' : '' }}">
+                    <div class="marker"></div>
+
+                    {% if audio.id == nowPlaying.audio.id|default(null) %}
+                        <form action="{{ path('player.stop') }}" method="post">
+                            <button id="{{ audio.id }}" type="submit" class="_inv-button">
+                                <i class="fa-regular fa-circle-stop fa-2xl icon"></i>
+                            </button>
+                        </form>
+                    {% else %}
+                        <form action="{{ path('player.play.audio', {'id': audio.id}) }}" method="post">
+                            <button id="{{ audio.id }}" type="submit" class="_inv-button">
+                                <i class="fa-regular fa-circle-play fa-2xl icon"></i>
+                            </button>
+                        </form>
+                    {% endif %}
+
+                    <span class="title">
+                            <a href="{{ path('audios.show', {'id': audio.id}) }}"> {{ audio.title }} </a>
+                     </span>
+                </div>
             </li>
 
             {% if not loop.last %}

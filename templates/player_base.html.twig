@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="jukebox-player"
-            {{ stimulus_controller('navbar') }}
-            {{ stimulus_target('navbar', 'jukebox') }}>
+    <div {{ turbo_stream_listen('player-status') }}>
+        <div class="jukebox-player"
+                {{ stimulus_controller('navbar') }}
+                {{ stimulus_target('navbar', 'jukebox') }} >
 
-        {% include 'navbar.html.twig' %}
-        {% include 'jukebox/player_shortcut.html.twig' %}
 
-        <section class="contents-section">
-            {% block contents %} {% endblock %}
-        </section>
+            {% include 'navbar.html.twig' %}
+            {% include 'jukebox/player_shortcut.html.twig' %}
 
-        {{ render(path('player.bar')) }}
+            <section class="contents-section">
+                {% block contents %} {% endblock %}
+            </section>
+
+            {{ render(path('player.bar')) }}
+        </div>
     </div>
 
 {% endblock %}

@@ -1,61 +1,56 @@
-<div {{ turbo_stream_listen('player-bar') }}>
-
+<div id="player-bar" class="player-bar" {{ stimulus_controller('adaptative-bg') }}>
     {% set isRunning = nowPlaying is null ? 0 : 1 %}
     {% set subjectAudio = isRunning ? nowPlaying.audio : lastPlayed %}
 
-    <div id="player-bar" class="player-bar" {{ stimulus_controller('adaptative-bg') }}>
-
-        {% if nowPlaying != null %}
-            <form action="{{ path('player.stop') }}" method="post">
-                <button type="submit" class="play-action _inv-button">
-                    <i class="fa-regular fa-circle-stop fa-2xl"></i>
-                </button>
-            </form>
-        {% elseif  lastPlayed != null %}
-            <form action="{{ path('player.play.audio', {'id': lastPlayed.id }) }}" method="post">
-                <button type="submit" class="play-action _inv-button">
-                    <i class="fa-regular fa-circle-play fa-2xl"></i>
-                </button>
-            </form>
-        {% else %}
-            <i class="play-action fa-solid fa-music fa-xl"></i>
-        {% endif %}
+    {% if nowPlaying != null %}
+        <form action="{{ path('player.stop') }}" method="post">
+            <button type="submit" class="play-action _inv-button">
+                <i class="fa-regular fa-circle-stop fa-2xl"></i>
+            </button>
+        </form>
+    {% elseif  lastPlayed != null %}
+        <form action="{{ path('player.play.audio', {'id': lastPlayed.id }) }}" method="post">
+            <button type="submit" class="play-action _inv-button">
+                <i class="fa-regular fa-circle-play fa-2xl"></i>
+            </button>
+        </form>
+    {% else %}
+        <i class="play-action fa-solid fa-music fa-xl"></i>
+    {% endif %}
 
 
-        <div class="center-block">
-            <p class="audio-title">{{ subjectAudio.title | default('') }}</p>
+    <div class="center-block">
+        <p class="audio-title">{{ subjectAudio.title | default('') }}</p>
 
 
-            <div class="playing-progress"
-                    {{ stimulus_controller('player-progress',
-                        {
-                            'isRunning': isRunning,
-                            'elapsedTime': date().format('U') - (nowPlaying.startedAt | default(0)),
-                            'totalTime': nowPlaying.audio.duration | default(0) }) }}>
+        <div class="playing-progress"
+                {{ stimulus_controller('player-progress',
+                    {
+                        'isRunning': isRunning,
+                        'elapsedTime': date().format('U') - (nowPlaying.startedAt | default(0)),
+                        'totalTime': nowPlaying.audio.duration | default(0) }) }}>
 
-                <div class="progress-bar" {{ stimulus_target('player-progress', 'progressBar') }} >
-                    <div class="played" {{ stimulus_target('player-progress', 'played') }}>
-                        <div class="position"></div>
-                    </div>
-                    <div class="remain"></div>
+            <div class="progress-bar" {{ stimulus_target('player-progress', 'progressBar') }} >
+                <div class="played" {{ stimulus_target('player-progress', 'played') }}>
+                    <div class="position"></div>
                 </div>
+                <div class="remain"></div>
+            </div>
 
-                <div class="progress-time">
+            <div class="progress-time">
                 <span {{ stimulus_target('player-progress', 'elapsed') }}>
                     {{ 0 | date('i:s') }}
                 </span>
-                    <span {{ stimulus_target('player-progress', 'remain') }} >
+                <span {{ stimulus_target('player-progress', 'remain') }} >
                     {{ subjectAudio.duration | default(0) | date('i:s') }}
                 </span>
-                </div>
             </div>
-
         </div>
 
-        {% if subjectAudio is not null %}
-            <img class="album-image" src="{{ asset('storage/covers/' ~ albumCover(subjectAudio.album)) }}"
-                 alt="" {{ stimulus_target('adaptative-bg', 'image') }}>
-        {% endif %}
-
     </div>
+
+    {% if subjectAudio is not null %}
+        <img class="album-image" src="{{ asset('storage/covers/' ~ albumCover(subjectAudio.album)) }}"
+             alt="" {{ stimulus_target('adaptative-bg', 'image') }}>
+    {% endif %}
 </div>
