@@ -35,10 +35,10 @@ class PaginationExtension extends AbstractExtension
         ];
     }
 
-    public function currentRouteWithParam(string $param, $value): string
+    public function currentRouteWithParam(array $paramValues): string
     {
         $route = $this->request->attributes->get('_route');
-        $queryParams = array_merge($this->request->query->all(), [$param => $value]);
+        $queryParams = array_merge($this->request->query->all(), $paramValues);
 
         return $this->router->generate($route, $queryParams);
     }
