@@ -1,4 +1,7 @@
-<div id="playlist-actions-{{ audio.id }}" class="playlist-actions">
+<div id="playlist-actions-{{ audio.id }}"
+     class="playlist-actions"
+        {{ stimulus_controller('active-audio-class', {'audioId': audio.id}) }} >
+
     {% if queued %}
         <form action="{{ path('audios.removeFromPlayingQueue', {'id': audio.id}) }}" method="POST">
             <input type="hidden" name="_method" value="delete">

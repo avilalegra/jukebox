@@ -30,9 +30,7 @@
                             <a href="{{ path('audios.show', {'id': audio.id}) }}"> {{ audio.title }} </a>
                         </span>
 
-                        {% if not playerStatus.isPlaying(audio) %}
-                            {% include 'audio/queue_actions.html.twig' with {'queued': playerStatus.hasQueuedAudio(audio)} %}
-                        {% endif %}
+                        {% include 'audio/queue_actions.html.twig' with {'queued': playerStatus.hasQueuedAudio(audio)} %}
                     </td>
                     <td class="audio-artist">{{ audio.artist }}</td>
                     <td class="audio-album">{{ audio.album }}</td>
