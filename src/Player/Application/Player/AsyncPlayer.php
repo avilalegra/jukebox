@@ -2,43 +2,41 @@
 
 declare(strict_types=1);
 
-namespace App\Player\Infrastructure;
+namespace App\Player\Application\Player;
 
-use App\Player\Application\Player\AsyncPlayerInterface;
-use App\Player\Application\Player\Player;
+use App\Album\Domain\Album;
+use App\Audio\Domain\AudioReadModel;
+use App\Player\Application\Interactor\PlayerInterface;
 use App\Player\Infrastructure\OSProcess\OSProcessManager;
 
 
-class AsyncPlayer implements AsyncPlayerInterface
+class AsyncPlayer implements PlayerInterface
 {
     private string $pidFilePath;
 
-
     public function __construct(
         private readonly string           $projectDir,
-        private readonly Player           $player,
+        private readonly SyncPlayer       $player,
         private readonly OSProcessManager $processManager
     )
     {
         $this->pidFilePath = $this->projectDir . '/player.pid';
     }
 
-    public function playQueueAsync(): void
+    public function playAudio(AudioReadModel $audio): void
+    {
+        $this->executePlayCommandAsync(['play-audio', $audio->id]);
+    }
+
+    public function playQueue(): void
     {
         $this->executePlayCommandAsync(['play-queue']);
     }
 
 
-    public function playAudioAsync(string $audioId): void
+    public function playAlbum(Album $album): void
     {
-        $this->executePlayCommandAsync(['play-audio', $audioId]);
-    }
-
-    private function executePlayCommandAsync(array $args): void
-    {
-        $this->stop();
-        $pid = $this->processManager->runAsync(['php', "{$this->projectDir}/bin/console", 'app:player', ...$args]);
-        $this->saveProcessPid($pid);
+        $this->executePlayCommandAsync(['play-album', $album->name]);
     }
 
     public function stop(): void
@@ -50,6 +48,14 @@ class AsyncPlayer implements AsyncPlayerInterface
         $this->processManager->kill($pid);
         $this->player->stop();
         unlink($this->pidFilePath);
+    }
+
+
+    private function executePlayCommandAsync(array $args): void
+    {
+        $this->stop();
+        $pid = $this->processManager->runAsync(['php', "{$this->projectDir}/bin/console", 'app:player', ...$args]);
+        $this->saveProcessPid($pid);
     }
 
     private function getActiveProcessPid(): ?int

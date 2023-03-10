@@ -6,6 +6,7 @@ namespace App\Album\Application\Interactor;
 
 
 use App\Album\Application\AlbumInfo;
+use App\Album\Domain\Album;
 use App\Audio\Domain\AudioReadModel;
 
 interface AlbumInfoProviderInterface
@@ -15,8 +16,5 @@ interface AlbumInfoProviderInterface
      */
     public function albums(): array;
 
-    /**
-     * @return array<AudioReadModel>
-     */
-    public function findAlbumAudios(string $albumName) : array;
+    public function findAlbum(string $albumName) : Album;
 }

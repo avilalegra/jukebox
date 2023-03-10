@@ -36,10 +36,14 @@ services:
   Mhor\MediaInfo\MediaInfo: ~
 
   jukebox.library:
-      class: 'App\Jukebox\Infrastructure\AudioLibraryManager'
+    class: 'App\Jukebox\Infrastructure\AudioLibraryManager'
+
+  player.async:
+    class: 'App\Player\Application\Player\AsyncPlayer'
+
+  App\Player\Application\Interactor\PlayerInterface: '@player.async'
 
   App\Audio\Application\Interactor\AudioLibraryManagerInterface: '@jukebox.library'
-
 
   App\WebUI\PlayerController:
     tags:

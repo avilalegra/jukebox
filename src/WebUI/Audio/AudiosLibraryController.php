@@ -31,7 +31,7 @@ class AudiosLibraryController extends AbstractController
     public function index(Request $request): Response
     {
 
-        $status = $this->statusInfoProvider->status();
+        $status = $this->statusInfoProvider->playerStatus();
         $paginationResults = $this->audioInfoProvider->paginateAudios($this->parsePaginationParams($request));
         $nowPlaying = $status->audioPlayingStatus->currentPlayingAudio?->audio;
 
@@ -49,7 +49,7 @@ class AudiosLibraryController extends AbstractController
     public function addToPlayingQueue(string $id, Request $request): Response
     {
         $audio = $this->audioInfoProvider->findAudio($id);
-        $this->playerQueue->add($audio);
+        $this->playerQueue->addToQueue($audio);
 
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
@@ -67,7 +67,7 @@ class AudiosLibraryController extends AbstractController
     public function removeFromPlayingQueue(string $id, Request $request): Response
     {
         $audio = $this->audioInfoProvider->findAudio($id);
-        $this->playerQueue->remove($audio);
+        $this->playerQueue->removeFromQueue($audio);
 
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);

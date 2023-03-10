@@ -7,11 +7,12 @@ namespace App\Album\Infrastructure;
 use App\Album\Application\AlbumInfo;
 use App\Album\Application\CoverStorageInterface;
 use App\Album\Application\Interactor\AlbumInfoProviderInterface;
+use App\Album\Domain\Album;
 use App\Audio\Domain\AudioEntity;
 use Doctrine\ORM\EntityManagerInterface;
 
 
-class AlbumInfoProvider implements AlbumInfoProviderInterface
+readonly class AlbumInfoProvider implements AlbumInfoProviderInterface
 {
 
     public function __construct(
@@ -40,10 +41,8 @@ class AlbumInfoProvider implements AlbumInfoProviderInterface
         );
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function findAlbumAudios(string $albumName): array
+
+    public function findAlbum(string $albumName): Album
     {
         $qb = $this->em
             ->createQueryBuilder()
@@ -53,11 +52,11 @@ class AlbumInfoProvider implements AlbumInfoProviderInterface
             ->setParameter('album', $albumName)
             ->distinct();
 
-        $results = $qb->getQuery()->getResult();
-
-        return array_map(
+        $albumAudios = array_map(
             fn(AudioEntity $audio) => $audio->readModel(),
-            $results
+            $qb->getQuery()->getResult()
         );
+
+        return new Album($albumName, $albumAudios);
     }
 }

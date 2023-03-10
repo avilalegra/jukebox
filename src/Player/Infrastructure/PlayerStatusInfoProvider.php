@@ -18,7 +18,7 @@ readonly class PlayerStatusInfoProvider implements PlayerStatusInfoProviderInter
     {
     }
 
-    public function status(): PlayerStatus
+    public function playerStatus(): PlayerStatus
     {
         return new PlayerStatus(
             audioPlayingStatus: $this->playingStatusRepository->status(),

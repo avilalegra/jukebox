@@ -6,9 +6,9 @@ use App\Audio\Domain\AudioReadModel;
 
 interface PlayerQueueManagerInterface
 {
-    public function clear(): void;
+    public function clearQueue(): void;
 
-    public function add(AudioReadModel ...$audios): void;
+    public function addToQueue(AudioReadModel ...$audios): void;
 
-    public function remove(AudioReadModel $audio): void;
+    public function removeFromQueue(AudioReadModel $audio): void;
 }

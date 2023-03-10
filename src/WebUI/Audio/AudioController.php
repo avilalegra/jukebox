@@ -27,7 +27,7 @@ class AudioController extends AbstractController
     public function show(string $id): Response
     {
         $audio = $this->audioInfoProvider->findAudio($id);
-        $status = $this->playerStatusInfoProvider->status();
+        $status = $this->playerStatusInfoProvider->playerStatus();
 
         return $this->render('audio/audio_details.html.twig', [
             'audio' => $audio,

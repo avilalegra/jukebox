@@ -20,17 +20,17 @@ class PlayerQueueManager implements PlayerQueueManagerInterface
         $this->mainPlaylistManager = $managerFactory->playlistManager(self::PLAYER_QUEUE_PLAYLIST_ID);
     }
 
-    public function clear(): void
+    public function clearQueue(): void
     {
         $this->mainPlaylistManager->clear();
     }
 
-    public function add(AudioReadModel ...$audios): void
+    public function addToQueue(AudioReadModel ...$audios): void
     {
         $this->mainPlaylistManager->add(...$audios);
     }
 
-    public function remove(AudioReadModel $audio): void
+    public function removeFromQueue(AudioReadModel $audio): void
     {
         $this->mainPlaylistManager->remove($audio);
     }

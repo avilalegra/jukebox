@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\WebUI;
 
-use App\Player\Application\Interactor\JukeboxPlayerInterface;
+use App\Album\Application\Interactor\AlbumInfoProviderInterface;
+use App\Audio\Application\Interactor\AudioInfoProviderInterface;
+use App\Player\Application\Interactor\PlayerInterface;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Player\Application\Player\AudioPlayingStarted;
 use App\Player\Application\Player\AudioPlayingStopped;
@@ -22,8 +24,10 @@ class PlayerController extends AbstractController implements EventSubscriberInte
 {
     public function __construct(
         private readonly HubInterface                      $mercureHub,
-        private readonly JukeboxPlayerInterface            $player,
-        private readonly PlayerStatusInfoProviderInterface $playerStatusInfoProvider
+        private readonly PlayerInterface                   $player,
+        private readonly PlayerStatusInfoProviderInterface $statusInfoProvider,
+        private readonly AudioInfoProviderInterface        $audioInfoProvider,
+        private readonly AlbumInfoProviderInterface        $albumInfoProvider
     )
     {
     }
@@ -40,7 +44,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     #[Route('/', name: 'index')]
     public function playerIndex(): Response
     {
-        $status = $this->playerStatusInfoProvider->status();
+        $status = $this->statusInfoProvider->playerStatus();
 
         return $this->render('player/player.html.twig',
             [
@@ -54,7 +58,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     #[Route('/bar', name: 'bar')]
     public function playerBar(): Response
     {
-        $status = $this->playerStatusInfoProvider->status();
+        $status = $this->statusInfoProvider->playerStatus();
 
         return $this->render('player/player_bar.html.twig',
             [
@@ -81,7 +85,8 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     #[Route('/audios/{id}', name: 'play.audio', methods: ['post'])]
     public function playAudio(string $id, Request $request): Response
     {
-        $this->player->playAudio($id);
+        $audio = $this->audioInfoProvider->findAudio($id);
+        $this->player->playAudio($audio);
 
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
@@ -95,13 +100,14 @@ class PlayerController extends AbstractController implements EventSubscriberInte
     #[Route('/album/{name}', name: 'play.album', methods: ['POST'])]
     public function playAlbum(string $name): Response
     {
-        $this->player->playAlbum($name);
+        $album = $this->albumInfoProvider->findAlbum($name);
+        $this->player->playAlbum($album);
         return $this->redirectToRoute('player.index');
     }
 
     public function onPlayerStatusChanged(AudioPlayingStarted|AudioPlayingStopped $_)
     {
-        $status = $this->playerStatusInfoProvider->status();
+        $status = $this->statusInfoProvider->playerStatus();
 
         $this->mercureHub->publish(new Update('player-status',
             $this->renderView('/player/player_stream.html.twig',

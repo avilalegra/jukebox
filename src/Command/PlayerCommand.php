@@ -2,9 +2,9 @@
 
 namespace App\Command;
 
+use App\Album\Application\Interactor\AlbumInfoProviderInterface;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
-use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
-use App\Player\Application\Player\Player;
+use App\Player\Application\Player\SyncPlayer;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,9 +18,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PlayerCommand extends Command
 {
     public function __construct(
-        private readonly Player                            $player,
-        private readonly AudioInfoProviderInterface        $audioBrowser,
-        private readonly PlayerStatusInfoProviderInterface $statusInfoProvider
+        private readonly SyncPlayer                 $player,
+        private readonly AudioInfoProviderInterface $audioInfoProvider,
+        private readonly AlbumInfoProviderInterface $albumInfoProvider
     )
     {
         parent::__construct();
@@ -29,7 +29,7 @@ class PlayerCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('action', InputArgument::REQUIRED, 'play-audio|play-queue')
+            ->addArgument('action', InputArgument::REQUIRED, 'play-audio|play-album|play-queue')
             ->addArgument('id', InputArgument::OPTIONAL, 'audio id');
     }
 
@@ -40,10 +40,10 @@ class PlayerCommand extends Command
         try {
             match ($input->getArgument('action')) {
                 'play-audio' => $this->playAudio($id),
+                'play-album' => $this->playAlbum($id),
                 'play-queue' => $this->playQueue()
             };
         } catch (\Throwable $t) {
-            dd($t);
             return Command::FAILURE;
         }
 
@@ -52,13 +52,18 @@ class PlayerCommand extends Command
 
     private function playAudio(string $audioId): void
     {
-        $audio = $this->audioBrowser->findAudio($audioId);
+        $audio = $this->audioInfoProvider->findAudio($audioId);
         $this->player->playAudio($audio);
+    }
+
+    private function playAlbum(string $albumName): void
+    {
+        $album = $this->albumInfoProvider->findAlbum($albumName);
+        $this->player->playAlbum($album);
     }
 
     private function playQueue(): void
     {
-        $queuedAudios = $this->statusInfoProvider->status()->queuedAudios;
-        $this->player->playAll(...$queuedAudios);
+        $this->player->playQueue();
     }
 }

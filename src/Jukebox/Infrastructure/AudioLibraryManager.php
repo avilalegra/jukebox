@@ -19,7 +19,7 @@ readonly class AudioLibraryManager implements AudioLibraryManagerInterface
 
     public function removeAudio(AudioReadModel $audio): void
     {
-        $status = $this->playerStatusInfoProvider->status();
+        $status = $this->playerStatusInfoProvider->playerStatus();
         if ($status->isPlaying($audio)) {
             throw new \Exception("can't remove an audio while it's being played");
         }

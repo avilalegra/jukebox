@@ -6,5 +6,5 @@ use App\Player\Application\Player\Status\PlayerStatus;
 
 interface PlayerStatusInfoProviderInterface
 {
-    public function status() : PlayerStatus;
+    public function playerStatus() : PlayerStatus;
 }
