@@ -4,7 +4,7 @@ namespace App\Player\Infrastructure\OSProcess;
 
 use Symfony\Component\Process\Process;
 
-class OSProcessManager implements OSProcessManagerInterface
+class OSProcessManager
 {
     /**
      * @inheritDoc

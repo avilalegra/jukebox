@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Audio\Infrastructure;
+namespace App\Audio\Application;
 
-use App\Audio\Application\AudioEntityRepositoryInterface;
-use App\Audio\Application\AudioFile\AudioStorageInterface;
+use App\Audio\Application\AudioFile\AudioStorage;
 use App\Audio\Application\Import\AudioImporter;
 use App\Audio\Application\Import\AudiosImportResult;
 use App\Audio\Application\Interactor\AudioLibraryManagerInterface;
+use App\Audio\Application\Interactor\AudioStorageInterface;
 use App\Audio\Domain\AudioReadModel;
 
 readonly class AudioLibraryManager implements AudioLibraryManagerInterface
@@ -14,7 +14,7 @@ readonly class AudioLibraryManager implements AudioLibraryManagerInterface
 
     public function __construct(
         private AudioEntityRepositoryInterface $audioRepository,
-        private AudioStorageInterface          $audioStorage,
+        private AudioStorage                   $audioStorage,
         private AudioImporter                  $audioImporter
     )
     {

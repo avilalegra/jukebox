@@ -2,10 +2,10 @@
 
 namespace App\Jukebox\Infrastructure;
 
+use App\Audio\Application\AudioLibraryManager as ALManager;
 use App\Audio\Application\Import\AudiosImportResult;
 use App\Audio\Application\Interactor\AudioLibraryManagerInterface;
 use App\Audio\Domain\AudioReadModel;
-use App\Audio\Infrastructure\AudioLibraryManager as ALManager;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 
 readonly class AudioLibraryManager implements AudioLibraryManagerInterface

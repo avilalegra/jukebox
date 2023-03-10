@@ -3,16 +3,17 @@
 namespace App\Audio\Application\Import;
 
 use App\Audio\Application\AudioEntityRepositoryInterface;
+use App\Audio\Application\AudioFile\AudioStorage;
 use App\Audio\Application\GuidGeneratorInterface;
+use App\Audio\Application\Interactor\AudioStorageInterface;
 use App\Audio\Application\Metadata\AudioMetadataExtractorInterface;
-use App\Audio\Application\AudioFile\AudioStorageInterface;
 use App\Audio\Domain\AudioEntity;
 
 readonly class SingleAudioImporter
 {
     public function __construct(
         private GuidGeneratorInterface          $guidGenerator,
-        private AudioStorageInterface           $audioStorage,
+        private AudioStorage                    $audioStorage,
         private AudioMetadataExtractorInterface $metadataExtractor,
         private AudioEntityRepositoryInterface  $audioRepository
     )

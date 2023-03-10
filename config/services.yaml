@@ -39,7 +39,7 @@ services:
     class: 'App\Jukebox\Infrastructure\AudioLibraryManager'
 
   player.async:
-    class: 'App\Player\Application\Player\AsyncPlayer'
+    class: 'App\Player\Infrastructure\AsyncPlayer'
 
   App\Player\Application\Interactor\PlayerInterface: '@player.async'
 

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Audio\Infrastructure;
+namespace App\Audio\Application\AudioFile;
 
-use App\Audio\Application\AudioFile\AudioFileNotFoundException;
-use App\Audio\Application\AudioFile\AudioStorageInterface;
+use App\Audio\Application\Interactor\AudioStorageInterface;
 use App\Audio\Domain\AudioFile;
 use App\Audio\Domain\AudioReadModel;
 use App\Shared\Application\File\LocalFileSystemInterface;

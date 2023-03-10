@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Player\Application\Player;
+namespace App\Player\Infrastructure;
 
 use App\Album\Domain\Album;
 use App\Audio\Domain\AudioReadModel;
 use App\Player\Application\Interactor\PlayerInterface;
+use App\Player\Application\Player\SyncPlayer;
 use App\Player\Infrastructure\OSProcess\OSProcessManager;
 
 
