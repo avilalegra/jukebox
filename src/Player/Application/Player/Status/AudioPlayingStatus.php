@@ -20,15 +20,6 @@ readonly class AudioPlayingStatus implements \JsonSerializable
         return new AudioPlayingStatus(null, null);
     }
 
-    public function playingTransition(AudioReadModel $audio, int $startedAt): self
-    {
-        return new AudioPlayingStatus(new CurrentPlayingAudioStatus($audio, $startedAt), $this->currentPlayingAudio?->audio);
-    }
-
-    public function stopTransition(): self
-    {
-        return new AudioPlayingStatus(null, $this->currentPlayingAudio?->audio);
-    }
     public function isPlaying(AudioReadModel $audio): bool
     {
         return $audio->equals($this->currentPlayingAudio?->audio);
