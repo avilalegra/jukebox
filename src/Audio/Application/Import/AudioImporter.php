@@ -3,10 +3,9 @@
 namespace App\Audio\Application\Import;
 
 
-use App\Audio\Application\Interactor\AudioImporterInterface;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
-readonly class AudioImporter implements AudioImporterInterface
+readonly class AudioImporter
 {
 
     public function __construct(
