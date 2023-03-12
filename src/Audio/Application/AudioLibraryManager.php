@@ -4,9 +4,10 @@ namespace App\Audio\Application;
 
 use App\Audio\Application\AudioFile\AudioStorage;
 use App\Audio\Application\Import\AudioImporter;
+use App\Audio\Application\Import\AudioImportError;
 use App\Audio\Application\Import\AudiosImportResult;
+use App\Audio\Application\Import\AudiosSourceInterface;
 use App\Audio\Application\Interactor\AudioLibraryManagerInterface;
-use App\Audio\Application\Interactor\AudioStorageInterface;
 use App\Audio\Domain\AudioReadModel;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 
@@ -14,9 +15,9 @@ readonly class AudioLibraryManager implements AudioLibraryManagerInterface
 {
 
     public function __construct(
-        private AudioEntityRepositoryInterface $audioRepository,
-        private AudioStorage                   $audioStorage,
-        private AudioImporter                  $audioImporter,
+        private AudioEntityRepositoryInterface    $audioRepository,
+        private AudioStorage                      $audioStorage,
+        private AudioImporter                     $audioImporter,
         private PlayerStatusInfoProviderInterface $playerStatusInfoProvider,
     )
     {
@@ -34,8 +35,17 @@ readonly class AudioLibraryManager implements AudioLibraryManagerInterface
         throw new \Exception("can't remove an audio while it's being played");
     }
 
-    public function importAudios(string $filePath): AudiosImportResult
+    public function importAudios(AudiosSourceInterface $audiosSource): AudiosImportResult
     {
-        return $this->audioImporter->import($filePath);
+        $errors = [];
+        foreach ($audiosSource->audioFilePaths() as $audioFilePath) {
+            try {
+                $this->audioImporter->importAudio($audioFilePath);
+            } catch (\Throwable $e) {
+                $errors[] = new AudioImportError($audioFilePath, $e->getTraceAsString());
+            }
+        }
+
+        return AudiosImportResult::withErrors(...$errors);
     }
 }

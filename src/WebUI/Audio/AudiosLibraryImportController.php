@@ -3,6 +3,9 @@
 namespace App\WebUI\Audio;
 
 use App\Audio\Application\Interactor\AudioLibraryManagerInterface;
+use App\Audio\Infrastructure\ListAudioSource;
+use App\Audio\Infrastructure\LocalArchiveAudioSourceFactory;
+use App\Audio\Infrastructure\ZipAudioSource;
 use App\Form\AudioImportSourceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -21,7 +24,7 @@ class AudiosLibraryImportController extends AbstractController
     }
 
     #[Route('/import', name: 'import', methods: ['get', 'post'])]
-    public function uploadAudios(Request $request): Response
+    public function uploadAudios(Request $request, LocalArchiveAudioSourceFactory $audioSourceFactory): Response
     {
         $form = ($this->createFormBuilder())
             ->add('file', AudioImportSourceType::class)
@@ -35,7 +38,8 @@ class AudiosLibraryImportController extends AbstractController
             $file = $form->get('file')->getData();
             $file = $file->move('/tmp', $file->getClientOriginalName());
 
-            $importResult = $this->audioLibraryManager->importAudios($file->getRealPath());
+            $importResult = $this->audioLibraryManager
+                ->importAudios($audioSourceFactory->makeSource($file->getRealPath()));
 
             if ($importResult->ok()) {
                 return $this->redirectToRoute('audios.index');

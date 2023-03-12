@@ -4,22 +4,27 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure;
 
-use App\Shared\Application\File\ZipExtractorInterface;
 
-
-class ZipExtractor implements ZipExtractorInterface
+class ZipExtractor
 {
-
     public function extract(string $zipFilePath, string $destination): void
     {
         $zip = new \ZipArchive();
         $code = $zip->open($zipFilePath);
 
         if ($code !== TRUE) {
-            throw new \Exception('zip iteration failure');
+            throw new \Exception('zip extraction failure');
         }
 
-        $zip->extractTo($destination);
-        $zip->close();
+        $success = $zip->extractTo($destination);
+
+        if (!$success) {
+            throw new \Exception('zip extraction failure');
+        }
+
+        $success = $zip->close();
+        if (!$success) {
+            throw new \Exception('zip extraction failure');
+        }
     }
 }
