@@ -8,6 +8,7 @@ use App\Audio\Application\Import\AudiosImportResult;
 use App\Audio\Application\Interactor\AudioLibraryManagerInterface;
 use App\Audio\Application\Interactor\AudioStorageInterface;
 use App\Audio\Domain\AudioReadModel;
+use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 
 readonly class AudioLibraryManager implements AudioLibraryManagerInterface
 {
@@ -15,16 +16,22 @@ readonly class AudioLibraryManager implements AudioLibraryManagerInterface
     public function __construct(
         private AudioEntityRepositoryInterface $audioRepository,
         private AudioStorage                   $audioStorage,
-        private AudioImporter                  $audioImporter
+        private AudioImporter                  $audioImporter,
+        private PlayerStatusInfoProviderInterface $playerStatusInfoProvider,
     )
     {
     }
 
     public function removeAudio(AudioReadModel $audio): void
     {
-        $audioEntity = $this->audioRepository->find($audio->id);
-        $this->audioRepository->remove($audioEntity);
-        $this->audioStorage->removeAudioFile($audio);
+
+        $status = $this->playerStatusInfoProvider->playerStatus();
+        if ($status->isPlaying($audio)) {
+            $audioEntity = $this->audioRepository->find($audio->id);
+            $this->audioRepository->remove($audioEntity);
+            $this->audioStorage->removeAudioFile($audio);
+        }
+        throw new \Exception("can't remove an audio while it's being played");
     }
 
     public function importAudios(string $filePath): AudiosImportResult
