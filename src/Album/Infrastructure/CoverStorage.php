@@ -3,13 +3,11 @@
 namespace App\Album\Infrastructure;
 
 use App\Album\Application\CoverStorageInterface;
-use App\Shared\Application\File\LocalFileSystemInterface;
 
-class CoverStorage implements CoverStorageInterface
+readonly class CoverStorage implements CoverStorageInterface
 {
     public function __construct(
-        private string                   $coversFolder,
-        private LocalFileSystemInterface $localFileSystem
+        private string $coversFolder
     )
     {
     }
@@ -17,7 +15,7 @@ class CoverStorage implements CoverStorageInterface
     public function getCoverFileName(string $albumName): ?string
     {
         $coverPath = $this->coverPath($albumName);
-        if ($this->localFileSystem->exists($coverPath)) {
+        if (file_exists($coverPath)) {
             return $albumName;
         }
 

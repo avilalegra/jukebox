@@ -3,7 +3,6 @@
 namespace App\Audio\Infrastructure;
 
 use App\Audio\Application\Import\AudiosSourceInterface;
-use App\Shared\Application\File\LocalFileSystemInterface;
 use App\Shared\Infrastructure\ZipExtractor;
 use Symfony\Component\Mime\MimeTypeGuesserInterface;
 
@@ -14,8 +13,7 @@ readonly class LocalArchiveAudioSourceFactory
 {
     public function __construct(
         private MimeTypeGuesserInterface $mimeTypeGuesser,
-        private ZipExtractor             $zipExtractor,
-        private LocalFileSystemInterface $localFileSystem,
+        private ZipExtractor             $zipExtractor
     )
     {
     }
@@ -27,7 +25,7 @@ readonly class LocalArchiveAudioSourceFactory
         if ($mimeType === 'audio/mpeg') {
             return new ListAudioSource([$filePath]);
         } else if ($mimeType === 'application/zip') {
-            return new ZipAudioSource($filePath, $this->zipExtractor, $this->localFileSystem);
+            return new ZipAudioSource($filePath, $this->zipExtractor);
         }
 
         throw new \Exception('no suitable audio source for the given filepath');

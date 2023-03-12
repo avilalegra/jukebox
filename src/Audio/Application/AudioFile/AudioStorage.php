@@ -5,13 +5,12 @@ namespace App\Audio\Application\AudioFile;
 use App\Audio\Application\Interactor\AudioStorageInterface;
 use App\Audio\Domain\AudioFile;
 use App\Audio\Domain\AudioReadModel;
-use App\Shared\Application\File\LocalFileSystemInterface;
+
 
 readonly class AudioStorage implements AudioStorageInterface
 {
     public function __construct(
-        private string                   $audiosFolder,
-        private LocalFileSystemInterface $localFileSystem
+        private string $audiosFolder
     )
     {
     }
@@ -20,14 +19,18 @@ readonly class AudioStorage implements AudioStorageInterface
     public function importAudioFile(AudioReadModel $audio, string $audioFilePath): void
     {
         $targetPath = $this->targetPath($audio);
-        $this->localFileSystem->moveFile($audioFilePath, $targetPath);
+        $h = fopen($audioFilePath, 'r');
+        $success = file_put_contents($targetPath, $h);
+        if (!$success) {
+            throw new \Exception("import audio exception");
+        }
     }
 
     public function findAudioFile(AudioReadModel $audio): AudioFile
     {
         $targetPath = $this->targetPath($audio);
 
-        if (!$this->localFileSystem->exists($targetPath)) {
+        if (!file_exists($targetPath)) {
             throw  new AudioFileNotFoundException($audio);
         }
 
@@ -41,6 +44,9 @@ readonly class AudioStorage implements AudioStorageInterface
 
     public function removeAudioFile(AudioReadModel $audio): void
     {
-        $this->localFileSystem->remove($this->targetPath($audio));
+        $success = unlink($this->targetPath($audio));
+        if (!$success) {
+            throw new \Exception("couldn't remove file");
+        }
     }
 }
