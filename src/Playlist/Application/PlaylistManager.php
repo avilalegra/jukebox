@@ -20,6 +20,7 @@ readonly class PlaylistManager implements PlaylistManagerInterface
     public function clear(): void
     {
         $this->playlist->clear();
+        $this->playlistRepository->update($this->playlist);
     }
 
     public function add(AudioReadModel ...$audios): void

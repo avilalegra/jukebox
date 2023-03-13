@@ -7,9 +7,11 @@ namespace App\WebUI;
 use App\Album\Application\Interactor\AlbumInfoProviderInterface;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Player\Application\Interactor\PlayerInterface;
+use App\Player\Application\Interactor\PlayerQueueManagerInterface;
 use App\Player\Application\Interactor\PlayerStatusInfoProviderInterface;
 use App\Player\Application\Player\AudioPlayingStarted;
 use App\Player\Application\Player\AudioPlayingStopped;
+use App\Player\Application\Player\PlayerQueueManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +29,8 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         private readonly PlayerInterface                   $player,
         private readonly PlayerStatusInfoProviderInterface $statusInfoProvider,
         private readonly AudioInfoProviderInterface        $audioInfoProvider,
-        private readonly AlbumInfoProviderInterface        $albumInfoProvider
+        private readonly AlbumInfoProviderInterface        $albumInfoProvider,
+        private readonly PlayerQueueManagerInterface       $queueManager
     )
     {
     }
@@ -97,7 +100,7 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->redirectToRoute('player.index');
     }
 
-    #[Route('/album/{name}', name: 'play.album', methods: ['POST'])]
+    #[Route('/album/{name}', name: 'play.album', methods: ['post'])]
     public function playAlbum(string $name): Response
     {
         $album = $this->albumInfoProvider->findAlbum($name);
@@ -105,10 +108,17 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->redirectToRoute('player.index');
     }
 
-    #[Route('/queue', name: 'play.queue', methods: ['POST'])]
+    #[Route('/queue', name: 'play.queue', methods: ['post'])]
     public function playQueue(): Response
     {
         $this->player->playQueue();
+        return $this->redirectToRoute('player.index');
+    }
+
+    #[Route('/queue', name: 'clear', methods: ['delete'])]
+    public function clearQueue(): Response
+    {
+        $this->queueManager->clearQueue();
         return $this->redirectToRoute('player.index');
     }
 

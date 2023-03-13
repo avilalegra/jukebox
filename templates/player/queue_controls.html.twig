@@ -1,11 +1,15 @@
 <div class="queue-controls">
     <form action="{{ path('player.play.queue') }}" method="post">
-        <button class="_inv-button" title="Reproducir toda la cola">
-            <i class="icon fa-regular fa-circle-play fa-2xl"></i>
+        <button class="action" title="Reproducir toda la cola">
+            <span>R</span>
         </button>
     </form>
 
-    <button class="_inv-button" title="Vaciar la cola de reproducción">
-        <i class="icon fa-solid fa-circle-minus fa-2xl"></i>
-    </button>
+    <form action="{{ path('player.clear') }}" method="post">
+        <input type="hidden" name="_method" value="delete">
+
+        <button class="action" title="Vaciar la cola de reproducción">
+            <span>L</span>
+        </button>
+    </form>
 </div>
