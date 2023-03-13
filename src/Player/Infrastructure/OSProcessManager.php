@@ -1,36 +1,29 @@
 <?php
 
-namespace App\Player\Infrastructure\OSProcess;
+namespace App\Player\Infrastructure;
 
 use Symfony\Component\Process\Process;
 
 class OSProcessManager
 {
-    /**
-     * @inheritDoc
-     */
+
     public function kill(int $pid): void
     {
         $this->run(['kill', $pid]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public function run(array $command): void
     {
         $process = $this->createProc($command);
         $process->run();
 
         if (!$process->isSuccessful()) {
-            throw new OsProcessException($command, $process->getErrorOutput());
+            $this->throwProcessFailure($process);
         }
     }
 
 
-    /**
-     * @inheritDoc
-     */
     public function runAsync(array $command): int
     {
         $process = $this->createProc($command);
@@ -39,7 +32,7 @@ class OSProcessManager
         $pid = $process->getPid();
 
         if ($pid === null) {
-            throw new OsProcessException($command, $process->getErrorOutput());
+            $this->throwProcessFailure($process);
         }
 
         return $pid;
@@ -53,5 +46,10 @@ class OSProcessManager
         $process->setIdleTimeout(null);
 
         return $process;
+    }
+
+    private function throwProcessFailure(Process $process): never
+    {
+        throw new \Exception(message: 'os process execution failure', previous: new \Exception($process->getErrorOutput()));
     }
 }

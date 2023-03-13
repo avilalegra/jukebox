@@ -8,7 +8,8 @@ use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Player\Application\Player\Status\CurrentPlayingAudioStatus;
 use App\Player\Application\Player\Status\AudioPlayingStatus;
 use App\Player\Application\Player\Status\AudioPlayingStatusRepositoryInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Filesystem\Filesystem;
+
 
 class AudioPlayingStatusRepository implements AudioPlayingStatusRepositoryInterface
 {
@@ -17,6 +18,7 @@ class AudioPlayingStatusRepository implements AudioPlayingStatusRepositoryInterf
     public function __construct(
         private readonly AudioInfoProviderInterface $audioBrowser,
         private readonly string                     $projectDir,
+        private readonly Filesystem                 $filesystem
     )
     {
         $this->statusFilePath = $this->projectDir . '/player-status';
@@ -24,12 +26,13 @@ class AudioPlayingStatusRepository implements AudioPlayingStatusRepositoryInterf
 
     public function save(AudioPlayingStatus $playerStatus): void
     {
-        file_put_contents($this->statusFilePath, json_encode($playerStatus));
+        $this->filesystem->remove($this->statusFilePath);
+        $this->filesystem->appendToFile($this->statusFilePath, json_encode($playerStatus));
     }
 
     public function status(): AudioPlayingStatus
     {
-        if (!file_exists($this->statusFilePath)) {
+        if (!$this->filesystem->exists($this->statusFilePath)) {
             return AudioPlayingStatus::default();
         }
 

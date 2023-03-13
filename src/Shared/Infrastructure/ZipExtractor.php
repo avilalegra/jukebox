@@ -10,21 +10,13 @@ class ZipExtractor
     public function extract(string $zipFilePath, string $destination): void
     {
         $zip = new \ZipArchive();
-        $code = $zip->open($zipFilePath);
+        $zip->open($zipFilePath) === TRUE || $this->throwFailure();
+        $zip->extractTo($destination) || $this->throwFailure();
+        $zip->close() || $this->throwFailure();
+    }
 
-        if ($code !== TRUE) {
-            throw new \Exception('zip extraction failure');
-        }
-
-        $success = $zip->extractTo($destination);
-
-        if (!$success) {
-            throw new \Exception('zip extraction failure');
-        }
-
-        $success = $zip->close();
-        if (!$success) {
-            throw new \Exception('zip extraction failure');
-        }
+    private function throwFailure(): never
+    {
+        throw new \Exception('zip extraction failure');
     }
 }

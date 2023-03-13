@@ -36,7 +36,7 @@ readonly class AudioMetadataExtractor implements AudioMetadataExtractorInterface
                 duration: (int)floor($general->get('duration')->getMilliseconds() / 1000),
             );
         } catch (\Throwable $t) {
-            throw new AudioMetadataExtractionException($audioFilePath, $t);
+            throw new \Exception(message: "metadata extraction failure for audio {$audioFilePath}", previous: $t);
         }
     }
 }

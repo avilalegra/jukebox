@@ -8,7 +8,7 @@ use App\Album\Domain\Album;
 use App\Audio\Domain\AudioReadModel;
 use App\Player\Application\Interactor\PlayerInterface;
 use App\Player\Application\Player\SyncPlayer;
-use App\Player\Infrastructure\OSProcess\OSProcessManager;
+use Symfony\Component\Filesystem\Filesystem;
 
 
 class AsyncPlayer implements PlayerInterface
@@ -18,7 +18,8 @@ class AsyncPlayer implements PlayerInterface
     public function __construct(
         private readonly string           $projectDir,
         private readonly SyncPlayer       $player,
-        private readonly OSProcessManager $processManager
+        private readonly OSProcessManager $processManager,
+        private readonly Filesystem       $filesystem
     )
     {
         $this->pidFilePath = $this->projectDir . '/player.pid';
@@ -48,7 +49,7 @@ class AsyncPlayer implements PlayerInterface
         }
         $this->processManager->kill($pid);
         $this->player->stop();
-        unlink($this->pidFilePath);
+        $this->filesystem->remove($this->pidFilePath);
     }
 
 
@@ -61,7 +62,7 @@ class AsyncPlayer implements PlayerInterface
 
     private function getActiveProcessPid(): ?int
     {
-        if (file_exists($this->pidFilePath)) {
+        if ($this->filesystem->exists($this->pidFilePath)) {
             return (int)file_get_contents($this->pidFilePath);
         }
 
@@ -70,6 +71,6 @@ class AsyncPlayer implements PlayerInterface
 
     private function saveProcessPid(int $pid): void
     {
-        file_put_contents($this->pidFilePath, $pid);
+        $this->filesystem->appendToFile($this->pidFilePath, $pid);
     }
 }

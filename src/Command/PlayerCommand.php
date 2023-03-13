@@ -44,6 +44,7 @@ class PlayerCommand extends Command
                 'play-queue' => $this->playQueue()
             };
         } catch (\Throwable $t) {
+            dd($t);
             return Command::FAILURE;
         }
 

@@ -4,12 +4,14 @@ namespace App\Audio\Application\AudioFile;
 
 use App\Audio\Domain\AudioFile;
 use App\Audio\Domain\AudioReadModel;
+use Symfony\Component\Filesystem\Filesystem;
 
 
 readonly class AudioStorage
 {
     public function __construct(
-        private string $audiosFolder
+        private string     $audiosFolder,
+        private Filesystem $filesystem
     )
     {
     }
@@ -18,19 +20,15 @@ readonly class AudioStorage
     public function importAudioFile(AudioReadModel $audio, string $audioFilePath): void
     {
         $targetPath = $this->targetPath($audio);
-        $h = fopen($audioFilePath, 'r');
-        $success = file_put_contents($targetPath, $h);
-        if (!$success) {
-            throw new \Exception("import audio exception");
-        }
+        $this->filesystem->copy($audioFilePath, $targetPath);
     }
 
     public function findAudioFile(AudioReadModel $audio): AudioFile
     {
         $targetPath = $this->targetPath($audio);
 
-        if (!file_exists($targetPath)) {
-            throw  new AudioFileNotFoundException($audio);
+        if (!$this->filesystem->exists($targetPath)) {
+            throw  new \Exception('audio not found');
         }
 
         return new AudioFile($targetPath);
@@ -43,9 +41,6 @@ readonly class AudioStorage
 
     public function removeAudioFile(AudioReadModel $audio): void
     {
-        $success = unlink($this->targetPath($audio));
-        if (!$success) {
-            throw new \Exception("couldn't remove file");
-        }
+        $this->filesystem->remove($this->targetPath($audio));
     }
 }

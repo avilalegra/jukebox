@@ -8,16 +8,16 @@ use App\Audio\Domain\AudioReadModel;
 
 readonly class AudioPlayingStatus implements \JsonSerializable
 {
+    public static function default(): AudioPlayingStatus
+    {
+        return new AudioPlayingStatus(null, null);
+    }
+
     public function __construct(
         public ?CurrentPlayingAudioStatus $currentPlayingAudio,
         public ?AudioReadModel            $lastPlayedAudio
     )
     {
-    }
-
-    public static function default(): AudioPlayingStatus
-    {
-        return new AudioPlayingStatus(null, null);
     }
 
     public function isPlaying(AudioReadModel $audio): bool

@@ -4,12 +4,14 @@ namespace App\Audio\Infrastructure;
 
 use App\Audio\Application\Import\AudiosSourceInterface;
 use App\Shared\Infrastructure\ZipExtractor;
+use Symfony\Component\Filesystem\Filesystem;
 
 readonly class ZipAudioSource implements AudiosSourceInterface
 {
     public function __construct(
-        private string                   $zipFilePath,
-        private ZipExtractor             $zipExtractor
+        private string       $zipFilePath,
+        private ZipExtractor $zipExtractor,
+        private Filesystem   $filesystem
     )
     {
     }
@@ -24,22 +26,18 @@ readonly class ZipAudioSource implements AudiosSourceInterface
     private function makeTempDir(): string
     {
         $path = '/tmp/' . time();
-        $success = mkdir($path);
-        if (!$success) {
-            throw new \Exception("couldn't make temp dir");
-        }
-
+        $this->filesystem->mkdir($path);
         return $path;
     }
 
-    private function iterateFilesRecursive(string $dirPath) : \Generator
+    private function iterateFilesRecursive(string $dirPath): \Generator
     {
         $directory = new \RecursiveDirectoryIterator($dirPath);
         $iterator = new \RecursiveIteratorIterator($directory);
 
         /** @var \SplFileInfo $fileInfo */
         foreach ($iterator as $fileInfo) {
-            if($fileInfo->isFile()){
+            if ($fileInfo->isFile()) {
                 yield $fileInfo->getRealPath();
             }
         }

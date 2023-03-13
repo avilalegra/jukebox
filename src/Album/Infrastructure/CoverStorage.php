@@ -3,11 +3,13 @@
 namespace App\Album\Infrastructure;
 
 use App\Album\Application\CoverStorageInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 readonly class CoverStorage implements CoverStorageInterface
 {
     public function __construct(
-        private string $coversFolder
+        private string     $coversFolder,
+        private Filesystem $filesystem
     )
     {
     }
@@ -15,7 +17,7 @@ readonly class CoverStorage implements CoverStorageInterface
     public function getCoverFileName(string $albumName): ?string
     {
         $coverPath = $this->coverPath($albumName);
-        if (file_exists($coverPath)) {
+        if ($this->filesystem->exists($coverPath)) {
             return $albumName;
         }
 
