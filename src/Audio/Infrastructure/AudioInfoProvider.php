@@ -2,8 +2,10 @@
 
 namespace App\Audio\Infrastructure;
 
+use App\Audio\Application\AudioFile\AudioStorage;
 use App\Audio\Application\Interactor\AudioInfoProviderInterface;
 use App\Audio\Domain\AudioEntity;
+use App\Audio\Domain\AudioFile;
 use App\Audio\Domain\AudioReadModel;
 use App\Shared\Application\Pagination\PaginationOrder;
 use App\Shared\Application\Pagination\PaginationParams;
@@ -20,7 +22,8 @@ class AudioInfoProvider implements AudioInfoProviderInterface
     private EntityRepository $repository;
 
     public function __construct(
-        private readonly EntityManagerInterface $em
+        private readonly EntityManagerInterface $em,
+        private readonly AudioStorage           $audioStorage
     )
     {
         $this->repository = $this->em->getRepository(AudioEntity::class);
@@ -29,6 +32,11 @@ class AudioInfoProvider implements AudioInfoProviderInterface
     public function findAudio(string $audioId): AudioReadModel
     {
         return $this->repository->find($audioId)->readModel();
+    }
+
+    public function findAudioFile(AudioReadModel $audio): AudioFile
+    {
+        return $this->audioStorage->findAudioFile($audio);
     }
 
 
