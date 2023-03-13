@@ -105,6 +105,13 @@ class PlayerController extends AbstractController implements EventSubscriberInte
         return $this->redirectToRoute('player.index');
     }
 
+    #[Route('/queue', name: 'play.queue', methods: ['POST'])]
+    public function playQueue(): Response
+    {
+        $this->player->playQueue();
+        return $this->redirectToRoute('player.index');
+    }
+
     public function onPlayerStatusChanged(AudioPlayingStarted|AudioPlayingStopped $_)
     {
         $status = $this->statusInfoProvider->playerStatus();

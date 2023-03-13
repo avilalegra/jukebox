@@ -2,11 +2,11 @@
     {% set isRunning = nowPlaying is null ? 0 : 1 %}
     {% set subjectAudio = isRunning ? nowPlaying.audio : lastPlayed %}
 
-    <div class="playing-audio-info">
-        {% if subjectAudio is not null %}
+    {% if subjectAudio is not null %}
+        <div class="playing-audio-info">
             <img class="album-image" src="{{ asset('storage/covers/' ~ albumCover(subjectAudio.album)) }}">
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
 
 
     <div class="player-queue">

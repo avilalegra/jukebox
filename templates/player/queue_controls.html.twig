@@ -1,7 +1,9 @@
 <div class="queue-controls">
-    <button class="_inv-button" title="Reproducir toda la cola">
-        <i class="icon fa-regular fa-circle-play fa-2xl"></i>
-    </button>
+    <form action="{{ path('player.play.queue') }}" method="post">
+        <button class="_inv-button" title="Reproducir toda la cola">
+            <i class="icon fa-regular fa-circle-play fa-2xl"></i>
+        </button>
+    </form>
 
     <button class="_inv-button" title="Vaciar la cola de reproducción">
         <i class="icon fa-solid fa-circle-minus fa-2xl"></i>
